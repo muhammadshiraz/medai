@@ -1,0 +1,305 @@
+
+The following rules have been activated
+ - 2025-06-05 08:49:06,305 - logic_logger - DEBUG
+Rule Bank[0x104e476b0] (loaded 2025-06-05 08:49:02.542951)		##   - 2025-06-05 08:49:06,305 - logic_logger - INFO
+Mapped Class[Contraindication] rules:		##   - 2025-06-05 08:49:06,305 - logic_logger - INFO
+  Constraint Function: None 		##   - 2025-06-05 08:49:06,305 - logic_logger - INFO
+Mapped Class[Patient] rules:		##   - 2025-06-05 08:49:06,305 - logic_logger - INFO
+  Derive <class 'database.models.Patient'>.age as Formula (1): <function>		##   - 2025-06-05 08:49:06,305 - logic_logger - INFO
+  Constraint Function: None 		##   - 2025-06-05 08:49:06,305 - logic_logger - INFO
+  Constraint Function: None 		##   - 2025-06-05 08:49:06,305 - logic_logger - INFO
+  Constraint Function: None 		##   - 2025-06-05 08:49:06,305 - logic_logger - INFO
+  Constraint Function: None 		##   - 2025-06-05 08:49:06,305 - logic_logger - INFO
+  Constraint Function: None 		##   - 2025-06-05 08:49:06,305 - logic_logger - INFO
+  Constraint Function: None 		##   - 2025-06-05 08:49:06,305 - logic_logger - INFO
+  Constraint Function: None 		##   - 2025-06-05 08:49:06,305 - logic_logger - INFO
+Mapped Class[Dosage] rules:		##   - 2025-06-05 08:49:06,305 - logic_logger - INFO
+  Derive <class 'database.models.Dosage'>.drug_name as Copy(drug.drug_name)		##   - 2025-06-05 08:49:06,305 - logic_logger - INFO
+  Derive <class 'database.models.Dosage'>.drug_type as Copy(drug.drug_type)		##   - 2025-06-05 08:49:06,306 - logic_logger - INFO
+Mapped Class[ReadingHistory] rules:		##   - 2025-06-05 08:49:06,306 - logic_logger - INFO
+  RowEvent ReadingHistory.fn_recommend_drug() 		##   - 2025-06-05 08:49:06,306 - logic_logger - INFO
+  Constraint Function: None 		##   - 2025-06-05 08:49:06,306 - logic_logger - INFO
+  Constraint Function: None 		##   - 2025-06-05 08:49:06,306 - logic_logger - INFO
+  Constraint Function: None 		##   - 2025-06-05 08:49:06,306 - logic_logger - INFO
+  Constraint Function: None 		##   - 2025-06-05 08:49:06,306 - logic_logger - INFO
+  Constraint Function: None 		##   - 2025-06-05 08:49:06,306 - logic_logger - INFO
+  Constraint Function: None 		##   - 2025-06-05 08:49:06,306 - logic_logger - INFO
+  Constraint Function: None 		##   - 2025-06-05 08:49:06,306 - logic_logger - INFO
+  Constraint Function: None 		##   - 2025-06-05 08:49:06,306 - logic_logger - INFO
+Mapped Class[Reading] rules:		##   - 2025-06-05 08:49:06,306 - logic_logger - INFO
+  RowEvent Reading.fn_recommend_insulin() 		##   - 2025-06-05 08:49:06,306 - logic_logger - INFO
+  RowEvent Reading.insert_reading_history() 		##   - 2025-06-05 08:49:06,306 - logic_logger - INFO
+  Constraint Function: None 		##   - 2025-06-05 08:49:06,306 - logic_logger - INFO
+  Constraint Function: None 		##   - 2025-06-05 08:49:06,306 - logic_logger - INFO
+  Constraint Function: None 		##   - 2025-06-05 08:49:06,307 - logic_logger - INFO
+Logic Bank - 31 rules loaded - 2025-06-05 08:49:06,307 - logic_logger - INFO
+Logic Bank - 31 rules loaded - 2025-06-05 08:49:06,307 - logic_logger - INFO
+
+Logic Phase:		ROW LOGIC		(session=0x10e5fb1a0) (sqlalchemy before_flush)			 - 2025-06-05 08:55:17,838 - logic_logger - INFO
+..Patient[480] {Update - client} id: 480, name: Patient-1140, birth_date: 1965-03-19, age: 60.0, weight: 117, height: 71, hba1c: 8.00, duration:  [44-->] 45, ckd: 1, cad: 1, hld: 1, patient_sex: F, creatine_mg_dl: 0.3000, medical_record_number: MRN1140, created_date: 2025-03-19 21:33:15.854304  row: 0x10e5fade0  session: 0x10e5fb1a0  ins_upd_dlt: upd, initial: upd - 2025-06-05 08:55:17,840 - logic_logger - INFO
+..Patient[480] {Prune Formula: age [['birth_date']]} id: 480, name: Patient-1140, birth_date: 1965-03-19, age: 60.0, weight: 117, height: 71, hba1c: 8.00, duration:  [44-->] 45, ckd: 1, cad: 1, hld: 1, patient_sex: F, creatine_mg_dl: 0.3000, medical_record_number: MRN1140, created_date: 2025-03-19 21:33:15.854304  row: 0x10e5fade0  session: 0x10e5fb1a0  ins_upd_dlt: upd, initial: upd - 2025-06-05 08:55:17,841 - logic_logger - INFO
+Logic Phase:		COMMIT LOGIC		(session=0x10e5fb1a0)   										 - 2025-06-05 08:55:17,843 - logic_logger - INFO
+Logic Phase:		AFTER_FLUSH LOGIC	(session=0x10e5fb1a0)   										 - 2025-06-05 08:55:17,853 - logic_logger - INFO
+
+These Rules Fired (see Logic Phases, above, for actual order):		## - 2025-06-05 08:55:17,854 - logic_logger - INFO
+
+Logic Phase:		COMPLETE(session=0x10e5fb1a0))       	 - 2025-06-05 08:55:17,854 - logic_logger - INFO
+
+Logic Phase:		ROW LOGIC		(session=0x10e7d3950) (sqlalchemy before_flush)			 - 2025-06-05 08:56:51,995 - logic_logger - INFO
+..ReadingHistory[0] {Insert - client} id: 0, patient_id: 2, reading_date: 2025-06-05, breakfast: 125, lunch: 118, dinner: 200, bedtime: 157, notes_for_day: None  row: 0x10e6fd2b0  session: 0x10e7d3950  ins_upd_dlt: ins, initial: ins - 2025-06-05 08:56:51,997 - logic_logger - INFO
+Logic Phase:		COMMIT LOGIC		(session=0x10e7d3950)   										 - 2025-06-05 08:56:52,008 - logic_logger - INFO
+Logic Phase:		AFTER_FLUSH LOGIC	(session=0x10e7d3950)   										 - 2025-06-05 08:56:52,020 - logic_logger - INFO
+..ReadingHistory[0] {AfterFlush Event} id: 0, patient_id: 2, reading_date: 2025-06-05, breakfast: 125, lunch: 118, dinner: 200, bedtime: 157, notes_for_day: None  row: 0x10e6fd2b0  session: 0x10e7d3950  ins_upd_dlt: ins, initial: ins - 2025-06-05 08:56:52,020 - logic_logger - INFO
+..ReadingHistory[0] {metformin} id: 0, patient_id: 2, reading_date: 2025-06-05, breakfast: 125, lunch: 118, dinner: 200, bedtime: 157, notes_for_day: None  row: 0x10e6fd2b0  session: 0x10e7d3950  ins_upd_dlt: ins, initial: ins - 2025-06-05 08:56:52,023 - logic_logger - INFO
+..ReadingHistory[0] {row: 0} id: 0, patient_id: 2, reading_date: 2025-06-05, breakfast: 125, lunch: 118, dinner: 200, bedtime: 157, notes_for_day: None  row: 0x10e6fd2b0  session: 0x10e7d3950  ins_upd_dlt: ins, initial: ins - 2025-06-05 08:56:52,023 - logic_logger - INFO
+..ReadingHistory[0] {Creating recommendation 1 - 1000 for 2 at breakfast} id: 0, patient_id: 2, reading_date: 2025-06-05, breakfast: 125, lunch: 118, dinner: 200, bedtime: 157, notes_for_day: None  row: 0x10e6fd2b0  session: 0x10e7d3950  ins_upd_dlt: ins, initial: ins - 2025-06-05 08:56:52,023 - logic_logger - INFO
+..ReadingHistory[0] {metformin} id: 0, patient_id: 2, reading_date: 2025-06-05, breakfast: 125, lunch: 118, dinner: 200, bedtime: 157, notes_for_day: None  row: 0x10e6fd2b0  session: 0x10e7d3950  ins_upd_dlt: ins, initial: ins - 2025-06-05 08:56:52,024 - logic_logger - INFO
+..ReadingHistory[0] {row: 0} id: 0, patient_id: 2, reading_date: 2025-06-05, breakfast: 125, lunch: 118, dinner: 200, bedtime: 157, notes_for_day: None  row: 0x10e6fd2b0  session: 0x10e7d3950  ins_upd_dlt: ins, initial: ins - 2025-06-05 08:56:52,025 - logic_logger - INFO
+..ReadingHistory[0] {Creating recommendation 1 - 1000 for 2 at dinner} id: 0, patient_id: 2, reading_date: 2025-06-05, breakfast: 125, lunch: 118, dinner: 200, bedtime: 157, notes_for_day: None  row: 0x10e6fd2b0  session: 0x10e7d3950  ins_upd_dlt: ins, initial: ins - 2025-06-05 08:56:52,025 - logic_logger - INFO
+..ReadingHistory[0] {tradjenta} id: 0, patient_id: 2, reading_date: 2025-06-05, breakfast: 125, lunch: 118, dinner: 200, bedtime: 157, notes_for_day: None  row: 0x10e6fd2b0  session: 0x10e7d3950  ins_upd_dlt: ins, initial: ins - 2025-06-05 08:56:52,026 - logic_logger - INFO
+..ReadingHistory[0] {ozempic} id: 0, patient_id: 2, reading_date: 2025-06-05, breakfast: 125, lunch: 118, dinner: 200, bedtime: 157, notes_for_day: None  row: 0x10e6fd2b0  session: 0x10e7d3950  ins_upd_dlt: ins, initial: ins - 2025-06-05 08:56:52,026 - logic_logger - INFO
+..ReadingHistory[0] {farxiga} id: 0, patient_id: 2, reading_date: 2025-06-05, breakfast: 125, lunch: 118, dinner: 200, bedtime: 157, notes_for_day: None  row: 0x10e6fd2b0  session: 0x10e7d3950  ins_upd_dlt: ins, initial: ins - 2025-06-05 08:56:52,026 - logic_logger - INFO
+
+These Rules Fired (see Logic Phases, above, for actual order):		## - 2025-06-05 08:56:52,030 - logic_logger - INFO
+  ReadingHistory		## - 2025-06-05 08:56:52,030 - logic_logger - INFO
+    1. RowEvent ReadingHistory.fn_recommend_drug() 		## - 2025-06-05 08:56:52,030 - logic_logger - INFO
+
+Logic Phase:		COMPLETE(session=0x10e7d3950))       	 - 2025-06-05 08:56:52,030 - logic_logger - INFO
+
+Logic Phase:		ROW LOGIC		(session=0x10e8a4a70) (sqlalchemy before_flush)			 - 2025-06-05 08:58:17,981 - logic_logger - INFO
+..ReadingHistory[0] {Insert - client} id: 0, patient_id: 20, reading_date: 2025-06-05, breakfast: 249, lunch: 142, dinner: 179, bedtime: 165, notes_for_day: test  row: 0x10e866330  session: 0x10e8a4a70  ins_upd_dlt: ins, initial: ins - 2025-06-05 08:58:17,982 - logic_logger - INFO
+Logic Phase:		COMMIT LOGIC		(session=0x10e8a4a70)   										 - 2025-06-05 08:58:17,992 - logic_logger - INFO
+
+Logic Phase:		ROW LOGIC		(session=0x10e8a7d70) (sqlalchemy before_flush)			 - 2025-06-05 08:58:30,769 - logic_logger - INFO
+..ReadingHistory[999] {Insert - client} id: 999, patient_id: 20, reading_date: 2025-06-05, breakfast: 249, lunch: 142, dinner: 179, bedtime: 165, notes_for_day: test  row: 0x10e8679e0  session: 0x10e8a7d70  ins_upd_dlt: ins, initial: ins - 2025-06-05 08:58:30,770 - logic_logger - INFO
+Logic Phase:		COMMIT LOGIC		(session=0x10e8a7d70)   										 - 2025-06-05 08:58:30,776 - logic_logger - INFO
+Logic Phase:		AFTER_FLUSH LOGIC	(session=0x10e8a7d70)   										 - 2025-06-05 08:58:30,781 - logic_logger - INFO
+..ReadingHistory[999] {AfterFlush Event} id: 999, patient_id: 20, reading_date: 2025-06-05, breakfast: 249, lunch: 142, dinner: 179, bedtime: 165, notes_for_day: test  row: 0x10e8679e0  session: 0x10e8a7d70  ins_upd_dlt: ins, initial: ins - 2025-06-05 08:58:30,781 - logic_logger - INFO
+..ReadingHistory[999] {metformin} id: 999, patient_id: 20, reading_date: 2025-06-05, breakfast: 249, lunch: 142, dinner: 179, bedtime: 165, notes_for_day: test  row: 0x10e8679e0  session: 0x10e8a7d70  ins_upd_dlt: ins, initial: ins - 2025-06-05 08:58:30,787 - logic_logger - INFO
+..ReadingHistory[999] {row: 999} id: 999, patient_id: 20, reading_date: 2025-06-05, breakfast: 249, lunch: 142, dinner: 179, bedtime: 165, notes_for_day: test  row: 0x10e8679e0  session: 0x10e8a7d70  ins_upd_dlt: ins, initial: ins - 2025-06-05 08:58:30,787 - logic_logger - INFO
+..ReadingHistory[999] {Creating recommendation 1 - 1000 for 20 at breakfast} id: 999, patient_id: 20, reading_date: 2025-06-05, breakfast: 249, lunch: 142, dinner: 179, bedtime: 165, notes_for_day: test  row: 0x10e8679e0  session: 0x10e8a7d70  ins_upd_dlt: ins, initial: ins - 2025-06-05 08:58:30,787 - logic_logger - INFO
+..ReadingHistory[999] {metformin} id: 999, patient_id: 20, reading_date: 2025-06-05, breakfast: 249, lunch: 142, dinner: 179, bedtime: 165, notes_for_day: test  row: 0x10e8679e0  session: 0x10e8a7d70  ins_upd_dlt: ins, initial: ins - 2025-06-05 08:58:30,791 - logic_logger - INFO
+..ReadingHistory[999] {row: 999} id: 999, patient_id: 20, reading_date: 2025-06-05, breakfast: 249, lunch: 142, dinner: 179, bedtime: 165, notes_for_day: test  row: 0x10e8679e0  session: 0x10e8a7d70  ins_upd_dlt: ins, initial: ins - 2025-06-05 08:58:30,791 - logic_logger - INFO
+..ReadingHistory[999] {Creating recommendation 1 - 1000 for 20 at dinner} id: 999, patient_id: 20, reading_date: 2025-06-05, breakfast: 249, lunch: 142, dinner: 179, bedtime: 165, notes_for_day: test  row: 0x10e8679e0  session: 0x10e8a7d70  ins_upd_dlt: ins, initial: ins - 2025-06-05 08:58:30,791 - logic_logger - INFO
+..ReadingHistory[999] {tradjenta} id: 999, patient_id: 20, reading_date: 2025-06-05, breakfast: 249, lunch: 142, dinner: 179, bedtime: 165, notes_for_day: test  row: 0x10e8679e0  session: 0x10e8a7d70  ins_upd_dlt: ins, initial: ins - 2025-06-05 08:58:30,792 - logic_logger - INFO
+..ReadingHistory[999] {ozempic} id: 999, patient_id: 20, reading_date: 2025-06-05, breakfast: 249, lunch: 142, dinner: 179, bedtime: 165, notes_for_day: test  row: 0x10e8679e0  session: 0x10e8a7d70  ins_upd_dlt: ins, initial: ins - 2025-06-05 08:58:30,792 - logic_logger - INFO
+..ReadingHistory[999] {farxiga} id: 999, patient_id: 20, reading_date: 2025-06-05, breakfast: 249, lunch: 142, dinner: 179, bedtime: 165, notes_for_day: test  row: 0x10e8679e0  session: 0x10e8a7d70  ins_upd_dlt: ins, initial: ins - 2025-06-05 08:58:30,793 - logic_logger - INFO
+..ReadingHistory[999] {lispro} id: 999, patient_id: 20, reading_date: 2025-06-05, breakfast: 249, lunch: 142, dinner: 179, bedtime: 165, notes_for_day: test  row: 0x10e8679e0  session: 0x10e8a7d70  ins_upd_dlt: ins, initial: ins - 2025-06-05 08:58:30,796 - logic_logger - INFO
+..ReadingHistory[999] {row: 999} id: 999, patient_id: 20, reading_date: 2025-06-05, breakfast: 249, lunch: 142, dinner: 179, bedtime: 165, notes_for_day: test  row: 0x10e8679e0  session: 0x10e8a7d70  ins_upd_dlt: ins, initial: ins - 2025-06-05 08:58:30,796 - logic_logger - INFO
+..ReadingHistory[999] {Creating recommendation 5 - 5 for 20 at breakfast} id: 999, patient_id: 20, reading_date: 2025-06-05, breakfast: 249, lunch: 142, dinner: 179, bedtime: 165, notes_for_day: test  row: 0x10e8679e0  session: 0x10e8a7d70  ins_upd_dlt: ins, initial: ins - 2025-06-05 08:58:30,796 - logic_logger - INFO
+
+These Rules Fired (see Logic Phases, above, for actual order):		## - 2025-06-05 08:58:30,799 - logic_logger - INFO
+  ReadingHistory		## - 2025-06-05 08:58:30,799 - logic_logger - INFO
+    1. RowEvent ReadingHistory.fn_recommend_drug() 		## - 2025-06-05 08:58:30,799 - logic_logger - INFO
+
+Logic Phase:		COMPLETE(session=0x10e8a7d70))       	 - 2025-06-05 08:58:30,799 - logic_logger - INFO
+
+Logic Phase:		ROW LOGIC		(session=0x10e6c0440) (sqlalchemy before_flush)			 - 2025-06-05 09:02:39,627 - logic_logger - INFO
+..ReadingHistory[None] {Insert - client} id: None, patient_id: 11, reading_date: 2025-06-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: Test   row: 0x10e483860  session: 0x10e6c0440  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:02:39,629 - logic_logger - INFO
+Logic Phase:		COMMIT LOGIC		(session=0x10e6c0440)   										 - 2025-06-05 09:02:39,638 - logic_logger - INFO
+Logic Phase:		AFTER_FLUSH LOGIC	(session=0x10e6c0440)   										 - 2025-06-05 09:02:39,650 - logic_logger - INFO
+..ReadingHistory[157] {AfterFlush Event} id: 157, patient_id: 11, reading_date: 2025-06-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: Test   row: 0x10e483860  session: 0x10e6c0440  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:02:39,651 - logic_logger - INFO
+..ReadingHistory[157] {metformin} id: 157, patient_id: 11, reading_date: 2025-06-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: Test   row: 0x10e483860  session: 0x10e6c0440  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:02:39,655 - logic_logger - INFO
+..ReadingHistory[157] {metformin} id: 157, patient_id: 11, reading_date: 2025-06-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: Test   row: 0x10e483860  session: 0x10e6c0440  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:02:39,656 - logic_logger - INFO
+..ReadingHistory[157] {tradjenta} id: 157, patient_id: 11, reading_date: 2025-06-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: Test   row: 0x10e483860  session: 0x10e6c0440  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:02:39,662 - logic_logger - INFO
+..ReadingHistory[157] {row: 157} id: 157, patient_id: 11, reading_date: 2025-06-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: Test   row: 0x10e483860  session: 0x10e6c0440  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:02:39,662 - logic_logger - INFO
+..ReadingHistory[157] {Creating recommendation 3 - 5 for 11 at breakfast} id: 157, patient_id: 11, reading_date: 2025-06-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: Test   row: 0x10e483860  session: 0x10e6c0440  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:02:39,662 - logic_logger - INFO
+..ReadingHistory[157] {ozempic} id: 157, patient_id: 11, reading_date: 2025-06-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: Test   row: 0x10e483860  session: 0x10e6c0440  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:02:39,667 - logic_logger - INFO
+..ReadingHistory[157] {row: 157} id: 157, patient_id: 11, reading_date: 2025-06-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: Test   row: 0x10e483860  session: 0x10e6c0440  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:02:39,667 - logic_logger - INFO
+..ReadingHistory[157] {Creating recommendation 7 - 1 for 11 at breakfast} id: 157, patient_id: 11, reading_date: 2025-06-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: Test   row: 0x10e483860  session: 0x10e6c0440  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:02:39,667 - logic_logger - INFO
+..ReadingHistory[157] {farxiga} id: 157, patient_id: 11, reading_date: 2025-06-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: Test   row: 0x10e483860  session: 0x10e6c0440  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:02:39,669 - logic_logger - INFO
+..ReadingHistory[157] {row: 157} id: 157, patient_id: 11, reading_date: 2025-06-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: Test   row: 0x10e483860  session: 0x10e6c0440  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:02:39,669 - logic_logger - INFO
+..ReadingHistory[157] {Creating recommendation 6 - 10 for 11 at breakfast} id: 157, patient_id: 11, reading_date: 2025-06-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: Test   row: 0x10e483860  session: 0x10e6c0440  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:02:39,669 - logic_logger - INFO
+..ReadingHistory[157] {lispro} id: 157, patient_id: 11, reading_date: 2025-06-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: Test   row: 0x10e483860  session: 0x10e6c0440  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:02:39,676 - logic_logger - INFO
+..ReadingHistory[157] {row: 157} id: 157, patient_id: 11, reading_date: 2025-06-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: Test   row: 0x10e483860  session: 0x10e6c0440  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:02:39,677 - logic_logger - INFO
+..ReadingHistory[157] {Creating recommendation 5 - 5 for 11 at dinner} id: 157, patient_id: 11, reading_date: 2025-06-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: Test   row: 0x10e483860  session: 0x10e6c0440  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:02:39,677 - logic_logger - INFO
+..ReadingHistory[157] {glargine} id: 157, patient_id: 11, reading_date: 2025-06-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: Test   row: 0x10e483860  session: 0x10e6c0440  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:02:39,678 - logic_logger - INFO
+..ReadingHistory[157] {row: 157} id: 157, patient_id: 11, reading_date: 2025-06-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: Test   row: 0x10e483860  session: 0x10e6c0440  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:02:39,679 - logic_logger - INFO
+..ReadingHistory[157] {Creating recommendation 4 - 15 for 11 at bedtime} id: 157, patient_id: 11, reading_date: 2025-06-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: Test   row: 0x10e483860  session: 0x10e6c0440  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:02:39,679 - logic_logger - INFO
+
+These Rules Fired (see Logic Phases, above, for actual order):		## - 2025-06-05 09:02:39,679 - logic_logger - INFO
+  ReadingHistory		## - 2025-06-05 09:02:39,679 - logic_logger - INFO
+    1. RowEvent ReadingHistory.fn_recommend_drug() 		## - 2025-06-05 09:02:39,679 - logic_logger - INFO
+
+Logic Phase:		COMPLETE(session=0x10e6c0440))       	 - 2025-06-05 09:02:39,679 - logic_logger - INFO
+
+Logic Phase:		ROW LOGIC		(session=0x10e88f530) (sqlalchemy before_flush)			 - 2025-06-05 09:11:10,874 - logic_logger - INFO
+..ReadingHistory[None] {Insert - client} id: None, patient_id: 11, reading_date: 2025-06-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: test  row: 0x10ebb8380  session: 0x10e88f530  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:11:10,882 - logic_logger - INFO
+Logic Phase:		COMMIT LOGIC		(session=0x10e88f530)   										 - 2025-06-05 09:11:10,891 - logic_logger - INFO
+Logic Phase:		AFTER_FLUSH LOGIC	(session=0x10e88f530)   										 - 2025-06-05 09:11:10,904 - logic_logger - INFO
+..ReadingHistory[158] {AfterFlush Event} id: 158, patient_id: 11, reading_date: 2025-06-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: test  row: 0x10ebb8380  session: 0x10e88f530  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:11:10,904 - logic_logger - INFO
+..ReadingHistory[158] {metformin} id: 158, patient_id: 11, reading_date: 2025-06-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: test  row: 0x10ebb8380  session: 0x10e88f530  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:11:47,142 - logic_logger - INFO
+..ReadingHistory[158] {metformin} id: 158, patient_id: 11, reading_date: 2025-06-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: test  row: 0x10ebb8380  session: 0x10e88f530  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:11:48,286 - logic_logger - INFO
+..ReadingHistory[158] {tradjenta} id: 158, patient_id: 11, reading_date: 2025-06-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: test  row: 0x10ebb8380  session: 0x10e88f530  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:11:51,807 - logic_logger - INFO
+..ReadingHistory[158] {row: 158} id: 158, patient_id: 11, reading_date: 2025-06-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: test  row: 0x10ebb8380  session: 0x10e88f530  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:11:51,811 - logic_logger - INFO
+..ReadingHistory[158] {Creating recommendation 3 - 5 for 11 at breakfast} id: 158, patient_id: 11, reading_date: 2025-06-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: test  row: 0x10ebb8380  session: 0x10e88f530  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:11:51,811 - logic_logger - INFO
+..ReadingHistory[158] {ozempic} id: 158, patient_id: 11, reading_date: 2025-06-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: test  row: 0x10ebb8380  session: 0x10e88f530  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:11:54,371 - logic_logger - INFO
+..ReadingHistory[158] {row: 158} id: 158, patient_id: 11, reading_date: 2025-06-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: test  row: 0x10ebb8380  session: 0x10e88f530  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:11:54,372 - logic_logger - INFO
+..ReadingHistory[158] {Creating recommendation 7 - 1 for 11 at breakfast} id: 158, patient_id: 11, reading_date: 2025-06-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: test  row: 0x10ebb8380  session: 0x10e88f530  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:11:54,373 - logic_logger - INFO
+..ReadingHistory[158] {farxiga} id: 158, patient_id: 11, reading_date: 2025-06-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: test  row: 0x10ebb8380  session: 0x10e88f530  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:11:56,926 - logic_logger - INFO
+..ReadingHistory[158] {row: 158} id: 158, patient_id: 11, reading_date: 2025-06-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: test  row: 0x10ebb8380  session: 0x10e88f530  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:11:56,927 - logic_logger - INFO
+..ReadingHistory[158] {Creating recommendation 6 - 10 for 11 at breakfast} id: 158, patient_id: 11, reading_date: 2025-06-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: test  row: 0x10ebb8380  session: 0x10e88f530  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:11:56,928 - logic_logger - INFO
+..ReadingHistory[158] {lispro} id: 158, patient_id: 11, reading_date: 2025-06-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: test  row: 0x10ebb8380  session: 0x10e88f530  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:12:16,765 - logic_logger - INFO
+..ReadingHistory[158] {row: 158} id: 158, patient_id: 11, reading_date: 2025-06-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: test  row: 0x10ebb8380  session: 0x10e88f530  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:12:16,766 - logic_logger - INFO
+..ReadingHistory[158] {Creating recommendation 5 - 5 for 11 at dinner} id: 158, patient_id: 11, reading_date: 2025-06-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: test  row: 0x10ebb8380  session: 0x10e88f530  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:12:16,767 - logic_logger - INFO
+..ReadingHistory[158] {glargine} id: 158, patient_id: 11, reading_date: 2025-06-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: test  row: 0x10ebb8380  session: 0x10e88f530  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:12:21,613 - logic_logger - INFO
+..ReadingHistory[158] {row: 158} id: 158, patient_id: 11, reading_date: 2025-06-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: test  row: 0x10ebb8380  session: 0x10e88f530  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:12:21,613 - logic_logger - INFO
+..ReadingHistory[158] {Creating recommendation 4 - 15 for 11 at bedtime} id: 158, patient_id: 11, reading_date: 2025-06-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: test  row: 0x10ebb8380  session: 0x10e88f530  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:12:21,613 - logic_logger - INFO
+
+These Rules Fired (see Logic Phases, above, for actual order):		## - 2025-06-05 09:12:27,747 - logic_logger - INFO
+  ReadingHistory		## - 2025-06-05 09:12:27,748 - logic_logger - INFO
+    1. RowEvent ReadingHistory.fn_recommend_drug() 		## - 2025-06-05 09:12:27,748 - logic_logger - INFO
+
+Logic Phase:		COMPLETE(session=0x10e88f530))       	 - 2025-06-05 09:12:27,748 - logic_logger - INFO
+
+Logic Phase:		ROW LOGIC		(session=0x10e520fe0) (sqlalchemy before_flush)			 - 2025-06-05 09:15:00,785 - logic_logger - INFO
+..ReadingHistory[None] {Insert - client} id: None, patient_id: 529, reading_date: 2025-06-04, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: test  row: 0x10e58fcb0  session: 0x10e520fe0  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:15:00,796 - logic_logger - INFO
+Logic Phase:		COMMIT LOGIC		(session=0x10e520fe0)   										 - 2025-06-05 09:15:00,807 - logic_logger - INFO
+Logic Phase:		AFTER_FLUSH LOGIC	(session=0x10e520fe0)   										 - 2025-06-05 09:15:00,817 - logic_logger - INFO
+..ReadingHistory[159] {AfterFlush Event} id: 159, patient_id: 529, reading_date: 2025-06-04, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: test  row: 0x10e58fcb0  session: 0x10e520fe0  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:15:00,817 - logic_logger - INFO
+..ReadingHistory[159] {metformin} id: 159, patient_id: 529, reading_date: 2025-06-04, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: test  row: 0x10e58fcb0  session: 0x10e520fe0  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:15:05,098 - logic_logger - INFO
+..ReadingHistory[159] {metformin} id: 159, patient_id: 529, reading_date: 2025-06-04, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: test  row: 0x10e58fcb0  session: 0x10e520fe0  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:15:05,099 - logic_logger - INFO
+..ReadingHistory[159] {tradjenta} id: 159, patient_id: 529, reading_date: 2025-06-04, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: test  row: 0x10e58fcb0  session: 0x10e520fe0  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:15:05,102 - logic_logger - INFO
+..ReadingHistory[159] {row: 159} id: 159, patient_id: 529, reading_date: 2025-06-04, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: test  row: 0x10e58fcb0  session: 0x10e520fe0  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:15:05,102 - logic_logger - INFO
+..ReadingHistory[159] {Creating recommendation 3 - 5 for 529 at breakfast} id: 159, patient_id: 529, reading_date: 2025-06-04, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: test  row: 0x10e58fcb0  session: 0x10e520fe0  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:15:05,102 - logic_logger - INFO
+..ReadingHistory[159] {ozempic} id: 159, patient_id: 529, reading_date: 2025-06-04, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: test  row: 0x10e58fcb0  session: 0x10e520fe0  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:15:05,105 - logic_logger - INFO
+..ReadingHistory[159] {farxiga} id: 159, patient_id: 529, reading_date: 2025-06-04, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: test  row: 0x10e58fcb0  session: 0x10e520fe0  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:15:05,106 - logic_logger - INFO
+..ReadingHistory[159] {glargine} id: 159, patient_id: 529, reading_date: 2025-06-04, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: test  row: 0x10e58fcb0  session: 0x10e520fe0  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:15:05,111 - logic_logger - INFO
+..ReadingHistory[159] {row: 159} id: 159, patient_id: 529, reading_date: 2025-06-04, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: test  row: 0x10e58fcb0  session: 0x10e520fe0  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:15:05,111 - logic_logger - INFO
+..ReadingHistory[159] {Creating recommendation 4 - 15 for 529 at bedtime} id: 159, patient_id: 529, reading_date: 2025-06-04, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: test  row: 0x10e58fcb0  session: 0x10e520fe0  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:15:05,111 - logic_logger - INFO
+
+These Rules Fired (see Logic Phases, above, for actual order):		## - 2025-06-05 09:15:05,112 - logic_logger - INFO
+  ReadingHistory		## - 2025-06-05 09:15:05,113 - logic_logger - INFO
+    1. RowEvent ReadingHistory.fn_recommend_drug() 		## - 2025-06-05 09:15:05,113 - logic_logger - INFO
+
+Logic Phase:		COMPLETE(session=0x10e520fe0))       	 - 2025-06-05 09:15:05,113 - logic_logger - INFO
+
+Logic Phase:		ROW LOGIC		(session=0x10ea25220) (sqlalchemy before_flush)			 - 2025-06-05 09:19:42,430 - logic_logger - INFO
+..ReadingHistory[None] {Insert - client} id: None, patient_id: 529, reading_date: 2025-06-01, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: test 2  row: 0x10ea0e1b0  session: 0x10ea25220  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:19:42,433 - logic_logger - INFO
+Logic Phase:		COMMIT LOGIC		(session=0x10ea25220)   										 - 2025-06-05 09:19:42,443 - logic_logger - INFO
+Logic Phase:		AFTER_FLUSH LOGIC	(session=0x10ea25220)   										 - 2025-06-05 09:19:42,452 - logic_logger - INFO
+..ReadingHistory[160] {AfterFlush Event} id: 160, patient_id: 529, reading_date: 2025-06-01, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: test 2  row: 0x10ea0e1b0  session: 0x10ea25220  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:19:42,452 - logic_logger - INFO
+..ReadingHistory[160] {metformin} id: 160, patient_id: 529, reading_date: 2025-06-01, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: test 2  row: 0x10ea0e1b0  session: 0x10ea25220  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:19:42,456 - logic_logger - INFO
+..ReadingHistory[160] {metformin} id: 160, patient_id: 529, reading_date: 2025-06-01, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: test 2  row: 0x10ea0e1b0  session: 0x10ea25220  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:19:42,457 - logic_logger - INFO
+..ReadingHistory[160] {tradjenta} id: 160, patient_id: 529, reading_date: 2025-06-01, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: test 2  row: 0x10ea0e1b0  session: 0x10ea25220  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:19:42,462 - logic_logger - INFO
+..ReadingHistory[160] {row: 160} id: 160, patient_id: 529, reading_date: 2025-06-01, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: test 2  row: 0x10ea0e1b0  session: 0x10ea25220  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:19:42,463 - logic_logger - INFO
+..ReadingHistory[160] {Creating recommendation 3 - 5 for 529 at breakfast} id: 160, patient_id: 529, reading_date: 2025-06-01, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: test 2  row: 0x10ea0e1b0  session: 0x10ea25220  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:19:42,463 - logic_logger - INFO
+..ReadingHistory[160] {ozempic} id: 160, patient_id: 529, reading_date: 2025-06-01, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: test 2  row: 0x10ea0e1b0  session: 0x10ea25220  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:19:42,472 - logic_logger - INFO
+..ReadingHistory[160] {farxiga} id: 160, patient_id: 529, reading_date: 2025-06-01, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: test 2  row: 0x10ea0e1b0  session: 0x10ea25220  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:19:42,472 - logic_logger - INFO
+..ReadingHistory[160] {glargine} id: 160, patient_id: 529, reading_date: 2025-06-01, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: test 2  row: 0x10ea0e1b0  session: 0x10ea25220  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:19:42,482 - logic_logger - INFO
+..ReadingHistory[160] {row: 160} id: 160, patient_id: 529, reading_date: 2025-06-01, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: test 2  row: 0x10ea0e1b0  session: 0x10ea25220  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:19:42,482 - logic_logger - INFO
+..ReadingHistory[160] {Creating recommendation 4 - 15 for 529 at bedtime} id: 160, patient_id: 529, reading_date: 2025-06-01, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: test 2  row: 0x10ea0e1b0  session: 0x10ea25220  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:19:42,483 - logic_logger - INFO
+
+These Rules Fired (see Logic Phases, above, for actual order):		## - 2025-06-05 09:19:42,485 - logic_logger - INFO
+  ReadingHistory		## - 2025-06-05 09:19:42,485 - logic_logger - INFO
+    1. RowEvent ReadingHistory.fn_recommend_drug() 		## - 2025-06-05 09:19:42,485 - logic_logger - INFO
+
+Logic Phase:		COMPLETE(session=0x10ea25220))       	 - 2025-06-05 09:19:42,485 - logic_logger - INFO
+
+Logic Phase:		ROW LOGIC		(session=0x10e64ef60) (sqlalchemy before_flush)			 - 2025-06-05 09:24:25,806 - logic_logger - INFO
+..ReadingHistory[43] {Update - client} id: 43, patient_id: 43, reading_date:  [2025-03-19-->] 2025-03-19, breakfast: 165.0000, lunch: 190.0000, dinner: 126.0000, bedtime: 94.0000, notes_for_day: None  row: 0x10e64ee70  session: 0x10e64ef60  ins_upd_dlt: upd, initial: upd - 2025-06-05 09:24:25,811 - logic_logger - INFO
+Logic Phase:		COMMIT LOGIC		(session=0x10e64ef60)   										 - 2025-06-05 09:24:25,816 - logic_logger - INFO
+Logic Phase:		AFTER_FLUSH LOGIC	(session=0x10e64ef60)   										 - 2025-06-05 09:24:25,842 - logic_logger - INFO
+..ReadingHistory[43] {AfterFlush Event} id: 43, patient_id: 43, reading_date:  [2025-03-19-->] 2025-03-19, breakfast: 165.0000, lunch: 190.0000, dinner: 126.0000, bedtime: 94.0000, notes_for_day: None  row: 0x10e64ee70  session: 0x10e64ef60  ins_upd_dlt: upd, initial: upd - 2025-06-05 09:24:25,843 - logic_logger - INFO
+..ReadingHistory[43] {metformin} id: 43, patient_id: 43, reading_date:  [2025-03-19-->] 2025-03-19, breakfast: 165.0000, lunch: 190.0000, dinner: 126.0000, bedtime: 94.0000, notes_for_day: None  row: 0x10e64ee70  session: 0x10e64ef60  ins_upd_dlt: upd, initial: upd - 2025-06-05 09:24:25,850 - logic_logger - INFO
+..ReadingHistory[43] {row: 43} id: 43, patient_id: 43, reading_date:  [2025-03-19-->] 2025-03-19, breakfast: 165.0000, lunch: 190.0000, dinner: 126.0000, bedtime: 94.0000, notes_for_day: None  row: 0x10e64ee70  session: 0x10e64ef60  ins_upd_dlt: upd, initial: upd - 2025-06-05 09:24:25,850 - logic_logger - INFO
+..ReadingHistory[43] {Creating recommendation 1 - 1000 for 43 at breakfast} id: 43, patient_id: 43, reading_date:  [2025-03-19-->] 2025-03-19, breakfast: 165.0000, lunch: 190.0000, dinner: 126.0000, bedtime: 94.0000, notes_for_day: None  row: 0x10e64ee70  session: 0x10e64ef60  ins_upd_dlt: upd, initial: upd - 2025-06-05 09:24:25,850 - logic_logger - INFO
+..ReadingHistory[43] {metformin} id: 43, patient_id: 43, reading_date:  [2025-03-19-->] 2025-03-19, breakfast: 165.0000, lunch: 190.0000, dinner: 126.0000, bedtime: 94.0000, notes_for_day: None  row: 0x10e64ee70  session: 0x10e64ef60  ins_upd_dlt: upd, initial: upd - 2025-06-05 09:24:25,855 - logic_logger - INFO
+..ReadingHistory[43] {row: 43} id: 43, patient_id: 43, reading_date:  [2025-03-19-->] 2025-03-19, breakfast: 165.0000, lunch: 190.0000, dinner: 126.0000, bedtime: 94.0000, notes_for_day: None  row: 0x10e64ee70  session: 0x10e64ef60  ins_upd_dlt: upd, initial: upd - 2025-06-05 09:24:25,855 - logic_logger - INFO
+..ReadingHistory[43] {Creating recommendation 1 - 1000 for 43 at dinner} id: 43, patient_id: 43, reading_date:  [2025-03-19-->] 2025-03-19, breakfast: 165.0000, lunch: 190.0000, dinner: 126.0000, bedtime: 94.0000, notes_for_day: None  row: 0x10e64ee70  session: 0x10e64ef60  ins_upd_dlt: upd, initial: upd - 2025-06-05 09:24:25,855 - logic_logger - INFO
+..ReadingHistory[43] {tradjenta} id: 43, patient_id: 43, reading_date:  [2025-03-19-->] 2025-03-19, breakfast: 165.0000, lunch: 190.0000, dinner: 126.0000, bedtime: 94.0000, notes_for_day: None  row: 0x10e64ee70  session: 0x10e64ef60  ins_upd_dlt: upd, initial: upd - 2025-06-05 09:24:25,856 - logic_logger - INFO
+..ReadingHistory[43] {ozempic} id: 43, patient_id: 43, reading_date:  [2025-03-19-->] 2025-03-19, breakfast: 165.0000, lunch: 190.0000, dinner: 126.0000, bedtime: 94.0000, notes_for_day: None  row: 0x10e64ee70  session: 0x10e64ef60  ins_upd_dlt: upd, initial: upd - 2025-06-05 09:24:25,856 - logic_logger - INFO
+..ReadingHistory[43] {farxiga} id: 43, patient_id: 43, reading_date:  [2025-03-19-->] 2025-03-19, breakfast: 165.0000, lunch: 190.0000, dinner: 126.0000, bedtime: 94.0000, notes_for_day: None  row: 0x10e64ee70  session: 0x10e64ef60  ins_upd_dlt: upd, initial: upd - 2025-06-05 09:24:25,857 - logic_logger - INFO
+..ReadingHistory[43] {glimepiride} id: 43, patient_id: 43, reading_date:  [2025-03-19-->] 2025-03-19, breakfast: 165.0000, lunch: 190.0000, dinner: 126.0000, bedtime: 94.0000, notes_for_day: None  row: 0x10e64ee70  session: 0x10e64ef60  ins_upd_dlt: upd, initial: upd - 2025-06-05 09:24:25,863 - logic_logger - INFO
+..ReadingHistory[43] {row: 43} id: 43, patient_id: 43, reading_date:  [2025-03-19-->] 2025-03-19, breakfast: 165.0000, lunch: 190.0000, dinner: 126.0000, bedtime: 94.0000, notes_for_day: None  row: 0x10e64ee70  session: 0x10e64ef60  ins_upd_dlt: upd, initial: upd - 2025-06-05 09:24:25,863 - logic_logger - INFO
+..ReadingHistory[43] {Creating recommendation 2 - 2 for 43 at breakfast} id: 43, patient_id: 43, reading_date:  [2025-03-19-->] 2025-03-19, breakfast: 165.0000, lunch: 190.0000, dinner: 126.0000, bedtime: 94.0000, notes_for_day: None  row: 0x10e64ee70  session: 0x10e64ef60  ins_upd_dlt: upd, initial: upd - 2025-06-05 09:24:25,863 - logic_logger - INFO
+
+These Rules Fired (see Logic Phases, above, for actual order):		## - 2025-06-05 09:24:25,865 - logic_logger - INFO
+  ReadingHistory		## - 2025-06-05 09:24:25,865 - logic_logger - INFO
+    1. RowEvent ReadingHistory.fn_recommend_drug() 		## - 2025-06-05 09:24:25,865 - logic_logger - INFO
+
+Logic Phase:		COMPLETE(session=0x10e64ef60))       	 - 2025-06-05 09:24:25,866 - logic_logger - INFO
+
+Logic Phase:		ROW LOGIC		(session=0x10e941f10) (sqlalchemy before_flush)			 - 2025-06-05 09:24:46,265 - logic_logger - INFO
+..ReadingHistory[160] {Update - client} id: 160, patient_id: 529, reading_date: 2025-06-01, breakfast: 105.0000, lunch: 210.0000, dinner: 280.0000, bedtime: 240.0000, notes_for_day:  [test 2-->] test 22  row: 0x10e940170  session: 0x10e941f10  ins_upd_dlt: upd, initial: upd - 2025-06-05 09:24:46,266 - logic_logger - INFO
+Logic Phase:		COMMIT LOGIC		(session=0x10e941f10)   										 - 2025-06-05 09:24:46,267 - logic_logger - INFO
+Logic Phase:		AFTER_FLUSH LOGIC	(session=0x10e941f10)   										 - 2025-06-05 09:24:46,275 - logic_logger - INFO
+..ReadingHistory[160] {AfterFlush Event} id: 160, patient_id: 529, reading_date: 2025-06-01, breakfast: 105.0000, lunch: 210.0000, dinner: 280.0000, bedtime: 240.0000, notes_for_day:  [test 2-->] test 22  row: 0x10e940170  session: 0x10e941f10  ins_upd_dlt: upd, initial: upd - 2025-06-05 09:24:46,275 - logic_logger - INFO
+..ReadingHistory[160] {metformin} id: 160, patient_id: 529, reading_date: 2025-06-01, breakfast: 105.0000, lunch: 210.0000, dinner: 280.0000, bedtime: 240.0000, notes_for_day:  [test 2-->] test 22  row: 0x10e940170  session: 0x10e941f10  ins_upd_dlt: upd, initial: upd - 2025-06-05 09:24:46,279 - logic_logger - INFO
+..ReadingHistory[160] {metformin} id: 160, patient_id: 529, reading_date: 2025-06-01, breakfast: 105.0000, lunch: 210.0000, dinner: 280.0000, bedtime: 240.0000, notes_for_day:  [test 2-->] test 22  row: 0x10e940170  session: 0x10e941f10  ins_upd_dlt: upd, initial: upd - 2025-06-05 09:24:46,279 - logic_logger - INFO
+..ReadingHistory[160] {tradjenta} id: 160, patient_id: 529, reading_date: 2025-06-01, breakfast: 105.0000, lunch: 210.0000, dinner: 280.0000, bedtime: 240.0000, notes_for_day:  [test 2-->] test 22  row: 0x10e940170  session: 0x10e941f10  ins_upd_dlt: upd, initial: upd - 2025-06-05 09:24:46,281 - logic_logger - INFO
+..ReadingHistory[160] {row: 160} id: 160, patient_id: 529, reading_date: 2025-06-01, breakfast: 105.0000, lunch: 210.0000, dinner: 280.0000, bedtime: 240.0000, notes_for_day:  [test 2-->] test 22  row: 0x10e940170  session: 0x10e941f10  ins_upd_dlt: upd, initial: upd - 2025-06-05 09:24:46,281 - logic_logger - INFO
+..ReadingHistory[160] {Creating recommendation 3 - 5 for 529 at breakfast} id: 160, patient_id: 529, reading_date: 2025-06-01, breakfast: 105.0000, lunch: 210.0000, dinner: 280.0000, bedtime: 240.0000, notes_for_day:  [test 2-->] test 22  row: 0x10e940170  session: 0x10e941f10  ins_upd_dlt: upd, initial: upd - 2025-06-05 09:24:46,281 - logic_logger - INFO
+..ReadingHistory[160] {ozempic} id: 160, patient_id: 529, reading_date: 2025-06-01, breakfast: 105.0000, lunch: 210.0000, dinner: 280.0000, bedtime: 240.0000, notes_for_day:  [test 2-->] test 22  row: 0x10e940170  session: 0x10e941f10  ins_upd_dlt: upd, initial: upd - 2025-06-05 09:24:46,284 - logic_logger - INFO
+..ReadingHistory[160] {farxiga} id: 160, patient_id: 529, reading_date: 2025-06-01, breakfast: 105.0000, lunch: 210.0000, dinner: 280.0000, bedtime: 240.0000, notes_for_day:  [test 2-->] test 22  row: 0x10e940170  session: 0x10e941f10  ins_upd_dlt: upd, initial: upd - 2025-06-05 09:24:46,284 - logic_logger - INFO
+..ReadingHistory[160] {glargine} id: 160, patient_id: 529, reading_date: 2025-06-01, breakfast: 105.0000, lunch: 210.0000, dinner: 280.0000, bedtime: 240.0000, notes_for_day:  [test 2-->] test 22  row: 0x10e940170  session: 0x10e941f10  ins_upd_dlt: upd, initial: upd - 2025-06-05 09:24:46,287 - logic_logger - INFO
+..ReadingHistory[160] {row: 160} id: 160, patient_id: 529, reading_date: 2025-06-01, breakfast: 105.0000, lunch: 210.0000, dinner: 280.0000, bedtime: 240.0000, notes_for_day:  [test 2-->] test 22  row: 0x10e940170  session: 0x10e941f10  ins_upd_dlt: upd, initial: upd - 2025-06-05 09:24:46,287 - logic_logger - INFO
+..ReadingHistory[160] {Creating recommendation 4 - 15 for 529 at bedtime} id: 160, patient_id: 529, reading_date: 2025-06-01, breakfast: 105.0000, lunch: 210.0000, dinner: 280.0000, bedtime: 240.0000, notes_for_day:  [test 2-->] test 22  row: 0x10e940170  session: 0x10e941f10  ins_upd_dlt: upd, initial: upd - 2025-06-05 09:24:46,287 - logic_logger - INFO
+
+These Rules Fired (see Logic Phases, above, for actual order):		## - 2025-06-05 09:24:46,288 - logic_logger - INFO
+  ReadingHistory		## - 2025-06-05 09:24:46,288 - logic_logger - INFO
+    1. RowEvent ReadingHistory.fn_recommend_drug() 		## - 2025-06-05 09:24:46,288 - logic_logger - INFO
+
+Logic Phase:		COMPLETE(session=0x10e941f10))       	 - 2025-06-05 09:24:46,288 - logic_logger - INFO
+
+Logic Phase:		ROW LOGIC		(session=0x10e793ef0) (sqlalchemy before_flush)			 - 2025-06-05 09:25:47,990 - logic_logger - INFO
+..ReadingHistory[None] {Insert - client} id: None, patient_id: 529, reading_date: 2025-06-02, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: June 2  row: 0x10ea0db80  session: 0x10e793ef0  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:25:47,992 - logic_logger - INFO
+Logic Phase:		COMMIT LOGIC		(session=0x10e793ef0)   										 - 2025-06-05 09:25:48,001 - logic_logger - INFO
+Logic Phase:		AFTER_FLUSH LOGIC	(session=0x10e793ef0)   										 - 2025-06-05 09:25:48,006 - logic_logger - INFO
+..ReadingHistory[161] {AfterFlush Event} id: 161, patient_id: 529, reading_date: 2025-06-02, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: June 2  row: 0x10ea0db80  session: 0x10e793ef0  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:25:48,006 - logic_logger - INFO
+..ReadingHistory[161] {metformin} id: 161, patient_id: 529, reading_date: 2025-06-02, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: June 2  row: 0x10ea0db80  session: 0x10e793ef0  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:25:48,009 - logic_logger - INFO
+..ReadingHistory[161] {metformin} id: 161, patient_id: 529, reading_date: 2025-06-02, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: June 2  row: 0x10ea0db80  session: 0x10e793ef0  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:25:48,009 - logic_logger - INFO
+..ReadingHistory[161] {tradjenta} id: 161, patient_id: 529, reading_date: 2025-06-02, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: June 2  row: 0x10ea0db80  session: 0x10e793ef0  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:25:48,012 - logic_logger - INFO
+..ReadingHistory[161] {row: 161} id: 161, patient_id: 529, reading_date: 2025-06-02, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: June 2  row: 0x10ea0db80  session: 0x10e793ef0  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:25:48,012 - logic_logger - INFO
+..ReadingHistory[161] {Creating recommendation 3 - 5 for 529 at breakfast} id: 161, patient_id: 529, reading_date: 2025-06-02, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: June 2  row: 0x10ea0db80  session: 0x10e793ef0  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:25:48,012 - logic_logger - INFO
+..ReadingHistory[161] {ozempic} id: 161, patient_id: 529, reading_date: 2025-06-02, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: June 2  row: 0x10ea0db80  session: 0x10e793ef0  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:25:48,014 - logic_logger - INFO
+..ReadingHistory[161] {farxiga} id: 161, patient_id: 529, reading_date: 2025-06-02, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: June 2  row: 0x10ea0db80  session: 0x10e793ef0  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:25:48,014 - logic_logger - INFO
+..ReadingHistory[161] {glargine} id: 161, patient_id: 529, reading_date: 2025-06-02, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: June 2  row: 0x10ea0db80  session: 0x10e793ef0  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:25:48,017 - logic_logger - INFO
+..ReadingHistory[161] {row: 161} id: 161, patient_id: 529, reading_date: 2025-06-02, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: June 2  row: 0x10ea0db80  session: 0x10e793ef0  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:25:48,017 - logic_logger - INFO
+..ReadingHistory[161] {Creating recommendation 4 - 15 for 529 at bedtime} id: 161, patient_id: 529, reading_date: 2025-06-02, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: June 2  row: 0x10ea0db80  session: 0x10e793ef0  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:25:48,017 - logic_logger - INFO
+
+These Rules Fired (see Logic Phases, above, for actual order):		## - 2025-06-05 09:25:48,018 - logic_logger - INFO
+  ReadingHistory		## - 2025-06-05 09:25:48,019 - logic_logger - INFO
+    1. RowEvent ReadingHistory.fn_recommend_drug() 		## - 2025-06-05 09:25:48,019 - logic_logger - INFO
+
+Logic Phase:		COMPLETE(session=0x10e793ef0))       	 - 2025-06-05 09:25:48,019 - logic_logger - INFO
+
+Logic Phase:		ROW LOGIC		(session=0x10ea0e600) (sqlalchemy before_flush)			 - 2025-06-05 09:28:35,374 - logic_logger - INFO
+..ReadingHistory[None] {Insert - client} id: None, patient_id: 529, reading_date: 2025-01-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: Jan  row: 0x10e5b1a00  session: 0x10ea0e600  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:28:35,376 - logic_logger - INFO
+Logic Phase:		COMMIT LOGIC		(session=0x10ea0e600)   										 - 2025-06-05 09:28:35,385 - logic_logger - INFO
+Logic Phase:		AFTER_FLUSH LOGIC	(session=0x10ea0e600)   										 - 2025-06-05 09:28:35,401 - logic_logger - INFO
+..ReadingHistory[162] {AfterFlush Event} id: 162, patient_id: 529, reading_date: 2025-01-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: Jan  row: 0x10e5b1a00  session: 0x10ea0e600  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:28:35,401 - logic_logger - INFO
+..ReadingHistory[162] {metformin} id: 162, patient_id: 529, reading_date: 2025-01-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: Jan  row: 0x10e5b1a00  session: 0x10ea0e600  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:28:35,407 - logic_logger - INFO
+..ReadingHistory[162] {metformin} id: 162, patient_id: 529, reading_date: 2025-01-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: Jan  row: 0x10e5b1a00  session: 0x10ea0e600  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:28:35,407 - logic_logger - INFO
+..ReadingHistory[162] {tradjenta} id: 162, patient_id: 529, reading_date: 2025-01-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: Jan  row: 0x10e5b1a00  session: 0x10ea0e600  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:28:35,411 - logic_logger - INFO
+..ReadingHistory[162] {row: 162} id: 162, patient_id: 529, reading_date: 2025-01-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: Jan  row: 0x10e5b1a00  session: 0x10ea0e600  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:28:35,411 - logic_logger - INFO
+..ReadingHistory[162] {Creating recommendation 3 - 5 for 529 at breakfast} id: 162, patient_id: 529, reading_date: 2025-01-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: Jan  row: 0x10e5b1a00  session: 0x10ea0e600  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:28:35,411 - logic_logger - INFO
+..ReadingHistory[162] {ozempic} id: 162, patient_id: 529, reading_date: 2025-01-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: Jan  row: 0x10e5b1a00  session: 0x10ea0e600  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:28:35,417 - logic_logger - INFO
+..ReadingHistory[162] {farxiga} id: 162, patient_id: 529, reading_date: 2025-01-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: Jan  row: 0x10e5b1a00  session: 0x10ea0e600  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:28:35,417 - logic_logger - INFO
+..ReadingHistory[162] {glargine} id: 162, patient_id: 529, reading_date: 2025-01-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: Jan  row: 0x10e5b1a00  session: 0x10ea0e600  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:28:35,423 - logic_logger - INFO
+..ReadingHistory[162] {row: 162} id: 162, patient_id: 529, reading_date: 2025-01-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: Jan  row: 0x10e5b1a00  session: 0x10ea0e600  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:28:35,423 - logic_logger - INFO
+..ReadingHistory[162] {Creating recommendation 4 - 15 for 529 at bedtime} id: 162, patient_id: 529, reading_date: 2025-01-05, breakfast: 105, lunch: 210, dinner: 280, bedtime: 240, notes_for_day: Jan  row: 0x10e5b1a00  session: 0x10ea0e600  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:28:35,424 - logic_logger - INFO
+
+These Rules Fired (see Logic Phases, above, for actual order):		## - 2025-06-05 09:28:35,424 - logic_logger - INFO
+  ReadingHistory		## - 2025-06-05 09:28:35,425 - logic_logger - INFO
+    1. RowEvent ReadingHistory.fn_recommend_drug() 		## - 2025-06-05 09:28:35,425 - logic_logger - INFO
+
+Logic Phase:		COMPLETE(session=0x10ea0e600))       	 - 2025-06-05 09:28:35,425 - logic_logger - INFO
+
+Logic Phase:		ROW LOGIC		(session=0x10e58c590) (sqlalchemy before_flush)			 - 2025-06-05 09:31:34,940 - logic_logger - INFO
+..Reading[None] {Insert - client} id: None, patient_id: 529, time_of_reading: breakfast, reading_value: 105, reading_date: 2025-02-05, notes: feb  row: 0x10e943380  session: 0x10e58c590  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:31:34,945 - logic_logger - INFO
+Logic Phase:		COMMIT LOGIC		(session=0x10e58c590)   										 - 2025-06-05 09:31:34,963 - logic_logger - INFO
+..Reading[None] {Commit Event} id: None, patient_id: 529, time_of_reading: breakfast, reading_value: 105, reading_date: 2025-02-05, notes: feb  row: 0x10e943380  session: 0x10e58c590  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:31:34,964 - logic_logger - INFO
+..Reading[None] {lispro} id: None, patient_id: 529, time_of_reading: breakfast, reading_value: 105, reading_date: 2025-02-05, notes: feb  row: 0x10e943380  session: 0x10e58c590  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:31:34,975 - logic_logger - INFO
+Logic Phase:		AFTER_FLUSH LOGIC	(session=0x10e58c590)   										 - 2025-06-05 09:31:34,990 - logic_logger - INFO
+..Reading[382] {AfterFlush Event} id: 382, patient_id: 529, time_of_reading: breakfast, reading_value: 105, reading_date: 2025-02-05, notes: feb  row: 0x10e943380  session: 0x10e58c590  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:31:34,991 - logic_logger - INFO
+
+Logic Phase:		ROW LOGIC		(session=0x10e9405f0) (sqlalchemy before_flush)			 - 2025-06-05 09:32:13,835 - logic_logger - INFO
+..Reading[None] {Insert - client} id: None, patient_id: 529, time_of_reading: breakfast, reading_value: 210, reading_date: 2025-02-05, notes: feb  row: 0x10ea3dc10  session: 0x10e9405f0  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:32:13,841 - logic_logger - INFO
+Logic Phase:		COMMIT LOGIC		(session=0x10e9405f0)   										 - 2025-06-05 09:32:13,847 - logic_logger - INFO
+..Reading[None] {Commit Event} id: None, patient_id: 529, time_of_reading: breakfast, reading_value: 210, reading_date: 2025-02-05, notes: feb  row: 0x10ea3dc10  session: 0x10e9405f0  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:32:13,847 - logic_logger - INFO
+..Reading[None] {lispro} id: None, patient_id: 529, time_of_reading: breakfast, reading_value: 210, reading_date: 2025-02-05, notes: feb  row: 0x10ea3dc10  session: 0x10e9405f0  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:32:13,851 - logic_logger - INFO
+..Reading[None] {row: None} id: None, patient_id: 529, time_of_reading: breakfast, reading_value: 210, reading_date: 2025-02-05, notes: feb  row: 0x10ea3dc10  session: 0x10e9405f0  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:32:13,851 - logic_logger - INFO
+..Reading[None] {Creating recommendation 5 - 5 for 529 at breakfast} id: None, patient_id: 529, time_of_reading: breakfast, reading_value: 210, reading_date: 2025-02-05, notes: feb  row: 0x10ea3dc10  session: 0x10e9405f0  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:32:13,851 - logic_logger - INFO
+Logic Phase:		AFTER_FLUSH LOGIC	(session=0x10e9405f0)   										 - 2025-06-05 09:32:13,858 - logic_logger - INFO
+..Reading[383] {AfterFlush Event} id: 383, patient_id: 529, time_of_reading: breakfast, reading_value: 210, reading_date: 2025-02-05, notes: feb  row: 0x10ea3dc10  session: 0x10e9405f0  ins_upd_dlt: ins, initial: ins - 2025-06-05 09:32:13,858 - logic_logger - INFO

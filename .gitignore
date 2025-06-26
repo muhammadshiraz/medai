@@ -1,0 +1,15 @@
+.DS_Store
+/build/
+/dist/
+**/__pycache__
+*.egg-info
+venv/
+devops/docker-compose-dev-local/postgres-data
+devops/docker-compose-dev-local/postgres-data/base
+devops/docker-compose-dev-local/postgres-data/global
+devops/docker-compose-dev-local/postgres-data/pg_commit_ts
+devops/docker-compose-dev-local/postgres-data/pg_dynshmem
+test/api_logic_server_behave/scenario_logic_logs/
+devops/docker-compose-dev-local-nginx/www
+devops/docker-compose-dev-azure-nginx/www
+ui/app/dist/

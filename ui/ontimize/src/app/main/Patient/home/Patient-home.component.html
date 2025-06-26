@@ -1,0 +1,59 @@
+<o-form-layout-manager attr="Patient" mode="tab" title="PATIENT">
+    <div fxFill fxLayout="column" fxLayoutAlign="start">
+        <o-table 
+            attr="PatientTable" 
+            service="Patient" 
+            entity="Patient" 
+            title="PATIENT"
+            keys="id"
+            columns="name;birth_date;age;weight;height;hba1c;duration;patient_sex;creatine_mg_dl;medical_record_number;created_date;id;ckd;cad;hld" 
+            header-actions="R;D"
+            visible-columns="name;birth_date;age;weight;height;hba1c;duration;patient_sex;creatine_mg_dl;medical_record_number;created_date;id;ckd;cad;hld"  
+            sort-columns="name" 
+            query-rows="20" 
+            quick-filter="yes"
+            row-height="medium" 
+            select-all-checkbox="true" 
+            pageable="yes"  
+            auto-adjust="true" 
+            virtual-scroll="yes" 
+            edition-mode="dblclick"
+            horizontal-scroll="yes"
+            show-title="yes"
+            export-button="yes">
+            
+            <o-table-column #name attr="name" title=" name" editable="no" required="yes" content-align="left"></o-table-column>
+            
+            <o-table-column #birth_date attr="birth_date" title="birth_date" type="DATE" editable="no" required="no" ></o-table-column>
+            
+            <o-table-column #age attr="age" title="age" type="real" min-decimal-digits="2" max-decimal-digits="4" min="0" max="1000000.0000" content-align="center"></o-table-column>
+            
+            <o-table-column #weight attr="weight" title="weight" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+            
+            <o-table-column #height attr="height" title="height" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+            
+            <o-table-column #hba1c attr="hba1c" title="hba1c" type="real" min-decimal-digits="2" max-decimal-digits="4" min="0" max="1000000.0000" content-align="center"></o-table-column>
+            
+            <o-table-column #duration attr="duration" title="duration" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+            
+            <o-table-column #patient_sex attr="patient_sex" title="patient_sex" editable="no" required="no" content-align="left"></o-table-column>
+            
+            <o-table-column #creatine_mg_dl attr="creatine_mg_dl" title="creatine_mg_dl" type="real" min-decimal-digits="2" max-decimal-digits="4" min="0" max="1000000.0000" content-align="center"></o-table-column>
+            
+            <o-table-column #medical_record_number attr="medical_record_number" title="medical_record_number" editable="no" required="no" content-align="left"></o-table-column>
+            
+            <o-table-column #created_date attr="created_date" title="created_date" type="DATETIME" editable="no" required="no" ></o-table-column>
+            
+            <o-table-column #id attr="id" title="id" type="integer" editable="no" required="yes" content-align="center"></o-table-column>
+            
+            <o-table-column #ckd attr="ckd" title="ckd" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+            
+            <o-table-column #cad attr="cad" title="cad" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+            
+            <o-table-column #hld attr="hld" title="hld" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+            
+            <o-table-context-menu></o-table-context-menu>
+            <o-table-paginator page-size-options="24;48;96"></o-table-paginator>
+        </o-table>
+    </div>
+</o-form-layout-manager>

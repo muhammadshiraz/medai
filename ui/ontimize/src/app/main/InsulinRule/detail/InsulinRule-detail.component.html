@@ -1,0 +1,36 @@
+<div class="container">
+<o-form-container breadcrumb="yes" breadcrumb-label-columns="id" breadcrumb-separator=", " class="fill-form">
+      <o-form #form attr="InsulinRule_form_edit" 
+        service="InsulinRule" 
+        entity="InsulinRule" 
+        fxLayout="column" 
+        show-header="yes" 
+        header-actions="R;U;D"
+        #oDetailForm keys="id" 
+        keys-sql-types="INTEGER" 
+        show-header-navigation="yes"
+        (onDataLoaded)="onDataLoaded($event)">
+
+  <o-row attr="row1" layout-align="start stretch">
+    <div fxLayout="row wrap" fxLayoutAlign="start start" fxFlex fxLayoutGap="14px">
+      
+      <o-integer-input #id attr="id" label=" id" type="integer" editable="no" required="yes" ></o-integer-input>
+      
+      <o-text-input #blood_sugar_reading attr="blood_sugar_reading" label="blood_sugar_reading" enabled="yes" required="yes" fxFlex="20%" class="form-field"></o-text-input>
+      
+      <o-integer-input #blood_sugar_level attr="blood_sugar_level" label="blood_sugar_level" type="integer" editable="no" required="yes" ></o-integer-input>
+      
+      <o-integer-input #glargine_before_dinner attr="glargine_before_dinner" label=" Before Bedtime Glargine" type="integer" editable="no" required="no" ></o-integer-input>
+      
+      <o-integer-input #lispro_before_breakfast attr="lispro_before_breakfast" label="lispro_before_breakfast" type="integer" editable="no" required="no" ></o-integer-input>
+      
+      <o-integer-input #lispro_before_lunch attr="lispro_before_lunch" label="lispro_before_lunch" type="integer" editable="no" required="no" ></o-integer-input>
+      
+      <o-integer-input #lispro_before_dinner attr="lispro_before_dinner" label="lispro_before_dinner" type="integer" editable="no" required="no" ></o-integer-input>
+      
+    </div>
+  </o-row>
+      
+    </o-form>
+  </o-form-container>
+</div>

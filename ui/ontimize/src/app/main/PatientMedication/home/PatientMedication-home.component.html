@@ -1,0 +1,53 @@
+<o-form-layout-manager attr="PatientMedication" mode="tab" title="PATIENTMEDICATION">
+    <div fxFill fxLayout="column" fxLayoutAlign="start">
+        <o-table 
+            attr="PatientMedicationTable" 
+            service="PatientMedication" 
+            entity="PatientMedication" 
+            title="PATIENTMEDICATION"
+            keys="id"
+            columns="id;dosage_unit;drug_id;patient_id;dosage" 
+            header-actions="R;D"
+            visible-columns="id;dosage_unit;drug_id;patient_id;dosage"  
+            sort-columns="id" 
+            query-rows="20" 
+            quick-filter="yes"
+            row-height="medium" 
+            select-all-checkbox="true" 
+            pageable="yes"  
+            auto-adjust="true" 
+            virtual-scroll="yes" 
+            edition-mode="dblclick"
+            horizontal-scroll="yes"
+            show-title="yes"
+            export-button="yes">
+            
+            <o-table-column #id attr="id" title=" id" type="integer" editable="no" required="yes" content-align="center"></o-table-column>
+            
+            <o-table-column #dosage_unit attr="dosage_unit" title="dosage_unit" editable="no" required="no" content-align="left"></o-table-column>
+            
+            <o-table-column attr="drug_id" title="drug_id">
+    <o-table-cell-renderer-service attr="drug_id" 
+        service="Drug" entity="DrugType" columns="id;drug_name"
+        parent-keys="id:drug_id"
+        value-column="drug_name" keys="drug_id"
+        visible-columns="drug_name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+            
+            <o-table-column attr="patient_id" title="patient_id">
+    <o-table-cell-renderer-service attr="patient_id" 
+        service="Patient" entity="PatientType" columns="id;name"
+        parent-keys="id:patient_id"
+        value-column="name" keys="patient_id"
+        visible-columns="name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+            
+            <o-table-column #dosage attr="dosage" title="dosage" type="real" min-decimal-digits="2" max-decimal-digits="4" min="0" max="1000000.0000" content-align="center"></o-table-column>
+            
+            <o-table-context-menu></o-table-context-menu>
+            <o-table-paginator page-size-options="24;48;96"></o-table-paginator>
+        </o-table>
+    </div>
+</o-form-layout-manager>

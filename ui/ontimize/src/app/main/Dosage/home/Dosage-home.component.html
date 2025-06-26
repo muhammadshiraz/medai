@@ -1,0 +1,62 @@
+<o-form-layout-manager attr="Dosage" mode="tab" title="DOSAGE">
+    <div fxFill fxLayout="column" fxLayoutAlign="start">
+        <o-table 
+            attr="DosageTable" 
+            service="Dosage" 
+            entity="Dosage" 
+            title="DOSAGE"
+            keys="id"
+            columns="drug_name;dosage_unit;drug_id;drug_type;min_dose;max_dose;min_age;max_age;min_weight;max_weight;min_creatine;max_creatine;id" 
+            header-actions="R;D"
+            visible-columns="drug_name;dosage_unit;drug_id;drug_type;min_dose;max_dose;min_age;max_age;min_weight;max_weight;min_creatine;max_creatine;id"  
+            sort-columns="drug_name" 
+            query-rows="20" 
+            quick-filter="yes"
+            row-height="medium" 
+            select-all-checkbox="true" 
+            pageable="yes"  
+            auto-adjust="true" 
+            virtual-scroll="yes" 
+            edition-mode="dblclick"
+            horizontal-scroll="yes"
+            show-title="yes"
+            export-button="yes">
+            
+            <o-table-column #drug_name attr="drug_name" title=" drug_name" editable="no" required="no" content-align="left"></o-table-column>
+            
+            <o-table-column #dosage_unit attr="dosage_unit" title="dosage_unit" editable="no" required="no" content-align="left"></o-table-column>
+            
+            <o-table-column attr="drug_id" title="drug_id">
+    <o-table-cell-renderer-service attr="drug_id" 
+        service="Drug" entity="DrugType" columns="id;drug_name"
+        parent-keys="id:drug_id"
+        value-column="drug_name" keys="drug_id"
+        visible-columns="drug_name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+            
+            <o-table-column #drug_type attr="drug_type" title="drug_type" editable="no" required="no" content-align="left"></o-table-column>
+            
+            <o-table-column #min_dose attr="min_dose" title="min_dose" type="real" min-decimal-digits="2" max-decimal-digits="4" min="0" max="1000000.0000" content-align="center"></o-table-column>
+            
+            <o-table-column #max_dose attr="max_dose" title="max_dose" type="real" min-decimal-digits="2" max-decimal-digits="4" min="0" max="1000000.0000" content-align="center"></o-table-column>
+            
+            <o-table-column #min_age attr="min_age" title="min_age" type="real" min-decimal-digits="2" max-decimal-digits="4" min="0" max="1000000.0000" content-align="center"></o-table-column>
+            
+            <o-table-column #max_age attr="max_age" title="max_age" type="real" min-decimal-digits="2" max-decimal-digits="4" min="0" max="1000000.0000" content-align="center"></o-table-column>
+            
+            <o-table-column #min_weight attr="min_weight" title="min_weight" type="real" min-decimal-digits="2" max-decimal-digits="4" min="0" max="1000000.0000" content-align="center"></o-table-column>
+            
+            <o-table-column #max_weight attr="max_weight" title="max_weight" type="real" min-decimal-digits="2" max-decimal-digits="4" min="0" max="1000000.0000" content-align="center"></o-table-column>
+            
+            <o-table-column #min_creatine attr="min_creatine" title="min_creatine" type="real" min-decimal-digits="2" max-decimal-digits="4" min="0" max="1000000.0000" content-align="center"></o-table-column>
+            
+            <o-table-column #max_creatine attr="max_creatine" title="max_creatine" type="real" min-decimal-digits="2" max-decimal-digits="4" min="0" max="1000000.0000" content-align="center"></o-table-column>
+            
+            <o-table-column #id attr="id" title="id" type="integer" editable="no" required="yes" content-align="center"></o-table-column>
+            
+            <o-table-context-menu></o-table-context-menu>
+            <o-table-paginator page-size-options="24;48;96"></o-table-paginator>
+        </o-table>
+    </div>
+</o-form-layout-manager>

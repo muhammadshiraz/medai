@@ -1,0 +1,86 @@
+<div class="container">
+<o-form-container breadcrumb="yes" breadcrumb-label-columns="drug_name" breadcrumb-separator=", " class="fill-form">
+      <o-form #form attr="Dosage_form_edit" 
+        service="Dosage" 
+        entity="Dosage" 
+        fxLayout="column" 
+        show-header="yes" 
+        header-actions="R;U;D"
+        #oDetailForm keys="id" 
+        keys-sql-types="INTEGER" 
+        show-header-navigation="yes"
+        (onDataLoaded)="onDataLoaded($event)">
+
+  <o-row attr="row1" layout-align="start stretch">
+    <div fxLayout="row wrap" fxLayoutAlign="start start" fxFlex fxLayoutGap="14px">
+      
+      <o-text-input #drug_name attr="drug_name" label=" drug_name" enabled="yes" required="no" fxFlex="20%" class="form-field"></o-text-input>
+      
+      <o-list-picker 
+        attr="dosage_unit"
+        service="DrugUnit" 
+        entity="DrugUnitType"
+        fxFlex="30" 
+        query-on-init="no" 
+        query-on-bind="yes" 
+        required="no" 
+        enabled="yes" 
+        filter="yes"
+        value-column="unit_name" 
+        value-column-type="VARCHAR"  
+        keys="unit_name" 
+        columns="unit_name;dosage_unit;unit_name" 
+        title="dosage_unit"
+        visible-columns="unit_name;unit_name" 
+        separator=" - " width="680px" class="form-field">
+</o-list-picker>
+      
+      <o-list-picker 
+        attr="drug_id"
+        service="Drug" 
+        entity="DrugType"
+        fxFlex="30" 
+        query-on-init="no" 
+        query-on-bind="yes" 
+        required="yes" 
+        enabled="yes" 
+        filter="yes"
+        value-column="id" 
+        value-column-type="BIGINT"  
+        keys="id" 
+        columns="id;drug_id;drug_name" 
+        title="drug_id"
+        visible-columns="id;drug_name" 
+        separator=" - " width="680px" class="form-field">
+</o-list-picker>
+      
+      <o-text-input #drug_type attr="drug_type" label="drug_type" enabled="yes" required="no" fxFlex="20%" class="form-field"></o-text-input>
+      
+      <o-real-input #min_dose attr="min_dose" label="min_dose" min-decimal-digits="2" max-decimal-digits="4" min="0" max="1000000000" fxFlex="20%" class="form-field"></o-real-input>
+      
+      <o-real-input #max_dose attr="max_dose" label="max_dose" min-decimal-digits="2" max-decimal-digits="4" min="0" max="1000000000" fxFlex="20%" class="form-field"></o-real-input>
+      
+      <o-real-input #min_age attr="min_age" label="min_age" min-decimal-digits="2" max-decimal-digits="4" min="0" max="1000000000" fxFlex="20%" class="form-field"></o-real-input>
+      
+      <o-real-input #max_age attr="max_age" label="max_age" min-decimal-digits="2" max-decimal-digits="4" min="0" max="1000000000" fxFlex="20%" class="form-field"></o-real-input>
+      
+      <o-real-input #min_weight attr="min_weight" label="min_weight" min-decimal-digits="2" max-decimal-digits="4" min="0" max="1000000000" fxFlex="20%" class="form-field"></o-real-input>
+      
+      <o-real-input #max_weight attr="max_weight" label="max_weight" min-decimal-digits="2" max-decimal-digits="4" min="0" max="1000000000" fxFlex="20%" class="form-field"></o-real-input>
+      
+      <o-real-input #min_creatine attr="min_creatine" label="min_creatine" min-decimal-digits="2" max-decimal-digits="4" min="0" max="1000000000" fxFlex="20%" class="form-field"></o-real-input>
+      
+      <o-real-input #max_creatine attr="max_creatine" label="max_creatine" min-decimal-digits="2" max-decimal-digits="4" min="0" max="1000000000" fxFlex="20%" class="form-field"></o-real-input>
+      
+      <o-integer-input #id attr="id" label="id" type="integer" editable="no" required="yes" ></o-integer-input>
+      
+    </div>
+  </o-row>
+      
+      <mat-tab-group fxFill>
+        
+      </mat-tab-group>
+      
+    </o-form>
+  </o-form-container>
+</div>

@@ -1,0 +1,47 @@
+<o-form #PatientLabForm attr="PatientLab_form_insert" service="PatientLab" entity="PatientLab"
+keys="id" fxLayout="column" show-header="yes" header-actions="I"
+horizontal-scroll="yes"
+after-insert-mode="new" class="standalone-form-container" >
+
+<o-row attr="row1" layout-align="start stretch">
+  <div fxLayout="row wrap" fxLayoutAlign="start start" fxFlex fxLayoutGap="14px">
+    
+        <o-text-input #lab_name attr="lab_name" label=" lab_name" enabled="yes" required="yes" fxFlex="20%" class="form-field"></o-text-input>
+      
+        <o-list-picker 
+        attr="patient_id"
+        service="Patient" 
+        entity="PatientType"
+        fxFlex="30" 
+        query-on-init="no" 
+        query-on-bind="yes" 
+        required="yes" 
+        enabled="yes" 
+        filter="yes"
+        value-column="id" 
+        value-column-type="BIGINT"  
+        keys="id" 
+        columns="id;patient_id;name" 
+        title="patient_id"
+        visible-columns="id;name" 
+        separator=" - " width="680px" class="form-field">
+</o-list-picker>
+      
+        <o-text-input #lab_test_name attr="lab_test_name" label="lab_test_name" enabled="yes" required="yes" fxFlex="20%" class="form-field"></o-text-input>
+      
+        <o-text-input #lab_test_code attr="lab_test_code" label="lab_test_code" enabled="yes" required="no" fxFlex="20%" class="form-field"></o-text-input>
+      
+        <o-text-input #lab_test_description attr="lab_test_description" label="lab_test_description" enabled="yes" required="no" fxFlex="20%" class="form-field"></o-text-input>
+      
+        <o-date-input #lab_date attr="lab_date" value-type="string" label="lab_date" enabled="yes" required="no" format="YYYY-MM-DD" fxFlex="20%" class="form-field"></o-date-input>
+      
+        <o-text-input #lab_result attr="lab_result" label="lab_result" enabled="yes" required="no" fxFlex="20%" class="form-field"></o-text-input>
+      
+        <o-integer-input #id attr="id" label="id" type="integer" editable="no" required="yes" ></o-integer-input>
+      
+</div>
+</o-row>
+
+<div layout-padding></div>
+
+</o-form>

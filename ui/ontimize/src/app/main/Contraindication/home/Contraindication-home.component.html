@@ -1,0 +1,51 @@
+<o-form-layout-manager attr="Contraindication" mode="tab" title="CONTRAINDICATION">
+    <div fxFill fxLayout="column" fxLayoutAlign="start">
+        <o-table 
+            attr="ContraindicationTable" 
+            service="Contraindication" 
+            entity="Contraindication" 
+            title="CONTRAINDICATION"
+            keys="id"
+            columns="description;drug_id_1;drug_id_2;id" 
+            header-actions="R;D"
+            visible-columns="description;drug_id_1;drug_id_2;id"  
+            sort-columns="description" 
+            query-rows="20" 
+            quick-filter="yes"
+            row-height="medium" 
+            select-all-checkbox="true" 
+            pageable="yes"  
+            auto-adjust="true" 
+            virtual-scroll="yes" 
+            edition-mode="dblclick"
+            horizontal-scroll="yes"
+            show-title="yes"
+            export-button="yes">
+            
+            <o-table-column #description attr="description" title=" description" editable="no" required="no" content-align="left"></o-table-column>
+            
+            <o-table-column attr="drug_id_1" title="drug_id_1">
+    <o-table-cell-renderer-service attr="drug_id_1" 
+        service="Drug" entity="DrugType" columns="id;drug_name"
+        parent-keys="id:drug_id_1"
+        value-column="drug_name" keys="drug_id_1"
+        visible-columns="drug_name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+            
+            <o-table-column attr="drug_id_2" title="drug_id_2">
+    <o-table-cell-renderer-service attr="drug_id_2" 
+        service="Drug" entity="DrugType" columns="id;drug_name"
+        parent-keys="id:drug_id_2"
+        value-column="drug_name" keys="drug_id_2"
+        visible-columns="drug_name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+            
+            <o-table-column #id attr="id" title="id" type="integer" editable="no" required="yes" content-align="center"></o-table-column>
+            
+            <o-table-context-menu></o-table-context-menu>
+            <o-table-paginator page-size-options="24;48;96"></o-table-paginator>
+        </o-table>
+    </div>
+</o-form-layout-manager>

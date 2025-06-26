@@ -1,0 +1,51 @@
+services:
+    apilogicserver:
+        image: tylerm007/medai:latest
+        container_name: medai_backend
+        # instead using a built image, uncomment the following to build the image dynamically
+        # build:
+        #     context: ../..
+        #     dockerfile: ./devops/docker-compose/Dockerfile.dockerfile
+        environment:
+          - APILOGICPROJECT_VERBOSE=true
+          - APILOGICPROJECT_IS_DOCKER=true
+          - APILOGICPROJECT_SECURITY_ENABLED=true
+          - APILOGICPROJECT_SWAGGER_HOST=ec2-54-145-40-116.compute-1.amazonaws.com
+          ## TODO: verify Database uri's here, 
+          - APILOGICPROJECT_SQLALCHEMY_DATABASE_URI=postgresql://postgres:Mart1nbaum$2908@database-1.ct6ae4ec4d3p.us-east-1.rds.amazo
+naws.com/medai
+          - APILOGICPROJECT_SQLALCHEMY_DATABASE_URI_AUTHENTICATION=postgresql://postgres:Mart1nbaum$2908@database-1.ct6ae4ec4d3p.us-e
+ast-1.rds.amazonaws.com/authdb
+        expose:
+          - 5656
+        ports:
+          - 5656:5656
+        #volumes:
+            # relative path - thanks https://stackoverflow.com/questions/46907558/docker-compose-relative-paths-vs-docker-volume
+            # - /Users/val/dev/ApiLogicServer/ApiLogicServer-dev/org_git/docker-compose-nw-postgres:/app
+            #- ./../..:/app
+        # https://stackoverflow.com/questions/39460892/gunicorn-no-module-named-myproject
+        #command: /usr/local/bin/gunicorn --reload --workers 2 --worker-connections 2 --access-logfile=- --pythonpath /app -b 0.0.0.0
+:5656 api_logic_server_run:flask_app 
+        #working_dir: /app/ApiLogicProject 
+
+  
+    media-front-end:
+        image: tylerm007/medai_frontend:latest
+        container_name: medai_frontend
+        expose:
+          - 80
+        ports:
+          - 80:80
+        #volumes:
+        # local:path-in-container
+        #  - ../../ui/app/dist:/home/node  
+        #volumes:
+          # local:path-in-container
+          #- ../ui/app/nginx:/etc/nginx  
+          #- ./Users/tylerband/medai+/medai2/ui/app/dist:/usr/share/nginx/html
+        depends_on:
+          - apilogicserver
+        environment:
+          - NODE_ENV=production
+          - API_URL=http://ec2-54-145-40-116.compute-1.amazonaws.com:5656/ontimizeweb/services/rest

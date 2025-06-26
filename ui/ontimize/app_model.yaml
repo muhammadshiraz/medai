@@ -1,0 +1,923 @@
+about:
+  date: March 15, 2025 13:51:56
+  recent_changes: works with modified safrs-react-admin
+  version: 0.0.0
+api_root: '{http_type}://{swagger_host}:{port}/{api}'
+application:
+  ontimize:
+    description: generated Ontimize application
+    menu_group:
+      data:
+        icon: edit_square
+        menu_item:
+          Contraindication:
+            icon: edit_square
+            menu_name: Contraindication
+            menu_title: Contraindication
+            page:
+              detail:
+                columns: description,drug_id_1,drug_id_2,id
+                include_children: true
+                page_name: detail
+                template_name: detail_template.html
+                title: Contraindication
+                typescript_name: detail_component.jinja
+                visible_columns: description,drug_id_1,drug_id_2,id
+              home:
+                columns: description,drug_id_1,drug_id_2,id
+                include_children: true
+                page_name: home
+                template_name: home_template.html
+                title: Contraindication
+                typescript_name: home_template.jinja
+                visible_columns: description,drug_id_1,drug_id_2,id
+              new:
+                columns: description,drug_id_1,drug_id_2,id
+                include_children: true
+                page_name: new
+                template_name: new_template.html
+                title: Contraindication
+                typescript_name: new_component.jinja
+                visible_columns: description,drug_id_1,drug_id_2,id
+            template_name: module.jinja
+          Dosage:
+            icon: edit_square
+            menu_name: Dosage
+            menu_title: Dosage
+            page:
+              detail:
+                columns: drug_name,dosage_unit,drug_id,drug_type,min_dose,max_dose,min_age,max_age,min_weight,max_weight,min_creatine,max_creatine,id
+                include_children: true
+                page_name: detail
+                template_name: detail_template.html
+                title: Dosage
+                typescript_name: detail_component.jinja
+                visible_columns: drug_name,dosage_unit,drug_id,drug_type,min_dose,max_dose,min_age,max_age,min_weight,max_weight,min_creatine,max_creatine,id
+              home:
+                columns: drug_name,dosage_unit,drug_id,drug_type,min_dose,max_dose,min_age,max_age,min_weight,max_weight,min_creatine,max_creatine,id
+                include_children: true
+                page_name: home
+                template_name: home_template.html
+                title: Dosage
+                typescript_name: home_template.jinja
+                visible_columns: drug_name,dosage_unit,drug_id,drug_type,min_dose,max_dose,min_age,max_age,min_weight,max_weight,min_creatine,max_creatine,id
+              new:
+                columns: drug_name,dosage_unit,drug_id,drug_type,min_dose,max_dose,min_age,max_age,min_weight,max_weight,min_creatine,max_creatine,id
+                include_children: true
+                page_name: new
+                template_name: new_template.html
+                title: Dosage
+                typescript_name: new_component.jinja
+                visible_columns: drug_name,dosage_unit,drug_id,drug_type,min_dose,max_dose,min_age,max_age,min_weight,max_weight,min_creatine,max_creatine,id
+            template_name: module.jinja
+          Drug:
+            icon: edit_square
+            menu_name: Drug
+            menu_title: Drug
+            page:
+              detail:
+                columns: drug_name,dosage_unit,dosage,drug_type,manufacturer,side_effects,id
+                include_children: true
+                page_name: detail
+                template_name: detail_template.html
+                title: Drug
+                typescript_name: detail_component.jinja
+                visible_columns: drug_name,dosage_unit,dosage,drug_type,manufacturer,side_effects,id
+              home:
+                columns: drug_name,dosage_unit,dosage,drug_type,manufacturer,side_effects,id
+                include_children: true
+                page_name: home
+                template_name: home_template.html
+                title: Drug
+                typescript_name: home_template.jinja
+                visible_columns: drug_name,dosage_unit,dosage,drug_type,manufacturer,side_effects,id
+              new:
+                columns: drug_name,dosage_unit,dosage,drug_type,manufacturer,side_effects,id
+                include_children: true
+                page_name: new
+                template_name: new_template.html
+                title: Drug
+                typescript_name: new_component.jinja
+                visible_columns: drug_name,dosage_unit,dosage,drug_type,manufacturer,side_effects,id
+            template_name: module.jinja
+          DrugUnit:
+            icon: edit_square
+            menu_name: DrugUnit
+            menu_title: DrugUnit
+            page:
+              detail:
+                columns: unit_name
+                include_children: true
+                page_name: detail
+                template_name: detail_template.html
+                title: DrugUnit
+                typescript_name: detail_component.jinja
+                visible_columns: unit_name
+              home:
+                columns: unit_name
+                include_children: true
+                page_name: home
+                template_name: home_template.html
+                title: DrugUnit
+                typescript_name: home_template.jinja
+                visible_columns: unit_name
+              new:
+                columns: unit_name
+                include_children: true
+                page_name: new
+                template_name: new_template.html
+                title: DrugUnit
+                typescript_name: new_component.jinja
+                visible_columns: unit_name
+            template_name: module.jinja
+          InsulinRule:
+            icon: edit_square
+            menu_name: InsulinRule
+            menu_title: InsulinRule
+            page:
+              detail:
+                columns: id,blood_sugar_reading,blood_sugar_level,glargine_before_dinner,lispro_before_breakfast,lispro_before_lunch,lispro_before_dinner
+                include_children: true
+                page_name: detail
+                template_name: detail_template.html
+                title: InsulinRule
+                typescript_name: detail_component.jinja
+                visible_columns: id,blood_sugar_reading,blood_sugar_level,glargine_before_dinner,lispro_before_breakfast,lispro_before_lunch,lispro_before_dinner
+              home:
+                columns: id,blood_sugar_reading,blood_sugar_level,glargine_before_dinner,lispro_before_breakfast,lispro_before_lunch,lispro_before_dinner
+                include_children: true
+                page_name: home
+                template_name: home_template.html
+                title: InsulinRule
+                typescript_name: home_template.jinja
+                visible_columns: id,blood_sugar_reading,blood_sugar_level,glargine_before_dinner,lispro_before_breakfast,lispro_before_lunch,lispro_before_dinner
+              new:
+                columns: id,blood_sugar_reading,blood_sugar_level,glargine_before_dinner,lispro_before_breakfast,lispro_before_lunch,lispro_before_dinner
+                include_children: true
+                page_name: new
+                template_name: new_template.html
+                title: InsulinRule
+                typescript_name: new_component.jinja
+                visible_columns: id,blood_sugar_reading,blood_sugar_level,glargine_before_dinner,lispro_before_breakfast,lispro_before_lunch,lispro_before_dinner
+            template_name: module.jinja
+          Patient:
+            icon: edit_square
+            menu_name: Patient
+            menu_title: Patient
+            page:
+              detail:
+                columns: name,birth_date,age,weight,height,hba1c,duration,patient_sex,creatine_mg_dl,medical_record_number,created_date,id,ckd,cad,hld
+                include_children: true
+                page_name: detail
+                template_name: detail_template.html
+                title: Patient
+                typescript_name: detail_component.jinja
+                visible_columns: name,birth_date,age,weight,height,hba1c,duration,patient_sex,creatine_mg_dl,medical_record_number,created_date,id,ckd,cad,hld
+              home:
+                columns: name,birth_date,age,weight,height,hba1c,duration,patient_sex,creatine_mg_dl,medical_record_number,created_date,id,ckd,cad,hld
+                include_children: true
+                page_name: home
+                template_name: home_template.html
+                title: Patient
+                typescript_name: home_template.jinja
+                visible_columns: name,birth_date,age,weight,height,hba1c,duration,patient_sex,creatine_mg_dl,medical_record_number,created_date,id,ckd,cad,hld
+              new:
+                columns: name,birth_date,age,weight,height,hba1c,duration,patient_sex,creatine_mg_dl,medical_record_number,created_date,id,ckd,cad,hld
+                include_children: true
+                page_name: new
+                template_name: new_template.html
+                title: Patient
+                typescript_name: new_component.jinja
+                visible_columns: name,birth_date,age,weight,height,hba1c,duration,patient_sex,creatine_mg_dl,medical_record_number,created_date,id,ckd,cad,hld
+            template_name: module.jinja
+          PatientLab:
+            icon: edit_square
+            menu_name: PatientLab
+            menu_title: PatientLab
+            page:
+              detail:
+                columns: lab_name,patient_id,lab_test_name,lab_test_code,lab_test_description,lab_date,lab_result,id
+                include_children: true
+                page_name: detail
+                template_name: detail_template.html
+                title: PatientLab
+                typescript_name: detail_component.jinja
+                visible_columns: lab_name,patient_id,lab_test_name,lab_test_code,lab_test_description,lab_date,lab_result,id
+              home:
+                columns: lab_name,patient_id,lab_test_name,lab_test_code,lab_test_description,lab_date,lab_result,id
+                include_children: true
+                page_name: home
+                template_name: home_template.html
+                title: PatientLab
+                typescript_name: home_template.jinja
+                visible_columns: lab_name,patient_id,lab_test_name,lab_test_code,lab_test_description,lab_date,lab_result,id
+              new:
+                columns: lab_name,patient_id,lab_test_name,lab_test_code,lab_test_description,lab_date,lab_result,id
+                include_children: true
+                page_name: new
+                template_name: new_template.html
+                title: PatientLab
+                typescript_name: new_component.jinja
+                visible_columns: lab_name,patient_id,lab_test_name,lab_test_code,lab_test_description,lab_date,lab_result,id
+            template_name: module.jinja
+          PatientMedication:
+            icon: edit_square
+            menu_name: PatientMedication
+            menu_title: PatientMedication
+            page:
+              detail:
+                columns: id,dosage_unit,drug_id,patient_id,dosage
+                include_children: true
+                page_name: detail
+                template_name: detail_template.html
+                title: PatientMedication
+                typescript_name: detail_component.jinja
+                visible_columns: id,dosage_unit,drug_id,patient_id,dosage
+              home:
+                columns: id,dosage_unit,drug_id,patient_id,dosage
+                include_children: true
+                page_name: home
+                template_name: home_template.html
+                title: PatientMedication
+                typescript_name: home_template.jinja
+                visible_columns: id,dosage_unit,drug_id,patient_id,dosage
+              new:
+                columns: id,dosage_unit,drug_id,patient_id,dosage
+                include_children: true
+                page_name: new
+                template_name: new_template.html
+                title: PatientMedication
+                typescript_name: new_component.jinja
+                visible_columns: id,dosage_unit,drug_id,patient_id,dosage
+            template_name: module.jinja
+          Reading:
+            icon: edit_square
+            menu_name: Reading
+            menu_title: Reading
+            page:
+              detail:
+                columns: id,patient_id,time_of_reading,reading_value,reading_date,notes
+                include_children: true
+                page_name: detail
+                template_name: detail_template.html
+                title: Reading
+                typescript_name: detail_component.jinja
+                visible_columns: id,patient_id,time_of_reading,reading_value,reading_date,notes
+              home:
+                columns: id,patient_id,time_of_reading,reading_value,reading_date,notes
+                include_children: true
+                page_name: home
+                template_name: home_template.html
+                title: Reading
+                typescript_name: home_template.jinja
+                visible_columns: id,patient_id,time_of_reading,reading_value,reading_date,notes
+              new:
+                columns: id,patient_id,time_of_reading,reading_value,reading_date,notes
+                include_children: true
+                page_name: new
+                template_name: new_template.html
+                title: Reading
+                typescript_name: new_component.jinja
+                visible_columns: id,patient_id,time_of_reading,reading_value,reading_date,notes
+            template_name: module.jinja
+          ReadingHistory:
+            icon: edit_square
+            menu_name: ReadingHistory
+            menu_title: ReadingHistory
+            page:
+              detail:
+                columns: id,patient_id,reading_date,breakfast,lunch,dinner,bedtime,notes_for_day
+                include_children: true
+                page_name: detail
+                template_name: detail_template.html
+                title: ReadingHistory
+                typescript_name: detail_component.jinja
+                visible_columns: id,patient_id,reading_date,breakfast,lunch,dinner,bedtime,notes_for_day
+              home:
+                columns: id,patient_id,reading_date,breakfast,lunch,dinner,bedtime,notes_for_day
+                include_children: true
+                page_name: home
+                template_name: home_template.html
+                title: ReadingHistory
+                typescript_name: home_template.jinja
+                visible_columns: id,patient_id,reading_date,breakfast,lunch,dinner,bedtime,notes_for_day
+              new:
+                columns: id,patient_id,reading_date,breakfast,lunch,dinner,bedtime,notes_for_day
+                include_children: true
+                page_name: new
+                template_name: new_template.html
+                title: ReadingHistory
+                typescript_name: new_component.jinja
+                visible_columns: id,patient_id,reading_date,breakfast,lunch,dinner,bedtime,notes_for_day
+            template_name: module.jinja
+          Recommendation:
+            icon: edit_square
+            menu_name: Recommendation
+            menu_title: Recommendation
+            page:
+              detail:
+                columns: id,dosage_unit,drug_id,patient_id,time_of_reading,dosage,recommendation_date
+                include_children: true
+                page_name: detail
+                template_name: detail_template.html
+                title: Recommendation
+                typescript_name: detail_component.jinja
+                visible_columns: id,dosage_unit,drug_id,patient_id,time_of_reading,dosage,recommendation_date
+              home:
+                columns: id,dosage_unit,drug_id,patient_id,time_of_reading,dosage,recommendation_date
+                include_children: true
+                page_name: home
+                template_name: home_template.html
+                title: Recommendation
+                typescript_name: home_template.jinja
+                visible_columns: id,dosage_unit,drug_id,patient_id,time_of_reading,dosage,recommendation_date
+              new:
+                columns: id,dosage_unit,drug_id,patient_id,time_of_reading,dosage,recommendation_date
+                include_children: true
+                page_name: new
+                template_name: new_template.html
+                title: Recommendation
+                typescript_name: new_component.jinja
+                visible_columns: id,dosage_unit,drug_id,patient_id,time_of_reading,dosage,recommendation_date
+            template_name: module.jinja
+        menu_name: data
+        menu_title: data
+        opened: true
+    name: ontimize
+authentication: '{system-default}'
+entities:
+  Contraindication:
+    columns:
+    - label: ' description*'
+      name: description
+      search: true
+      sort: true
+      template: text
+      type: TEXT
+    - name: drug_id_1
+      required: true
+      template: integer
+      type: BIGINT
+    - name: drug_id_2
+      required: true
+      template: integer
+      type: BIGINT
+    - name: id
+      required: true
+      template: integer
+      type: BIGINT
+    favorite: description
+    hidden: {}
+    label: Contraindication
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - drug_id_1
+      name: drug
+      resource: Drug
+    - direction: toone
+      fks:
+      - drug_id_2
+      name: drug1
+      resource: Drug
+    type: Contraindication
+  Dosage:
+    columns:
+    - label: ' drug_name*'
+      name: drug_name
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: dosage_unit
+      template: text
+      type: VARCHAR
+    - name: drug_id
+      required: true
+      template: integer
+      type: BIGINT
+    - name: drug_type
+      template: text
+      type: VARCHAR
+    - name: min_dose
+      template: real
+      type: NUMERIC
+    - name: max_dose
+      template: real
+      type: NUMERIC
+    - default: '18'
+      name: min_age
+      template: real
+      type: NUMERIC
+    - default: '105'
+      name: max_age
+      template: real
+      type: NUMERIC
+    - name: min_weight
+      template: real
+      type: NUMERIC
+    - name: max_weight
+      template: real
+      type: NUMERIC
+    - name: min_creatine
+      template: real
+      type: NUMERIC
+    - name: max_creatine
+      template: real
+      type: NUMERIC
+    - name: id
+      required: true
+      template: integer
+      type: BIGINT
+    favorite: drug_name
+    hidden: {}
+    label: Dosage
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - dosage_unit
+      name: drug_unit
+      resource: DrugUnit
+    - direction: toone
+      fks:
+      - drug_id
+      name: drug
+      resource: Drug
+    type: Dosage
+  Drug:
+    columns:
+    - label: ' drug_name*'
+      name: drug_name
+      required: true
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: dosage_unit
+      template: text
+      type: VARCHAR
+    - name: dosage
+      template: real
+      type: NUMERIC
+    - name: drug_type
+      template: text
+      type: VARCHAR
+    - name: manufacturer
+      template: text
+      type: VARCHAR
+    - name: side_effects
+      template: text
+      type: TEXT
+    - name: id
+      required: true
+      template: integer
+      type: BIGINT
+    favorite: drug_name
+    hidden: {}
+    label: Drug
+    primary_key:
+    - id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - drug_id_1
+      name: ContraindicationList
+      resource: Contraindication
+    - direction: tomany
+      fks:
+      - drug_id_2
+      name: ContraindicationList1
+      resource: Contraindication
+    - direction: tomany
+      fks:
+      - drug_id
+      name: DosageList
+      resource: Dosage
+    - direction: tomany
+      fks:
+      - drug_id
+      name: PatientMedicationList
+      resource: PatientMedication
+    - direction: tomany
+      fks:
+      - drug_id
+      name: RecommendationList
+      resource: Recommendation
+    - direction: toone
+      fks:
+      - dosage_unit
+      name: drug_unit
+      resource: DrugUnit
+    type: Drug
+  DrugUnit:
+    columns:
+    - label: ' unit_name*'
+      name: unit_name
+      required: true
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    favorite: unit_name
+    hidden: {}
+    label: DrugUnit
+    primary_key:
+    - unit_name
+    tab_groups:
+    - direction: tomany
+      fks:
+      - dosage_unit
+      name: DosageList
+      resource: Dosage
+    - direction: tomany
+      fks:
+      - dosage_unit
+      name: DrugList
+      resource: Drug
+    - direction: tomany
+      fks:
+      - dosage_unit
+      name: PatientMedicationList
+      resource: PatientMedication
+    - direction: tomany
+      fks:
+      - dosage_unit
+      name: RecommendationList
+      resource: Recommendation
+    type: DrugUnit
+  InsulinRule:
+    columns:
+    - label: ' id*'
+      name: id
+      required: true
+      search: true
+      sort: true
+      template: integer
+      type: BIGINT
+    - name: blood_sugar_reading
+      required: true
+      template: text
+      type: VARCHAR
+    - name: blood_sugar_level
+      required: true
+      template: integer
+      type: INTEGER
+    - label: ' Before Bedtime Glargine'
+      name: glargine_before_dinner
+      template: integer
+      type: INTEGER
+    - name: lispro_before_breakfast
+      template: integer
+      type: INTEGER
+    - name: lispro_before_lunch
+      template: integer
+      type: INTEGER
+    - name: lispro_before_dinner
+      template: integer
+      type: INTEGER
+    favorite: id
+    hidden: {}
+    label: InsulinRule
+    primary_key:
+    - id
+    type: InsulinRule
+  Patient:
+    columns:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: birth_date
+      type: DATE
+    - name: age
+      template: real
+      type: NUMERIC
+    - name: weight
+      template: integer
+      type: BIGINT
+    - name: height
+      template: integer
+      type: BIGINT
+    - name: hba1c
+      template: real
+      type: NUMERIC
+    - name: duration
+      template: integer
+      type: BIGINT
+    - name: patient_sex
+      template: text
+      type: VARCHAR
+    - name: creatine_mg_dl
+      template: real
+      type: NUMERIC
+    - name: medical_record_number
+      template: text
+      type: VARCHAR
+    - name: created_date
+      type: DATETIME
+    - name: id
+      required: true
+      template: integer
+      type: BIGINT
+    - name: ckd
+      template: integer
+      type: INTEGER
+    - name: cad
+      template: integer
+      type: INTEGER
+    - name: hld
+      template: integer
+      type: INTEGER
+    favorite: name
+    hidden: {}
+    label: Patient
+    primary_key:
+    - id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - patient_id
+      name: PatientLabList
+      resource: PatientLab
+    - direction: tomany
+      fks:
+      - patient_id
+      name: PatientMedicationList
+      resource: PatientMedication
+    - direction: tomany
+      fks:
+      - patient_id
+      name: ReadingList
+      resource: Reading
+    - direction: tomany
+      fks:
+      - patient_id
+      name: ReadingHistoryList
+      resource: ReadingHistory
+    - direction: tomany
+      fks:
+      - patient_id
+      name: RecommendationList
+      resource: Recommendation
+    type: Patient
+  PatientLab:
+    columns:
+    - label: ' lab_name*'
+      name: lab_name
+      required: true
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: patient_id
+      required: true
+      template: integer
+      type: BIGINT
+    - name: lab_test_name
+      required: true
+      template: text
+      type: VARCHAR
+    - name: lab_test_code
+      template: text
+      type: VARCHAR
+    - name: lab_test_description
+      template: text
+      type: TEXT
+    - name: lab_date
+      type: DATE
+    - name: lab_result
+      template: text
+      type: JSON
+    - name: id
+      required: true
+      template: integer
+      type: BIGINT
+    favorite: lab_name
+    hidden: {}
+    label: PatientLab
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - patient_id
+      name: patient
+      resource: Patient
+    type: PatientLab
+  PatientMedication:
+    columns:
+    - label: ' id*'
+      name: id
+      required: true
+      search: true
+      sort: true
+      template: integer
+      type: BIGINT
+    - name: dosage_unit
+      template: text
+      type: VARCHAR
+    - name: drug_id
+      required: true
+      template: integer
+      type: BIGINT
+    - name: patient_id
+      required: true
+      template: integer
+      type: BIGINT
+    - name: dosage
+      template: real
+      type: NUMERIC
+    favorite: id
+    hidden: {}
+    label: PatientMedication
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - dosage_unit
+      name: drug_unit
+      resource: DrugUnit
+    - direction: toone
+      fks:
+      - drug_id
+      name: drug
+      resource: Drug
+    - direction: toone
+      fks:
+      - patient_id
+      name: patient
+      resource: Patient
+    type: PatientMedication
+  Reading:
+    columns:
+    - label: ' id*'
+      name: id
+      required: true
+      search: true
+      sort: true
+      template: integer
+      type: BIGINT
+    - name: patient_id
+      required: true
+      template: integer
+      type: BIGINT
+    - name: time_of_reading
+      required: true
+      template: text
+      type: VARCHAR
+    - name: reading_value
+      template: real
+      type: NUMERIC
+    - name: reading_date
+      type: DATE
+    - name: notes
+      template: text
+      type: TEXT
+    favorite: id
+    hidden: {}
+    label: Reading
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - patient_id
+      name: patient
+      resource: Patient
+    type: Reading
+  ReadingHistory:
+    columns:
+    - label: ' id*'
+      name: id
+      required: true
+      search: true
+      sort: true
+      template: integer
+      type: BIGINT
+    - name: patient_id
+      required: true
+      template: integer
+      type: BIGINT
+    - name: reading_date
+      required: true
+      type: DATE
+    - default: '0.0'
+      name: breakfast
+      template: real
+      type: NUMERIC
+    - default: '0.0'
+      name: lunch
+      template: real
+      type: NUMERIC
+    - default: '0.0'
+      name: dinner
+      template: real
+      type: NUMERIC
+    - default: '0.0'
+      name: bedtime
+      template: real
+      type: NUMERIC
+    - name: notes_for_day
+      template: text
+      type: TEXT
+    favorite: id
+    hidden: {}
+    label: ReadingHistory
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - patient_id
+      name: patient
+      resource: Patient
+    type: ReadingHistory
+  Recommendation:
+    columns:
+    - label: ' id*'
+      name: id
+      required: true
+      search: true
+      sort: true
+      template: integer
+      type: BIGINT
+    - name: dosage_unit
+      template: text
+      type: VARCHAR
+    - name: drug_id
+      required: true
+      template: integer
+      type: BIGINT
+    - name: patient_id
+      required: true
+      template: integer
+      type: BIGINT
+    - name: time_of_reading
+      required: true
+      template: text
+      type: VARCHAR
+    - name: dosage
+      template: real
+      type: NUMERIC
+    - name: recommendation_date
+      type: DATETIME
+    favorite: id
+    hidden: {}
+    label: Recommendation
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - dosage_unit
+      name: drug_unit
+      resource: DrugUnit
+    - direction: toone
+      fks:
+      - drug_id
+      name: drug
+      resource: Drug
+    - direction: toone
+      fks:
+      - patient_id
+      name: patient
+      resource: Patient
+    type: Recommendation
+settings:
+  HomeJS: /admin-app/home.js
+  max_list_columns: 8
+  style_guide:
+    api_endpoint: http://localhost:5656/api
+    applicationLocales:
+    - en
+    - es
+    currency_symbol: $
+    currency_symbol_position: left
+    date_format: YYYY-MM-DD
+    decimal_max: '1000000000'
+    decimal_min: '0'
+    decimal_separator: .
+    edit_on_mode: dblclick
+    exclude_listpicker: false
+    include_translation: false
+    keycloak_client_id: alsclient
+    keycloak_realm: kcals
+    keycloak_url: http://localhost:8080
+    locale: en
+    max_decimal_digits: '4'
+    min_decimal_digits: '2'
+    mode: tab
+    pick_style: list
+    serviceType: JSONAPI
+    startSessionPath: /auth/login
+    style: light
+    thousand_separator: ','
+    use_keycloak: false

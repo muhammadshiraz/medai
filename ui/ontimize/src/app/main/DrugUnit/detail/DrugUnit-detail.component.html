@@ -1,0 +1,259 @@
+<div class="container">
+<o-form-container breadcrumb="yes" breadcrumb-label-columns="unit_name" breadcrumb-separator=", " class="fill-form">
+      <o-form #form attr="DrugUnit_form_edit" 
+        service="DrugUnit" 
+        entity="DrugUnit" 
+        fxLayout="column" 
+        show-header="yes" 
+        header-actions="R;U;D"
+        #oDetailForm keys="unit_name" 
+        keys-sql-types="VARCHAR" 
+        show-header-navigation="yes"
+        (onDataLoaded)="onDataLoaded($event)">
+
+  <o-row attr="row1" layout-align="start stretch">
+    <div fxLayout="row wrap" fxLayoutAlign="start start" fxFlex fxLayoutGap="14px">
+      
+      <o-text-input #unit_name attr="unit_name" label=" unit_name" enabled="yes" required="yes" fxFlex="20%" class="form-field"></o-text-input>
+      
+    </div>
+  </o-row>
+      
+      <mat-tab-group fxFill>
+        
+        <mat-tab label="DOSAGE-dosage_unit">
+    <div layout-padding>
+      <o-table 
+        attr="DosageTable" 
+        service="Dosage" 
+        entity="Dosage" 
+        keys="id"
+        parent-keys="dosage_unit:unit_name"
+        columns="drug_name;dosage_unit;drug_id;drug_type;min_dose;max_dose;min_age;max_age;min_weight;max_weight;min_creatine;max_creatine;id"  
+        horizontal-scroll="yes"
+        detail-form-route="Dosage" 
+        edit-form-route="Dosage"
+        visible-columns="drug_name;dosage_unit;drug_id;drug_type;min_dose;max_dose;min_age;max_age;min_weight;max_weight;min_creatine;max_creatine;id"  
+        sort-columns="drug_name" 
+        query-rows="25" 
+        quick-filter="yes"
+        row-height="medium" 
+        select-all-checkbox="true" 
+        pageable="yes"  
+        auto-adjust="true" 
+        virtual-scroll="yes" 
+        insert-button="yes" 
+        delete-button="yes" 
+        fixed-header="true" 
+        class="vertical-padding-8"
+        edition-mode="dblclick" 
+        horizontal-scroll="yes" class="fill-form">
+        
+          <o-table-column #drug_name attr="drug_name" title=" drug_name" editable="no" required="no" content-align="left"></o-table-column>
+        
+          <o-table-column #dosage_unit attr="dosage_unit" title="dosage_unit" editable="no" required="no" content-align="left"></o-table-column>
+        
+          <o-table-column attr="drug_id" title="drug_id">
+    <o-table-cell-renderer-service attr="drug_id" 
+        service="Drug" entity="DrugType" columns="id;drug_name"
+        parent-keys="unit_name:drug_id"
+        value-column="drug_name" keys="drug_id"
+        visible-columns="drug_name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-table-column #drug_type attr="drug_type" title="drug_type" editable="no" required="no" content-align="left"></o-table-column>
+        
+          <o-table-column #min_dose attr="min_dose" title="min_dose" type="real" min-decimal-digits="2" max-decimal-digits="4" min="0" max="1000000.0000" content-align="center"></o-table-column>
+        
+          <o-table-column #max_dose attr="max_dose" title="max_dose" type="real" min-decimal-digits="2" max-decimal-digits="4" min="0" max="1000000.0000" content-align="center"></o-table-column>
+        
+          <o-table-column #min_age attr="min_age" title="min_age" type="real" min-decimal-digits="2" max-decimal-digits="4" min="0" max="1000000.0000" content-align="center"></o-table-column>
+        
+          <o-table-column #max_age attr="max_age" title="max_age" type="real" min-decimal-digits="2" max-decimal-digits="4" min="0" max="1000000.0000" content-align="center"></o-table-column>
+        
+          <o-table-column #min_weight attr="min_weight" title="min_weight" type="real" min-decimal-digits="2" max-decimal-digits="4" min="0" max="1000000.0000" content-align="center"></o-table-column>
+        
+          <o-table-column #max_weight attr="max_weight" title="max_weight" type="real" min-decimal-digits="2" max-decimal-digits="4" min="0" max="1000000.0000" content-align="center"></o-table-column>
+        
+          <o-table-column #min_creatine attr="min_creatine" title="min_creatine" type="real" min-decimal-digits="2" max-decimal-digits="4" min="0" max="1000000.0000" content-align="center"></o-table-column>
+        
+          <o-table-column #max_creatine attr="max_creatine" title="max_creatine" type="real" min-decimal-digits="2" max-decimal-digits="4" min="0" max="1000000.0000" content-align="center"></o-table-column>
+        
+          <o-table-column #id attr="id" title="id" type="integer" editable="no" required="yes" content-align="center"></o-table-column>
+        
+        <o-table-paginator page-size-options="25;50;100"></o-table-paginator>
+      </o-table>
+    </div>
+</mat-tab>
+        
+        <mat-tab label="DRUG-dosage_unit">
+    <div layout-padding>
+      <o-table 
+        attr="DrugTable" 
+        service="Drug" 
+        entity="Drug" 
+        keys="id"
+        parent-keys="dosage_unit:unit_name"
+        columns="drug_name;dosage_unit;dosage;drug_type;manufacturer;side_effects;id"  
+        horizontal-scroll="yes"
+        detail-form-route="Drug" 
+        edit-form-route="Drug"
+        visible-columns="drug_name;dosage_unit;dosage;drug_type;manufacturer;side_effects;id"  
+        sort-columns="drug_name" 
+        query-rows="25" 
+        quick-filter="yes"
+        row-height="medium" 
+        select-all-checkbox="true" 
+        pageable="yes"  
+        auto-adjust="true" 
+        virtual-scroll="yes" 
+        insert-button="yes" 
+        delete-button="yes" 
+        fixed-header="true" 
+        class="vertical-padding-8"
+        edition-mode="dblclick" 
+        horizontal-scroll="yes" class="fill-form">
+        
+          <o-table-column #drug_name attr="drug_name" title=" drug_name" editable="no" required="yes" content-align="left"></o-table-column>
+        
+          <o-table-column #dosage_unit attr="dosage_unit" title="dosage_unit" editable="no" required="no" content-align="left"></o-table-column>
+        
+          <o-table-column #dosage attr="dosage" title="dosage" type="real" min-decimal-digits="2" max-decimal-digits="4" min="0" max="1000000.0000" content-align="center"></o-table-column>
+        
+          <o-table-column #drug_type attr="drug_type" title="drug_type" editable="no" required="no" content-align="left"></o-table-column>
+        
+          <o-table-column #manufacturer attr="manufacturer" title="manufacturer" editable="no" required="no" content-align="left"></o-table-column>
+        
+          <o-table-column #side_effects attr="side_effects" title="side_effects" editable="no" required="no" content-align="left"></o-table-column>
+        
+          <o-table-column #id attr="id" title="id" type="integer" editable="no" required="yes" content-align="center"></o-table-column>
+        
+        <o-table-paginator page-size-options="25;50;100"></o-table-paginator>
+      </o-table>
+    </div>
+</mat-tab>
+        
+        <mat-tab label="PATIENTMEDICATION-dosage_unit">
+    <div layout-padding>
+      <o-table 
+        attr="PatientMedicationTable" 
+        service="PatientMedication" 
+        entity="PatientMedication" 
+        keys="id"
+        parent-keys="dosage_unit:unit_name"
+        columns="id;dosage_unit;drug_id;patient_id;dosage"  
+        horizontal-scroll="yes"
+        detail-form-route="PatientMedication" 
+        edit-form-route="PatientMedication"
+        visible-columns="id;dosage_unit;drug_id;patient_id;dosage"  
+        sort-columns="id" 
+        query-rows="25" 
+        quick-filter="yes"
+        row-height="medium" 
+        select-all-checkbox="true" 
+        pageable="yes"  
+        auto-adjust="true" 
+        virtual-scroll="yes" 
+        insert-button="yes" 
+        delete-button="yes" 
+        fixed-header="true" 
+        class="vertical-padding-8"
+        edition-mode="dblclick" 
+        horizontal-scroll="yes" class="fill-form">
+        
+          <o-table-column #id attr="id" title=" id" type="integer" editable="no" required="yes" content-align="center"></o-table-column>
+        
+          <o-table-column #dosage_unit attr="dosage_unit" title="dosage_unit" editable="no" required="no" content-align="left"></o-table-column>
+        
+          <o-table-column attr="drug_id" title="drug_id">
+    <o-table-cell-renderer-service attr="drug_id" 
+        service="Drug" entity="DrugType" columns="id;drug_name"
+        parent-keys="unit_name:drug_id"
+        value-column="drug_name" keys="drug_id"
+        visible-columns="drug_name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-table-column attr="patient_id" title="patient_id">
+    <o-table-cell-renderer-service attr="patient_id" 
+        service="Patient" entity="PatientType" columns="id;name"
+        parent-keys="unit_name:patient_id"
+        value-column="name" keys="patient_id"
+        visible-columns="name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-table-column #dosage attr="dosage" title="dosage" type="real" min-decimal-digits="2" max-decimal-digits="4" min="0" max="1000000.0000" content-align="center"></o-table-column>
+        
+        <o-table-paginator page-size-options="25;50;100"></o-table-paginator>
+      </o-table>
+    </div>
+</mat-tab>
+        
+        <mat-tab label="RECOMMENDATION-dosage_unit">
+    <div layout-padding>
+      <o-table 
+        attr="RecommendationTable" 
+        service="Recommendation" 
+        entity="Recommendation" 
+        keys="id"
+        parent-keys="dosage_unit:unit_name"
+        columns="id;dosage_unit;drug_id;patient_id;time_of_reading;dosage;recommendation_date"  
+        horizontal-scroll="yes"
+        detail-form-route="Recommendation" 
+        edit-form-route="Recommendation"
+        visible-columns="id;dosage_unit;drug_id;patient_id;time_of_reading;dosage;recommendation_date"  
+        sort-columns="id" 
+        query-rows="25" 
+        quick-filter="yes"
+        row-height="medium" 
+        select-all-checkbox="true" 
+        pageable="yes"  
+        auto-adjust="true" 
+        virtual-scroll="yes" 
+        insert-button="yes" 
+        delete-button="yes" 
+        fixed-header="true" 
+        class="vertical-padding-8"
+        edition-mode="dblclick" 
+        horizontal-scroll="yes" class="fill-form">
+        
+          <o-table-column #id attr="id" title=" id" type="integer" editable="no" required="yes" content-align="center"></o-table-column>
+        
+          <o-table-column #dosage_unit attr="dosage_unit" title="dosage_unit" editable="no" required="no" content-align="left"></o-table-column>
+        
+          <o-table-column attr="drug_id" title="drug_id">
+    <o-table-cell-renderer-service attr="drug_id" 
+        service="Drug" entity="DrugType" columns="id;drug_name"
+        parent-keys="unit_name:drug_id"
+        value-column="drug_name" keys="drug_id"
+        visible-columns="drug_name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-table-column attr="patient_id" title="patient_id">
+    <o-table-cell-renderer-service attr="patient_id" 
+        service="Patient" entity="PatientType" columns="id;name"
+        parent-keys="unit_name:patient_id"
+        value-column="name" keys="patient_id"
+        visible-columns="name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-table-column #time_of_reading attr="time_of_reading" title="time_of_reading" editable="no" required="yes" content-align="left"></o-table-column>
+        
+          <o-table-column #dosage attr="dosage" title="dosage" type="real" min-decimal-digits="2" max-decimal-digits="4" min="0" max="1000000.0000" content-align="center"></o-table-column>
+        
+          <o-table-column #recommendation_date attr="recommendation_date" title="recommendation_date" type="DATETIME" editable="no" required="no" ></o-table-column>
+        
+        <o-table-paginator page-size-options="25;50;100"></o-table-paginator>
+      </o-table>
+    </div>
+</mat-tab>
+        
+      </mat-tab-group>
+      
+    </o-form>
+  </o-form-container>
+</div>

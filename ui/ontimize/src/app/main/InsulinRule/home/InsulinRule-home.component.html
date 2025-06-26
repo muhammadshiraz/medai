@@ -1,0 +1,43 @@
+<o-form-layout-manager attr="InsulinRule" mode="dialog" title="INSULINRULE">
+    <div fxFill fxLayout="column" fxLayoutAlign="start">
+        <o-table 
+            attr="InsulinRuleTable" 
+            service="InsulinRule" 
+            entity="InsulinRule" 
+            title="INSULINRULE"
+            keys="id"
+            columns="id;blood_sugar_reading;blood_sugar_level;glargine_before_dinner;lispro_before_breakfast;lispro_before_lunch;lispro_before_dinner" 
+            header-actions="R;D"
+            visible-columns="id;blood_sugar_reading;blood_sugar_level;glargine_before_dinner;lispro_before_breakfast;lispro_before_lunch;lispro_before_dinner"  
+            sort-columns="id" 
+            query-rows="20" 
+            quick-filter="yes"
+            row-height="medium" 
+            select-all-checkbox="true" 
+            pageable="yes"  
+            auto-adjust="true" 
+            virtual-scroll="yes" 
+            edition-mode="dblclick"
+            horizontal-scroll="yes"
+            show-title="yes"
+            export-button="yes">
+            
+            <o-table-column #id attr="id" title=" id" type="integer" editable="no" required="yes" content-align="center"></o-table-column>
+            
+            <o-table-column #blood_sugar_reading attr="blood_sugar_reading" title="blood_sugar_reading" editable="no" required="yes" content-align="left"></o-table-column>
+            
+            <o-table-column #blood_sugar_level attr="blood_sugar_level" title="blood_sugar_level" type="integer" editable="no" required="yes" content-align="center"></o-table-column>
+            
+            <o-table-column #glargine_before_dinner attr="glargine_before_dinner" title=" Before Bedtime Glargine" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+            
+            <o-table-column #lispro_before_breakfast attr="lispro_before_breakfast" title="lispro_before_breakfast" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+            
+            <o-table-column #lispro_before_lunch attr="lispro_before_lunch" title="lispro_before_lunch" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+            
+            <o-table-column #lispro_before_dinner attr="lispro_before_dinner" title="lispro_before_dinner" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+            
+            <o-table-context-menu></o-table-context-menu>
+            <o-table-paginator page-size-options="24;48;96"></o-table-paginator>
+        </o-table>
+    </div>
+</o-form-layout-manager>

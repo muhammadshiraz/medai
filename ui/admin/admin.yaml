@@ -1,0 +1,428 @@
+about:
+  date: March 15, 2025 13:51:56
+  recent_changes: works with modified safrs-react-admin
+  version: 0.0.0
+api_root: '{http_type}://{swagger_host}:{port}/{api}'
+authentication: '{system-default}'
+info:
+  number_relationships: 14
+  number_tables: 11
+info_toggle_checked: true
+resources:
+  Contraindication:
+    attributes:
+    - label: ' description*'
+      name: description
+      search: true
+      sort: true
+    - name: drug_id_1
+      required: true
+    - name: drug_id_2
+      required: true
+    - name: id
+      required: true
+    tab_groups:
+    - direction: toone
+      fks:
+      - drug_id_1
+      name: drug
+      resource: Drug
+    - direction: toone
+      fks:
+      - drug_id_2
+      name: drug1
+      resource: Drug
+    type: Contraindication
+    user_key: description
+  Dosage:
+    attributes:
+    - label: ' drug_name*'
+      name: drug_name
+      search: true
+      sort: true
+    - name: dosage_unit
+    - name: drug_id
+      required: true
+    - name: drug_type
+    - name: min_dose
+    - name: max_dose
+    - name: min_age
+    - name: max_age
+    - name: min_weight
+    - name: max_weight
+    - name: min_creatine
+    - name: max_creatine
+    - name: id
+      required: true
+    tab_groups:
+    - direction: toone
+      fks:
+      - dosage_unit
+      name: drug_unit
+      resource: DrugUnit
+    - direction: toone
+      fks:
+      - drug_id
+      name: drug
+      resource: Drug
+    type: Dosage
+    user_key: drug_name
+  Drug:
+    attributes:
+    - label: ' drug_name*'
+      name: drug_name
+      required: true
+      search: true
+      sort: true
+    - name: dosage_unit
+    - name: dosage
+    - name: drug_type
+    - name: manufacturer
+    - name: side_effects
+    - name: id
+      required: true
+    tab_groups:
+    - direction: tomany
+      fks:
+      - drug_id_1
+      name: ContraindicationList
+      resource: Contraindication
+    - direction: tomany
+      fks:
+      - drug_id_2
+      name: ContraindicationList1
+      resource: Contraindication
+    - direction: tomany
+      fks:
+      - drug_id
+      name: DosageList
+      resource: Dosage
+    - direction: tomany
+      fks:
+      - drug_type
+      name: InsulinList
+      resource: Insulin
+    - direction: tomany
+      fks:
+      - drug_id
+      name: PatientMedicationList
+      resource: PatientMedication
+    - direction: tomany
+      fks:
+      - drug_id
+      name: RecommendationList
+      resource: Recommendation
+    - direction: toone
+      fks:
+      - dosage_unit
+      name: drug_unit
+      resource: DrugUnit
+    type: Drug
+    user_key: drug_name
+  DrugUnit:
+    attributes:
+    - label: ' unit_name*'
+      name: unit_name
+      required: true
+      search: true
+      sort: true
+    tab_groups:
+    - direction: tomany
+      fks:
+      - dosage_unit
+      name: DosageList
+      resource: Dosage
+    - direction: tomany
+      fks:
+      - dosage_unit
+      name: DrugList
+      resource: Drug
+    - direction: tomany
+      fks:
+      - dosage_unit
+      name: PatientMedicationList
+      resource: PatientMedication
+    - direction: tomany
+      fks:
+      - dosage_unit
+      name: RecommendationList
+      resource: Recommendation
+    type: DrugUnit
+    user_key: unit_name
+  Insulin:
+    attributes:
+    - label: ' id*'
+      name: id
+      required: true
+      search: true
+      sort: true
+    - name: drug_type
+      required: true
+    - name: patient_id
+      required: true
+    - name: reading_date
+      required: true
+      type: DATE
+    - name: breakfast
+    - name: lunch
+    - name: dinner
+    - name: bedtime
+    tab_groups:
+    - direction: toone
+      fks:
+      - drug_type
+      name: drug
+      resource: Drug
+    - direction: toone
+      fks:
+      - patient_id
+      name: patient
+      resource: Patient
+    type: Insulin
+    user_key: id
+  InsulinRule:
+    attributes:
+    - label: ' id*'
+      name: id
+      required: true
+      search: true
+      sort: true
+    - name: blood_sugar_reading
+      required: true
+    - name: blood_sugar_level
+      required: true
+    - name: glargine_before_dinner
+      label: ' Before Bedtime Glargine'
+    - name: lispro_before_breakfast
+    - name: lispro_before_lunch
+    - name: lispro_before_dinner
+    type: InsulinRule
+    user_key: id
+  Patient:
+    attributes:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+    - name: birth_date
+      type: DATE
+    - name: age
+    - name: weight
+    - name: height
+    - name: hba1c
+    - name: duration
+    - name: patient_sex
+    - name: creatine_mg_dl
+    - name: medical_record_number
+    - name: created_date
+      type: DATETIME
+    - name: id
+      required: true
+    - name: ckd
+    - name: cad
+    - name: hld
+    tab_groups:
+    - direction: tomany
+      fks:
+      - patient_id
+      name: InsulinList
+      resource: Insulin
+    - direction: tomany
+      fks:
+      - patient_id
+      name: PatientLabList
+      resource: PatientLab
+    - direction: tomany
+      fks:
+      - patient_id
+      name: PatientMedicationList
+      resource: PatientMedication
+    - direction: tomany
+      fks:
+      - patient_id
+      name: ReadingList
+      resource: Reading
+    - direction: tomany
+      fks:
+      - patient_id
+      name: ReadingHistoryList
+      resource: ReadingHistory
+    - direction: tomany
+      fks:
+      - patient_id
+      name: RecommendationList
+      resource: Recommendation
+    type: Patient
+    user_key: name
+  PatientLab:
+    attributes:
+    - label: ' lab_name*'
+      name: lab_name
+      required: true
+      search: true
+      sort: true
+    - name: patient_id
+      required: true
+    - name: lab_test_name
+      required: true
+    - name: lab_test_code
+    - name: lab_test_description
+    - name: lab_date
+      type: DATE
+    - name: lab_result
+    - name: id
+      required: true
+    tab_groups:
+    - direction: toone
+      fks:
+      - patient_id
+      name: patient
+      resource: Patient
+    type: PatientLab
+    user_key: lab_name
+  PatientMedication:
+    attributes:
+    - label: ' id*'
+      name: id
+      required: true
+      search: true
+      sort: true
+    - name: dosage_unit
+    - name: drug_id
+      required: true
+    - name: patient_id
+      required: true
+    - name: dosage
+    tab_groups:
+    - direction: toone
+      fks:
+      - dosage_unit
+      name: drug_unit
+      resource: DrugUnit
+    - direction: toone
+      fks:
+      - drug_id
+      name: drug
+      resource: Drug
+    - direction: toone
+      fks:
+      - patient_id
+      name: patient
+      resource: Patient
+    type: PatientMedication
+    user_key: id
+  Reading:
+    attributes:
+    - label: ' id*'
+      name: id
+      required: true
+      search: true
+      sort: true
+    - name: patient_id
+      required: true
+    - name: time_of_reading
+      required: true
+    - name: reading_value
+    - name: reading_date
+      type: DATE
+    - name: notes
+    tab_groups:
+    - direction: toone
+      fks:
+      - patient_id
+      name: patient
+      resource: Patient
+    type: Reading
+    user_key: id
+  ReadingHistory:
+    attributes:
+    - label: ' id*'
+      name: id
+      required: true
+      search: true
+      sort: true
+    - name: patient_id
+      required: true
+    - name: reading_date
+      required: true
+      type: DATE
+    - name: breakfast
+    - name: lunch
+    - name: dinner
+    - name: bedtime
+    - name: notes_for_day
+    tab_groups:
+    - direction: toone
+      fks:
+      - patient_id
+      name: patient
+      resource: Patient
+    type: ReadingHistory
+    user_key: id
+  Recommendation:
+    attributes:
+    - label: ' id*'
+      name: id
+      required: true
+      search: true
+      sort: true
+    - name: dosage_unit
+    - name: drug_id
+      required: true
+    - name: patient_id
+      required: true
+    - name: time_of_reading
+      required: true
+    - name: dosage
+    - name: recommendation_date
+      type: DATETIME
+    tab_groups:
+    - direction: toone
+      fks:
+      - dosage_unit
+      name: drug_unit
+      resource: DrugUnit
+    - direction: toone
+      fks:
+      - drug_id
+      name: drug
+      resource: Drug
+    - direction: toone
+      fks:
+      - patient_id
+      name: patient
+      resource: Patient
+    type: Recommendation
+    user_key: id
+settings:
+  HomeJS: /admin-app/home.js
+  max_list_columns: 8
+  style_guide:
+    applicationLocales:
+    - en
+    - es
+    currency_symbol: $
+    currency_symbol_position: left
+    date_format: LL
+    decimal_max: '1000000000'
+    decimal_min: '0'
+    decimal_separator: .
+    detail_mode: tab
+    edit_on_mode: dblclick
+    exclude_listpicker: false
+    include_translation: 'false'
+    keycloak_client_id: alsclient
+    keycloak_realm: kcals
+    keycloak_url: http://localhost:8080
+    locale: en
+    max_decimal_digits: '4'
+    min_decimal_digits: '2'
+    new_mode: dialog
+    pick_style: list
+    row_height: small,
+    serviceType: OntimizeEE
+    startSessionPath: /auth/login
+    style: light
+    thousand_separator: ','
+    use_keycloak: 'false'

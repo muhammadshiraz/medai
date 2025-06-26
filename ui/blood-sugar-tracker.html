@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Sugar Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        .card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #2980b9;
+        }
+        .nav-button {
+            background: #f2f2f2;
+            color: #333;
+            margin-right: 10px;
+            margin-bottom: 20px;
+        }
+        .nav-button.active {
+            background: #3498db;
+            color: white;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f8f8f8;
+        }
+        .reading-high {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        .reading-normal {
+            color: #27ae60;
+        }
+        .reading-low {
+            color: #f39c12;
+            font-weight: bold;
+        }
+        .summary {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .summary-card {
+            flex: 1;
+            margin: 0 10px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .summary-value {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .page {
+            display: none;
+        }
+        .page.active {
+            display: block;
+        }
+        .date-selector {
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .daily-reading-table td {
+            width: 25%;
+        }
+        .no-reading {
+            color: #95a5a6;
+            font-style: italic;
+        }
+        .medication-panel {
+            margin-top: 20px;
+            background: #f0f8ff;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            border-radius: 4px;
+        }
+        .warning {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 10px;
+            margin: 15px 0;
+            font-style: italic;
+        }
+        .medication-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            background: white;
+        }
+        .medication-name {
+            font-weight: bold;
+            color: #3498db;
+            margin-bottom: 5px;
+        }
+        .medication-dosage {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        .medication-type {
+            display: inline-block;
+            padding: 3px 8px;
+            background: #eee;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-right: 5px;
+        }
+        .medication-action {
+            margin-top: 10px;
+            font-style: italic;
+        }
+        .pattern-analysis {
+            background: #e8f7f0;
+            border-left: 4px solid #27ae60;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 4px;
+        }
+        @media (max-width: 600px) {
+            .summary {
+                flex-direction: column;
+            }
+            .summary-card {
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Blood Sugar Tracker (MedAI Plus)</h1>
+    
+    <div class="navigation">
+        <button class="nav-button active" data-page="input-page">Add Reading</button>
+        <button class="nav-button" data-page="history-page">History List</button>
+        <button class="nav-button" data-page="daily-page">Daily View</button>
+        <button class="nav-button" data-page="medication-page">Medication</button>
+    </div>
+    
+    <!-- Input Page -->
+    <div id="input-page" class="page active">
+        <div class="card">
+            <h2>Add New Reading</h2>
+            <form id="reading-form">
+                <div class="form-group">
+                    <label for="date">Date:</label>
+                    <input type="date" id="date" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="time">Time of Day:</label>
+                    <select id="time" required>
+                        <option value="Breakfast">Breakfast (Fasting)</option>
+                        <option value="Lunch">Noon (Lunch)</option>
+                        <option value="Dinner">Dinner</option>
+                        <option value="Bedtime">Evening (Bedtime)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="reading">Blood Sugar Reading (mg/dL):</label>
+                    <input type="number" id="reading" min="0" max="500" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="notes">Notes (optional):</label>
+                    <input type="text" id="notes" placeholder="Meal, activity, medication...">
+                </div>
+                
+                <button type="submit">Save Reading</button>
+                <script>
+                    document.getElementById('reading-form').addEventListener('submit', async function(e) {
+                        e.preventDefault();
+                        
+                        // Get form values
+                        const date = document.getElementById('date').value;
+                        const time = document.getElementById('time').value;
+                        const reading = parseInt(document.getElementById('reading').value);
+                        const notes = document.getElementById('notes').value;
+                        
+                        // Add new reading
+                        const newReading = {
+                            "data": {
+                                "attributes": {
+                                "patient_id": 1,
+                                "time_of_reading": time,
+                                "reading_value": reading,
+                                "reading_date": date,
+                                "notes": notes
+                                },
+                                "type": "Reading"
+                            }
+                        };
+            
+                        console.log(JSON.stringify(newReading));
+                        // Save to localStorage
+            
+                        localStorage.setItem('bloodSugarReadings', JSON.stringify(newReading));
+                        
+                        // Submit to API
+                        try {
+                            const response = await fetch('http://localhost:5656/api/Reading', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(newReading)
+                            });
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+                            const data = await response.json();
+                            console.log('Success:', data);
+                            // Show success snackbar
+                            const snackbar = document.createElement('div');
+                            snackbar.textContent = 'Reading saved successfully!';
+                            snackbar.style.position = 'fixed';
+                            snackbar.style.bottom = '20px';
+                            snackbar.style.left = '50%';
+                            snackbar.style.transform = 'translateX(-50%)';
+                            snackbar.style.backgroundColor = '#4caf50';
+                            snackbar.style.color = 'white'; 
+                            snackbar.style.padding = '10px 20px';
+                            snackbar.style.borderRadius = '5px';
+                            snackbar.style.boxShadow = '0 2px 4px rgba(0,0,0,0.2)';
+                            document.body.appendChild(snackbar);
+
+                            // Hide snackbar after 3 seconds
+                            setTimeout(() => {
+                                snackbar.remove();
+                            }, 3000);
+                        } catch (error) {
+                            console.error('Error:', error);
+                        }
+                        
+                        // Reset form
+                        document.getElementById('reading').value = '';
+                        document.getElementById('notes').value = '';
+                        
+                        // Update display
+                        displayReadings();
+                        calculateSummary();
+                    });
+                </script>
+            </form>
+        </div>
+        
+        <div class="card">
+            <h2>Summary</h2>
+            <div class="summary">
+                <div class="summary-card">
+                    <div>Average Reading</div>
+                    <div class="summary-value" id="average-reading">--</div>
+                    <div>mg/dL</div>
+                </div>
+                <div class="summary-card">
+                    <div>Highest Reading</div>
+                    <div class="summary-value" id="highest-reading">--</div>
+                    <div>mg/dL</div>
+                </div>
+                <div class="summary-card">
+                    <div>Lowest Reading</div>
+                    <div class="summary-value" id="lowest-reading">--</div>
+                    <div>mg/dL</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- History Page -->
+    <div id="history-page" class="page">
+        <div class="card">
+            <h2>History</h2>
+            <div id="history-container">
+                <table id="history-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Reading (mg/dL)</th>
+                            <th>Notes</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="history-body">
+                        <!-- Data will be inserted here -->
+                    </tbody>
+                </table>
+                <p id="no-data-message">No readings recorded yet.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Daily View Page -->
+    <div id="daily-page" class="page">
+        <div class="card">
+            <h2>Daily Readings</h2>
+            
+            <div class="date-selector">
+                <label for="view-date">Select Date:</label>
+                <input type="date" id="view-date">
+                <button id="prev-date">Previous Day</button>
+                <button id="next-date">Next Day</button>
+            </div>
+            
+            <div id="daily-container">
+                <table id="daily-table" class="daily-reading-table">
+                    <thead>
+                        <tr>
+                            <th>Breakfast</th>
+                            <th>Lunch</th>
+                            <th>Dinner</th>
+                            <th>Bedtime</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="daily-readings">
+                            <!-- Daily readings will be inserted here -->
+                        </tr>
+                    </tbody>
+                </table>
+                <div id="daily-notes">
+                    <!-- Notes will be displayed here -->
+                </div>
+            </div>
+            
+            <div id="no-daily-data" style="display: none;">
+                No readings recorded for this date.
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>Calendar View</h2>
+            <div id="calendar-container">
+                <table id="calendar-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Breakfast</th>
+                            <th>Lunch</th>
+                            <th>Dinner</th>
+                            <th>Bedtime</th>
+                        </tr>
+                    </thead>
+                    <tbody id="calendar-body">
+                        <!-- Calendar data will be inserted here -->
+                    </tbody>
+                </table>
+                <p id="no-calendar-data" style="display: none;">No readings recorded yet.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Medication Page -->
+    <div id="medication-page" class="page">
+        <div class="card">
+            <h2>Medication Recommendations</h2>
+            
+            <div class="warning">
+                <strong>Important:</strong> These recommendations are for informational purposes only and are not medical advice. Always consult with your healthcare provider before making any changes to your medication regimen.
+            </div>
+            
+            <div class="date-selector">
+                <label for="med-date">Select Date:</label>
+                <input type="date" id="med-date">
+                <button id="med-prev-date">Previous Day</button>
+                <button id="med-next-date">Next Day</button>
+            </div>
+            
+            <div id="med-readings-summary">
+                <h3>Blood Sugar Readings</h3>
+                <table id="med-readings-table" class="daily-reading-table">
+                    <thead>
+                        <tr>
+                            <th>Breakfast</th>
+                            <th>Lunch</th>
+                            <th>Dinner</th>
+                            <th>Bedtime</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="med-readings">
+                            <!-- Daily readings will be inserted here -->
+                        </tr>
+                    </tbody>
+                </table>
+                <div id="no-med-data" style="display: none;">
+                    No readings recorded for this date. Please add readings to receive medication recommendations.
+                </div>
+            </div>
+            
+            <div id="medication-recommendations" class="medication-panel">
+                <h3>Today's Medication Plan</h3>
+                <div id="medication-list">
+                    <!-- Medication recommendations will be inserted here -->
+                </div>
+            </div>
+            
+            <div id="pattern-analysis" class="pattern-analysis">
+                <h3>Pattern Analysis</h3>
+                <div id="pattern-content">
+                    <!-- Pattern analysis will be inserted here -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>Medication Settings</h2>
+            <form id="medication-settings-form">
+                <div class="form-group">
+                    <label for="current-medications">Current Medications:</label>
+                    <textarea id="current-medications" rows="4" placeholder="List your current diabetes medications and dosages here..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="target-range-min">Target Blood Sugar Range (mg/dL):</label>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="number" id="target-range-min" placeholder="Min" value="70" min="60" max="200">
+                        <input type="number" id="target-range-max" placeholder="Max" value="180" min="80" max="250">
+                    </div>
+                </div>
+                
+                <button type="submit">Save Settings</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:5656/api';
+        // Initialize data
+        let readings = JSON.parse(localStorage.getItem('bloodSugarReadings')) || [];
+        let medicationSettings = JSON.parse(localStorage.getItem('medicationSettings')) || {
+            currentMedications: '',
+            targetRangeMin: 70,
+            targetRangeMax: 180
+        };
+        
+        // Set today's date as default for input and view
+        document.getElementById('date').valueAsDate = new Date();
+        document.getElementById('view-date').valueAsDate = new Date();
+        document.getElementById('med-date').valueAsDate = new Date();
+        
+        // Load medication settings
+        document.getElementById('current-medications').value = medicationSettings.currentMedications;
+        document.getElementById('target-range-min').value = medicationSettings.targetRangeMin;
+        document.getElementById('target-range-max').value = medicationSettings.targetRangeMax;
+        
+        // Navigation
+        document.querySelectorAll('.nav-button').forEach(button => {
+            button.addEventListener('click', function() {
+                // Update active button
+                document.querySelectorAll('.nav-button').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Show selected page
+                const pageId = this.getAttribute('data-page');
+                document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+                document.getElementById(pageId).classList.add('active');
+                
+                // Update content if needed
+                if (pageId === 'history-page') {
+                    displayReadings();
+                } else if (pageId === 'daily-page') {
+                    displayDailyReadings();
+                    displayCalendar();
+                } else if (pageId === 'medication-page') {
+                    displayMedicationPage();
+                }
+            });
+        });
+        
+        // Form submission handler
+        document.getElementById('reading-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            const reading = parseInt(document.getElementById('reading').value);
+            const notes = document.getElementById('notes').value;
+            
+            // Add new reading
+            readings.push({
+                id: Date.now(), // Unique ID for each entry
+                date: date,
+                time: time,
+                reading: reading,
+                notes: notes
+            });
+            
+            // Sort readings by date and time
+            sortReadings();
+            
+            // Save to localStorage
+            localStorage.setItem('bloodSugarReadings', JSON.stringify(readings));
+            
+            // Reset form
+            document.getElementById('reading').value = '';
+            document.getElementById('notes').value = '';
+            
+            // Update display
+            displayReadings();
+            calculateSummary();
+        });
+        
+        // Medication settings form submission
+        document.getElementById('medication-settings-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            medicationSettings = {
+                currentMedications: document.getElementById('current-medications').value,
+                targetRangeMin: parseInt(document.getElementById('target-range-min').value),
+                targetRangeMax: parseInt(document.getElementById('target-range-max').value)
+            };
+            
+            // Save to localStorage
+            localStorage.setItem('medicationSettings', JSON.stringify(medicationSettings));
+            
+            // Update display
+            displayMedicationPage();
+            
+            alert('Medication settings saved.');
+        });
+        async function fetchData(endpoint, elementId, onClickFunction) {
+            const response = await fetch(`${API_BASE}/${endpoint}/`);
+            const data = await response.json();
+            const listElement = document.getElementById(elementId);
+            listElement.innerHTML = '';
+            data.data.forEach(item => {
+                console.log(item);
+                const li = document.createElement('li');
+                li.textContent = item.attributes.name || `ID: ${item.id}`;
+                if (onClickFunction) li.onclick = () => onClickFunction(item.id);
+                listElement.appendChild(li);
+            });
+        }
+        
+        // Sort readings by date and time
+        function sortReadings() {
+            readings.sort((a, b) => {
+                const dateA = new Date(a.date);
+                const dateB = new Date(b.date);
+                if (dateA > dateB) return -1;
+                if (dateA < dateB) return 1;
+                
+                // Same date, compare time periods
+                const timePriority = {
+                    'Breakfast': 0,
+                    'Lunch': 1,
+                    'Dinner': 2,
+                    'Bedtime': 3
+                };
+                return timePriority[a.time] - timePriority[b.time];
+            });
+        }
+        
+        // Display all readings
+        function displayReadings() {
+            const tableBody = document.getElementById('history-body');
+            const noDataMessage = document.getElementById('no-data-message');
+            
+            // Clear the table
+            tableBody.innerHTML = '';
+            
+            if (readings.length === 0) {
+                // Show message when no data
+                noDataMessage.style.display = 'block';
+                document.getElementById('history-table').style.display = 'none';
+            } else {
+                // Hide message and show table
+                noDataMessage.style.display = 'none';
+                document.getElementById('history-table').style.display = 'table';
+                
+                // Add each reading to the table
+                readings.forEach(item => {
+                    const row = document.createElement('tr');
+                    
+                    // Format date for display
+                    const dateObj = new Date(item.date);
+                    const formattedDate = dateObj.toLocaleDateString();
+                    
+                    // Determine cell class based on reading value
+                    let readingClass = getReadingClass(item.reading);
+                    
+                    row.innerHTML = `
+                        <td>${formattedDate}</td>
+                        <td>${item.time}</td>
+                        <td class="${readingClass}">${item.reading}</td>
+                        <td>${item.notes}</td>
+                        <td>
+                            <button onclick="deleteReading(${item.id})">Delete</button>
+                        </td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            }
+        }
+        
+        // Helper function to determine reading class
+        function getReadingClass(reading) {
+            if (reading > medicationSettings.targetRangeMax) {
+                return 'reading-high';
+            } else if (reading < medicationSettings.targetRangeMin) {
+                return 'reading-low';
+            } else {
+                return 'reading-normal';
+            }
+        }
+        
+        // Calculate and display summary statistics
+        function calculateSummary() {
+            if (readings.length === 0) {
+                document.getElementById('average-reading').textContent = '--';
+                document.getElementById('highest-reading').textContent = '--';
+                document.getElementById('lowest-reading').textContent = '--';
+                return;
+            }
+            
+            // Calculate statistics
+            const values = readings.map(r => r.reading);
+            const average = values.reduce((sum, val) => sum + val, 0) / values.length;
+            const highest = Math.max(...values);
+            const lowest = Math.min(...values);
+            
+            // Update display
+            document.getElementById('average-reading').textContent = average.toFixed(1);
+            document.getElementById('highest-reading').textContent = highest;
+            document.getElementById('lowest-reading').textContent = lowest;
+        }
+        
+        // Delete a reading
+        window.deleteReading = function(id) {
+            if (confirm('Are you sure you want to delete this reading?')) {
+                readings = readings.filter(reading => reading.id !== id);
+                localStorage.setItem('bloodSugarReadings', JSON.stringify(readings));
+                displayReadings();
+                calculateSummary();
+                displayDailyReadings();
+                displayCalendar();
+                displayMedicationPage();
+            }
+        };
+        
+        // Daily view date selection
+        document.getElementById('view-date').addEventListener('change', function() {
+            displayDailyReadings();
+        });
+        
+        // Previous day button
+        document.getElementById('prev-date').addEventListener('click', function() {
+            const currentDate = new Date(document.getElementById('view-date').value);
+            currentDate.setDate(currentDate.getDate() - 1);
+            document.getElementById('view-date').valueAsDate = currentDate;
+            displayDailyReadings();
+        });
+        
+        // Next day button
+        document.getElementById('next-date').addEventListener('click', function() {
+            const currentDate = new Date(document.getElementById('view-date').value);
+            currentDate.setDate(currentDate.getDate() + 1);
+            document.getElementById('view-date').valueAsDate = currentDate;
+            displayDailyReadings();
+        });
+        
+        // Medication page date selection
+        document.getElementById('med-date').addEventListener('change', function() {
+            displayMedicationPage();
+        });
+        
+        // Medication previous day button
+        document.getElementById('med-prev-date').addEventListener('click', function() {
+            const currentDate = new Date(document.getElementById('med-date').value);
+            currentDate.setDate(currentDate.getDate() - 1);
+            document.getElementById('med-date').valueAsDate = currentDate;
+            displayMedicationPage();
+        });
+        
+        // Medication next day button
+        document.getElementById('med-next-date').addEventListener('click', function() {
+            const currentDate = new Date(document.getElementById('med-date').value);
+            currentDate.setDate(currentDate.getDate() + 1);
+            document.getElementById('med-date').valueAsDate = currentDate;
+            displayMedicationPage();
+        });
+        
+        // Display readings for selected date
+        function displayDailyReadings() {
+            const selectedDate = document.getElementById('view-date').value;
+            const dailyReadings = document.getElementById('daily-readings');
+            const noDataMessage = document.getElementById('no-daily-data');
+            const dailyTable = document.getElementById('daily-table');
+            const dailyNotes = document.getElementById('daily-notes');
+            
+            // Get readings for selected date
+            const dateReadings = readings.filter(reading => reading.date === selectedDate);
+            
+            if (dateReadings.length === 0) {
+                noDataMessage.style.display = 'block';
+                dailyTable.style.display = 'none';
+                dailyNotes.innerHTML = '';
+            } else {
+                noDataMessage.style.display = 'none';
+                dailyTable.style.display = 'table';
+                
+                // Create object with readings by time period
+                const timeReadings = {
+                    'Breakfast': null,
+                    'Lunch': null,
+                    'Dinner': null,
+                    'Bedtime': null
+                };
+                
+                dateReadings.forEach(reading => {
+                    timeReadings[reading.time] = reading;
+                });
+                
+                // Clear the table row
+                dailyReadings.innerHTML = '';
+                
+                // Create cells for each time period
+                for (const time of ['Breakfast', 'Lunch', 'Dinner', 'Bedtime']) {
+                    const cell = document.createElement('td');
+                    const reading = timeReadings[time];
+                    
+                    if (reading) {
+                        let readingClass = getReadingClass(reading.reading);
+                        cell.innerHTML = `<span class="${readingClass}">${reading.reading} mg/dL</span>`;
+                    } else {
+                        cell.innerHTML = '<span class="no-reading">No reading</span>';
+                    }
+                    
+                    dailyReadings.appendChild(cell);
+                }
+                
+                // Display notes for the day
+                dailyNotes.innerHTML = '<h3>Notes</h3>';
+                const notesList = document.createElement('ul');
+                
+                dateReadings.forEach(reading => {
+                    if (reading.notes) {
+                        const noteItem = document.createElement('li');
+                        noteItem.innerHTML = `<strong>${reading.time}:</strong> ${reading.notes}`;
+                        notesList.appendChild(noteItem);
+                    }
+                });
+                
+                if (notesList.children.length > 0) {
+                    dailyNotes.appendChild(notesList);
+                } else {
+                    dailyNotes.innerHTML += '<p>No notes for this day.</p>';
+                }
+            }
+        }
+        
+        // Display calendar view
+        function displayCalendar() {
+            const calendarBody = document.getElementById('calendar-body');
+            const noCalendarData = document.getElementById('no-calendar-data');
+            
+            // Clear the table
+            calendarBody.innerHTML = '';
+            
+            if (readings.length === 0) {
+                document.getElementById('calendar-table').style.display = 'none';
+                noCalendarData.style.display = 'block';
+                return;
+            }
+            
+            document.getElementById('calendar-table').style.display = 'table';
+            noCalendarData.style.display = 'none';
+            
+            // Get unique dates
+            const uniqueDates = [...new Set(readings.map(r => r.date))].sort().reverse();
+            
+            // Create a row for each date
+            uniqueDates.forEach(date => {
+                const row = document.createElement('tr');
+                
+                // Add date cell
+                const dateCell = document.createElement('td');
+                const dateObj = new Date(date);
+                dateCell.textContent = dateObj.toLocaleDateString();
+                row.appendChild(dateCell);
+                
+                // Create object with readings by time period
+                const timeReadings = {
+                    'Breakfast': null,
+                    'Lunch': null,
+                    'Dinner': null,
+                    'Bedtime': null
+                };
+                
+                readings.filter(r => r.date === date).forEach(reading => {
+                    timeReadings[reading.time] = reading;
+                });
+                
+                // Add cells for each time period
+                for (const time of ['Breakfast', 'Lunch', 'Dinner', 'Bedtime']) {
+                    const cell = document.createElement('td');
+                    const reading = timeReadings[time];
+                    
+                    if (reading) {
+                        let readingClass = getReadingClass(reading.reading);
+                        cell.innerHTML = `<span class="${readingClass}">${reading.reading}</span>`;
+                    } else {
+                        cell.innerHTML = '<span class="no-reading">--</span>';
+                    }
+                    
+                    row.appendChild(cell);
+                }
+                
+                calendarBody.appendChild(row);
+            });
+        }
+        
+        // Display medication page
+        function displayMedicationPage() {
+            const selectedDate = document.getElementById('med-date').value;
+            const medReadings = document.getElementById('med-readings');
+            const noDataMessage = document.getElementById('no-med-data');
+            const medTable = document.getElementById('med-readings-table');
+            const medicationList = document.getElementById('medication-list');
+            const patternContent = document.getElementById('pattern-content');
+            
+            // Get readings for selected date
+            const dateReadings = readings.filter(reading => reading.date === selectedDate);
+            
+            // Clear the medication list
+            medicationList.innerHTML = '';
+            
+            if (dateReadings.length === 0) {
+                noDataMessage.style.display = 'block';
+                medTable.style.display = 'none';
+                medicationList.innerHTML = '<p>No readings available for medication recommendations.</p>';
+                patternContent.innerHTML = '<p>Insufficient data for pattern analysis.</p>';
+            } else {
+                noDataMessage.style.display = 'none';
+                medTable.style.display = 'table';
+                
+                // Create object with readings by time period
+                const timeReadings = {
+                    'Breakfast': null,
+                    'Lunch': null,
+                    'Dinner': null,
+                    'Bedtime': null
+                };
+                
+                dateReadings.forEach(reading => {
+                    timeReadings[reading.time] = reading;
+                });
+                
+                // Clear the table row
+                medReadings.innerHTML = '';
+                
+                // Create cells for each time period
+                for (const time of ['Breakfast', 'Lunch', 'Dinner', 'Bedtime']) {
+                    const cell = document.createElement('td');
+                    const reading = timeReadings[time];
+                    
+                    if (reading) {
+                        let readingClass = getReadingClass(reading.reading);
+                        cell.innerHTML = `<span class="${readingClass}">${reading.reading} mg/dL</span>`;
+                    } else {
+                        cell.innerHTML = '<span class="no-reading">No reading</span>';
+                    }
+                    
+                    medReadings.appendChild(cell);
+                }
+                
+                // Generate medication recommendations
+                generateMedicationRecommendations(timeReadings, medicationList);
+                
+                // Generate pattern analysis
+                generatePatternAnalysis(selectedDate, patternContent);
+            }
+        }
+        
+        // Generate medication recommendations
+        function generateMedicationRecommendations(timeReadings, container) {
+            container.innerHTML = '';
+            
+            // Check if any readings exist
+            const hasAnyReading = Object.values(timeReadings).some(r => r !== null);
+            
+            if (!hasAnyReading) {
+                container.innerHTML = '<p>No readings available for medication recommendations.</p>';
+                return;
+            }
+            
+        }
+</script>
+</body>

@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body {
+    @apply overflow-x-hidden;
+  }
+}
+
+body {
+  @apply font-sans;
+}
+
+/* Custom animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Chart tooltip styling */
+.chart-tooltip {
+  @apply bg-white dark:bg-gray-900 border border-gray-200 rounded-lg shadow-lg p-3;
+}
+
+.chart-tooltip h4 {
+  @apply font-semibold text-gray-800 dark:text-white mb-2;
+}
+
+.chart-tooltip p {
+  @apply text-sm text-gray-600 dark:text-gray-400;
+}

@@ -1,0 +1,75 @@
+<o-form #PatientMedicationForm attr="PatientMedication_form_insert" service="PatientMedication" entity="PatientMedication"
+keys="id" fxLayout="column" show-header="yes" header-actions="I"
+horizontal-scroll="yes"
+after-insert-mode="new" class="standalone-form-container" >
+
+<o-row attr="row1" layout-align="start stretch">
+  <div fxLayout="row wrap" fxLayoutAlign="start start" fxFlex fxLayoutGap="14px">
+    
+        <o-integer-input #id attr="id" label=" id" type="integer" editable="no" required="yes" ></o-integer-input>
+      
+        <o-list-picker 
+        attr="dosage_unit"
+        service="DrugUnit" 
+        entity="DrugUnitType"
+        fxFlex="30" 
+        query-on-init="no" 
+        query-on-bind="yes" 
+        required="no" 
+        enabled="yes" 
+        filter="yes"
+        value-column="unit_name" 
+        value-column-type="VARCHAR"  
+        keys="unit_name" 
+        columns="unit_name;dosage_unit;unit_name" 
+        title="dosage_unit"
+        visible-columns="unit_name;unit_name" 
+        separator=" - " width="680px" class="form-field">
+</o-list-picker>
+      
+        <o-list-picker 
+        attr="drug_id"
+        service="Drug" 
+        entity="DrugType"
+        fxFlex="30" 
+        query-on-init="no" 
+        query-on-bind="yes" 
+        required="yes" 
+        enabled="yes" 
+        filter="yes"
+        value-column="id" 
+        value-column-type="BIGINT"  
+        keys="id" 
+        columns="id;drug_id;drug_name" 
+        title="drug_id"
+        visible-columns="id;drug_name" 
+        separator=" - " width="680px" class="form-field">
+</o-list-picker>
+      
+        <o-list-picker 
+        attr="patient_id"
+        service="Patient" 
+        entity="PatientType"
+        fxFlex="30" 
+        query-on-init="no" 
+        query-on-bind="yes" 
+        required="yes" 
+        enabled="yes" 
+        filter="yes"
+        value-column="id" 
+        value-column-type="BIGINT"  
+        keys="id" 
+        columns="id;patient_id;name" 
+        title="patient_id"
+        visible-columns="id;name" 
+        separator=" - " width="680px" class="form-field">
+</o-list-picker>
+      
+        <o-real-input #dosage attr="dosage" label="dosage" min-decimal-digits="2" max-decimal-digits="4" min="0" max="1000000000" fxFlex="20%" class="form-field"></o-real-input>
+      
+</div>
+</o-row>
+
+<div layout-padding></div>
+
+</o-form>

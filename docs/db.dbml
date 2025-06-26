@@ -1,0 +1,135 @@
+// Copy this text, paste to https://dbdiagram.io/d
+// Or, https://databasediagram.com/app
+// Or, view in VSCode with extension: "DBML Live Preview"
+
+Table Contraindication {
+    id BIGINT [primary key]
+    drug_id_1 BIGINT 
+    drug_id_2 BIGINT 
+    description TEXT 
+    }
+
+Table Drug {
+    id BIGINT [primary key]
+    drug_name VARCHAR(256) 
+    dosage NUMERIC(10, 4) 
+    dosage_unit VARCHAR(10) 
+    drug_type VARCHAR(256) 
+    manufacturer VARCHAR(256) 
+    side_effects TEXT 
+    }
+
+Table Dosage {
+    id BIGINT [primary key]
+    drug_id BIGINT 
+    drug_name VARCHAR(256) 
+    drug_type VARCHAR(256) 
+    min_dose NUMERIC(10, 4) 
+    max_dose NUMERIC(10, 4) 
+    dosage_unit VARCHAR(10) 
+    min_age NUMERIC(10, 4) 
+    max_age NUMERIC(10, 4) 
+    min_weight NUMERIC(10, 4) 
+    max_weight NUMERIC(10, 4) 
+    min_creatine NUMERIC(10, 4) 
+    max_creatine NUMERIC(10, 4) 
+    }
+
+Table DrugUnit {
+    unit_name VARCHAR(10) [primary key]
+    }
+
+Table InsulinRule {
+    id BIGINT [primary key]
+    blood_sugar_reading VARCHAR(20) 
+    blood_sugar_level INTEGER 
+    glargine_before_dinner INTEGER 
+    lispro_before_breakfast INTEGER 
+    lispro_before_lunch INTEGER 
+    lispro_before_dinner INTEGER 
+    }
+
+Table Patient {
+    id BIGINT [primary key]
+    name VARCHAR(256) 
+    birth_date DATE 
+    age NUMERIC(10, 1) 
+    weight BIGINT 
+    height BIGINT 
+    hba1c NUMERIC(10, 2) 
+    duration BIGINT 
+    ckd INTEGER 
+    cad INTEGER 
+    hld INTEGER 
+    patient_sex VARCHAR(1) 
+    creatine_mg_dl NUMERIC(10, 4) 
+    medical_record_number VARCHAR(256) 
+    created_date DATETIME 
+    }
+
+Table PatientLab {
+    id BIGINT [primary key]
+    patient_id BIGINT 
+    lab_name VARCHAR(256) 
+    lab_test_name VARCHAR(256) 
+    lab_test_code VARCHAR(256) 
+    lab_test_description TEXT 
+    lab_date DATE 
+    lab_result JSON 
+    }
+
+Table PatientMedication {
+    id BIGINT [primary key]
+    patient_id BIGINT 
+    drug_id BIGINT 
+    dosage NUMERIC(10, 4) 
+    dosage_unit VARCHAR(10) 
+    }
+
+Table Reading {
+    id BIGINT [primary key]
+    patient_id BIGINT 
+    time_of_reading VARCHAR(10) 
+    reading_value NUMERIC(10, 4) 
+    reading_date DATE 
+    notes TEXT 
+    }
+
+Table ReadingHistory {
+    id BIGINT [primary key]
+    patient_id BIGINT 
+    reading_date DATE 
+    breakfast NUMERIC(10, 4) 
+    lunch NUMERIC(10, 4) 
+    dinner NUMERIC(10, 4) 
+    bedtime NUMERIC(10, 4) 
+    notes_for_day TEXT 
+    }
+
+Table Recommendation {
+    id BIGINT [primary key]
+    patient_id BIGINT 
+    time_of_reading VARCHAR(10) 
+    drug_id BIGINT 
+    dosage NUMERIC(10, 4) 
+    dosage_unit VARCHAR(10) 
+    recommendation_date DATETIME 
+    }
+
+
+
+// Relationships
+    Ref: Contraindication.(drug_id_1) < Drug.(id)
+    Ref: Contraindication.(drug_id_2) < Drug.(id)
+    Ref: Drug.(dosage_unit) < DrugUnit.(unit_name)
+    Ref: Dosage.(dosage_unit) < DrugUnit.(unit_name)
+    Ref: Dosage.(drug_id) < Drug.(id)
+    Ref: PatientLab.(patient_id) < Patient.(id)
+    Ref: PatientMedication.(dosage_unit) < DrugUnit.(unit_name)
+    Ref: PatientMedication.(drug_id) < Drug.(id)
+    Ref: PatientMedication.(patient_id) < Patient.(id)
+    Ref: Reading.(patient_id) < Patient.(id)
+    Ref: ReadingHistory.(patient_id) < Patient.(id)
+    Ref: Recommendation.(dosage_unit) < DrugUnit.(unit_name)
+    Ref: Recommendation.(drug_id) < Drug.(id)
+    Ref: Recommendation.(patient_id) < Patient.(id)

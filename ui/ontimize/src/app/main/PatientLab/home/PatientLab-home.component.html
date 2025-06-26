@@ -1,0 +1,52 @@
+<o-form-layout-manager attr="PatientLab" mode="tab" title="PATIENTLAB">
+    <div fxFill fxLayout="column" fxLayoutAlign="start">
+        <o-table 
+            attr="PatientLabTable" 
+            service="PatientLab" 
+            entity="PatientLab" 
+            title="PATIENTLAB"
+            keys="id"
+            columns="lab_name;patient_id;lab_test_name;lab_test_code;lab_test_description;lab_date;lab_result;id" 
+            header-actions="R;D"
+            visible-columns="lab_name;patient_id;lab_test_name;lab_test_code;lab_test_description;lab_date;lab_result;id"  
+            sort-columns="lab_name" 
+            query-rows="20" 
+            quick-filter="yes"
+            row-height="medium" 
+            select-all-checkbox="true" 
+            pageable="yes"  
+            auto-adjust="true" 
+            virtual-scroll="yes" 
+            edition-mode="dblclick"
+            horizontal-scroll="yes"
+            show-title="yes"
+            export-button="yes">
+            
+            <o-table-column #lab_name attr="lab_name" title=" lab_name" editable="no" required="yes" content-align="left"></o-table-column>
+            
+            <o-table-column attr="patient_id" title="patient_id">
+    <o-table-cell-renderer-service attr="patient_id" 
+        service="Patient" entity="PatientType" columns="id;name"
+        parent-keys="id:patient_id"
+        value-column="name" keys="patient_id"
+        visible-columns="name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+            
+            <o-table-column #lab_test_name attr="lab_test_name" title="lab_test_name" editable="no" required="yes" content-align="left"></o-table-column>
+            
+            <o-table-column #lab_test_code attr="lab_test_code" title="lab_test_code" editable="no" required="no" content-align="left"></o-table-column>
+            
+            <o-table-column #lab_test_description attr="lab_test_description" title="lab_test_description" editable="no" required="no" content-align="left"></o-table-column>
+            
+            <o-table-column #lab_date attr="lab_date" title="lab_date" type="DATE" editable="no" required="no" ></o-table-column>
+            
+            <o-table-column #lab_result attr="lab_result" title="lab_result" editable="no" required="no" content-align="left"></o-table-column>
+            
+            <o-table-column #id attr="id" title="id" type="integer" editable="no" required="yes" content-align="center"></o-table-column>
+            
+            <o-table-context-menu></o-table-context-menu>
+            <o-table-paginator page-size-options="24;48;96"></o-table-paginator>
+        </o-table>
+    </div>
+</o-form-layout-manager>

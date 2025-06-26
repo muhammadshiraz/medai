@@ -1,0 +1,16 @@
+Feature: About Sample # features/about.feature:6
+
+  Scenario: Transaction Processing                           # features/about.feature:8
+    Given Sample Database                                    # features/steps/about.py:8
+    When Transactions are submitted                          # features/steps/about.py:12
+    Then Enforce business policies with Logic (rules + code) # features/steps/about.py:16
+
+Feature: Patient Testing # features/medai.feature:1
+
+  Scenario: Validate Recommendations              # features/medai.feature:2
+    Given Existing Patients Readings              # features/steps/medai.py:11
+    When Blood Sugar History is given             # features/steps/medai.py:19
+    Then Recommendations should match prior entry # features/steps/medai.py:48
+
+&nbsp;&nbsp;
+/Users/tylerband/medai+/medai/test/api_logic_server_behave/behave_run.py completed at June 05, 2025 08:49:06
