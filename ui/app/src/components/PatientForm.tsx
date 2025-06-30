@@ -48,7 +48,9 @@ export default function PatientForm({
   const [formData, setFormData] = useState<Partial<Patient>>(initialData || {});
   const [readings, setReadings] = useState<FormReading[]>([]);
   const [medications, setMedications] = useState<FormMedication[]>([]);
-  const [recommendations, setRecommendations] = useState<FormRecommendation[]>([]);
+  const [recommendations, setRecommendations] = useState<FormRecommendation[]>(
+    []
+  );
   const [insulinData, setInsulinData] = useState<FormInsulin[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
@@ -103,7 +105,7 @@ export default function PatientForm({
             patient_id: med.patient_id,
             drug_id: med.drug_id,
             dosage: med.dosage,
-            dosage_unit: med.dosage_unit || 'unit',
+            dosage_unit: med.dosage_unit || "unit",
             time_of_reading: med.time_of_reading || "",
             recommendation_date: med.recommendation_date || "",
           }))
@@ -187,7 +189,8 @@ export default function PatientForm({
           },
         });
 
-        router.push(`/patient/${patientId}`);
+        // router.push(`/patient/${patientId}`);
+        router.push(`/patients`);
         router.refresh();
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -277,7 +280,6 @@ export default function PatientForm({
     ]);
   };
 
-
   const handleRecommendationsChange = (
     index: number,
     field: string,
@@ -285,7 +287,10 @@ export default function PatientForm({
   ) => {
     setRecommendations((prev) => {
       const newRecommendations = [...prev];
-      newRecommendations[index] = { ...newRecommendations[index], [field]: value };
+      newRecommendations[index] = {
+        ...newRecommendations[index],
+        [field]: value,
+      };
       return newRecommendations;
     });
   };
@@ -429,14 +434,14 @@ export default function PatientForm({
             const reading = readings.find((r) => r.time === time);
             return (
               <div key={time} className="space-y-2">
-                <FormField
+                {/*<FormField
                   label={`Date for ${time}`}
                   type="date"
                   value={reading?.date || ""}
                   onChange={(v) =>
                     handleReadingChange(time, reading?.value || "", v)
                   }
-                />
+                />*/}
                 <FormField
                   label={`Before ${
                     time.charAt(0).toUpperCase() + time.slice(1)
@@ -459,15 +464,17 @@ export default function PatientForm({
       </div>
 
       {/* Medications Section */}
-      <div className="bg-white dark:bg-gray-900 p-6 rounded-xl shadow">
+      <div
+        className={`bg-white dark:bg-gray-900 p-6 rounded-xl shadow ${
+          initialData === undefined ? "hidden" : "block"
+        }`}
+      >
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-xl font-semibold">
-            Medications
-          </h2>
+          <h2 className="text-xl font-semibold">Medications</h2>
           <button
             type="button"
             onClick={addMedication}
-            className="px-4 py-2 bg-blue-500 text-white rounded-lg"
+            className="px-4 py-2 bg-blue-500 text-white rounded-lg hidden"
           >
             Add Medication
           </button>
@@ -490,73 +497,90 @@ export default function PatientForm({
                   "Farxiga",
                   "Ozempic",
                 ]}
-                value={med.drug_id ? [
-                  "Metformin",
-                  "Glimepiride",
-                  "Tradjenta",
-                  "Glargine",
-                  "Lispro",
-                  "Farxiga",
-                  "Ozempic",
-                ][Number(med.drug_id) - 1] : ""}
-                onChange={(v) => handleMedicationChange(index, "drug_id", (
-                  [
-                    "Metformin",
-                    "Glimepiride",
-                    "Tradjenta",
-                    "Glargine",
-                    "Lispro",
-                    "Farxiga",
-                    "Ozempic",
-                  ].indexOf(v) + 1
-                ))}
+                value={
+                  med.drug_id
+                    ? [
+                        "Metformin",
+                        "Glimepiride",
+                        "Tradjenta",
+                        "Glargine",
+                        "Lispro",
+                        "Farxiga",
+                        "Ozempic",
+                      ][Number(med.drug_id) - 1]
+                    : ""
+                }
+                onChange={(v) =>
+                  handleMedicationChange(
+                    index,
+                    "drug_id",
+                    [
+                      "Metformin",
+                      "Glimepiride",
+                      "Tradjenta",
+                      "Glargine",
+                      "Lispro",
+                      "Farxiga",
+                      "Ozempic",
+                    ].indexOf(v) + 1
+                  )
+                }
+                disabled={initialData !== undefined}
               />
               <FormField
                 label="Dosage"
                 value={med.dosage || ""}
                 onChange={(v) => handleMedicationChange(index, "dosage", v)}
                 //sub="mg"
+                disabled={initialData !== undefined}
               />
               <FormField
                 label="Units"
                 type="select"
                 options={["mg", "mcg", "ml", "unit", "g", "kg", "l", "oz"]}
                 value={med.dosage_unit || "unit"}
-                onChange={(v) => handleMedicationChange(index, "dosage_unit", v)}
+                onChange={(v) =>
+                  handleMedicationChange(index, "dosage_unit", v)
+                }
+                disabled={initialData !== undefined}
               />
             </div>
           ))}
         </div>
       </div>
 
-{/* Insulin Section */}
-      <div className="bg-white dark:bg-gray-900 p-6 rounded-xl shadow">
+      {/* Insulin Section */}
+      <div
+        className={`bg-white dark:bg-gray-900 p-6 rounded-xl shadow ${
+          initialData === undefined ? "hidden" : "block"
+        }`}
+      >
         <h2 className="text-xl font-semibold mb-6">Insulin</h2>
         <button
-            type="button"
-            onClick={() =>
-              setInsulinData((prev) => [
-                ...prev,
-                {
-                  drug: "Lispro",
-                  breakfast: "0",
-                  lunch: "0",
-                  dinner: "0",
-                  bedtime: "0",
-                },
-              ])
-            }
-            className="px-4 py-2 bg-blue-500 text-white rounded-lg"
-          >
-            Add Insulin
-          </button>
+          type="button"
+          onClick={() =>
+            setInsulinData((prev) => [
+              ...prev,
+              {
+                drug: "Lispro",
+                breakfast: "0",
+                lunch: "0",
+                dinner: "0",
+                bedtime: "0",
+              },
+            ])
+          }
+          className="px-4 py-2 bg-blue-500 text-white rounded-lg hidden"
+        >
+          Add Insulin
+        </button>
         <div className="space-y-4">
           {insulinData.map((insulin, index) => (
             <div key={index} className="grid grid-cols-5 gap-4 items-end">
               <FormField
-              label="Insulin Type"
-              type="select"
-              options={[
+                label="Insulin Type"
+                type="select"
+                options={[
                   "Metformin",
                   "Glimepiride",
                   "Tradjenta",
@@ -565,75 +589,77 @@ export default function PatientForm({
                   "Farxiga",
                   "Ozempic",
                 ]}
-              value={insulin.drug || "Lispro"}
-              onChange={(v) =>
-                setInsulinData((prev) => {
-                const newData = [...prev];
-                newData[index].drug = v;
-                return newData;
-                })
-              }
+                value={insulin.drug || "Lispro"}
+                onChange={(v) =>
+                  setInsulinData((prev) => {
+                    const newData = [...prev];
+                    newData[index].drug = v;
+                    return newData;
+                  })
+                }
+                disabled={initialData !== undefined}
               />
               <FormField
-              label="Breakfast"
-              value={insulin.breakfast}
-              onChange={(v) =>
-                setInsulinData((prev) => {
-                const newData = [...prev];
-                newData[index].breakfast = v;
-                return newData;
-                })
-              }
-              //sub="units"
+                label="Breakfast"
+                value={insulin.breakfast}
+                onChange={(v) =>
+                  setInsulinData((prev) => {
+                    const newData = [...prev];
+                    newData[index].breakfast = v;
+                    return newData;
+                  })
+                }
+                //sub="units"
+                disabled={initialData !== undefined}
               />
               <FormField
-              label="Lunch"
-              value={insulin.lunch}
-              onChange={(v) =>
-                setInsulinData((prev) => {
-                const newData = [...prev];
-                newData[index].lunch = v;
-                return newData;
-                })
-              }
-              //sub="units"
+                label="Lunch"
+                value={insulin.lunch}
+                onChange={(v) =>
+                  setInsulinData((prev) => {
+                    const newData = [...prev];
+                    newData[index].lunch = v;
+                    return newData;
+                  })
+                }
+                //sub="units"
+                disabled={initialData !== undefined}
               />
               <FormField
-              label="Dinner"
-              value={insulin.dinner}
-              onChange={(v) =>
-                setInsulinData((prev) => {
-                const newData = [...prev];
-                newData[index].dinner = v;
-                return newData;
-                })
-              }
-              //sub="units"
+                label="Dinner"
+                value={insulin.dinner}
+                onChange={(v) =>
+                  setInsulinData((prev) => {
+                    const newData = [...prev];
+                    newData[index].dinner = v;
+                    return newData;
+                  })
+                }
+                //sub="units"
+                disabled={initialData !== undefined}
               />
               <FormField
-              label="Bedtime"
-              value={insulin.bedtime}
-              onChange={(v) =>
-                setInsulinData((prev) => {
-                const newData = [...prev];
-                newData[index].bedtime = v;
-                return newData;
-                })
-              }
-              //sub="units"
+                label="Bedtime"
+                value={insulin.bedtime}
+                onChange={(v) =>
+                  setInsulinData((prev) => {
+                    const newData = [...prev];
+                    newData[index].bedtime = v;
+                    return newData;
+                  })
+                }
+                //sub="units"
+                disabled={initialData !== undefined}
               />
             </div>
           ))}
         </div>
       </div>
 
-     {/* Recommendation Section */}
+      {/* Recommendation Section */}
       <div className="bg-white dark:bg-gray-900 p-6 rounded-xl shadow">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-xl font-semibold">
-            Recommendations
-          </h2>
-          
+          <h2 className="text-xl font-semibold">Recommendations</h2>
         </div>
         <div className="space-y-4">
           {recommendations.map((med, index) => (
@@ -641,31 +667,38 @@ export default function PatientForm({
               <FormField
                 label="Drug Name"
                 value={med.drug_id}
-                  onChange={(v) => handleRecommendationsChange(index, "drug", v)}
+                onChange={(v) => handleRecommendationsChange(index, "drug", v)}
+                disabled={initialData !== undefined}
               />
               <FormField
                 label="Breakfast"
                 value={med.time_of_reading == "breakfast" ? med.dosage : ""}
-                onChange={(v) => handleRecommendationsChange(index, "breakfast", v)}
+                onChange={(v) =>
+                  handleRecommendationsChange(index, "breakfast", v)
+                }
                 //sub="mg"
+                disabled={initialData !== undefined}
               />
               <FormField
                 label="Lunch"
                 value={med.time_of_reading == "lunch" ? med.dosage : ""}
                 onChange={(v) => handleRecommendationsChange(index, "lunch", v)}
                 //sub="mg"
+                disabled={initialData !== undefined}
               />
               <FormField
                 label="Dinner"
                 value={med.time_of_reading == "dinner" ? med.dosage : ""}
-                onChange={(v) => handleRecommendationsChange(index, "dinner", v)}
+                onChange={(v) =>
+                  handleRecommendationsChange(index, "dinner", v)
+                }
                 //sub="mg"
+                disabled={initialData !== undefined}
               />
             </div>
           ))}
         </div>
       </div>
-
 
       <div className="flex justify-end gap-4 mt-8">
         <button
