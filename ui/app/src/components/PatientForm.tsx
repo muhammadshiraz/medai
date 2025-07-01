@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Patient } from "@/types/patient";
 import FormField from "@/components/FormField";
 import { PatientService } from "@/lib/api/patientService";
+import { BloodSugarService } from "@/lib/api/bloodSugarService";
 import toast from "react-hot-toast";
 
 interface FormReading {
@@ -150,7 +151,7 @@ export default function PatientForm({
         duration: formData.duration || 0,
         medications: medications || [],
         insulinData: insulinData || [],
-        latestReadings: readings || [],
+        // latestReadings: readings || [],
       };
       if (!initialData?.id) {
         //throw new Error("Patient ID missing " + JSON.stringify(initialData));
@@ -161,6 +162,32 @@ export default function PatientForm({
         );
         // Optionally update formData with new patient data (e.g., id)
         setFormData(newPatient);
+
+        // Use Promise.all to wait for all readings to be saved
+        const readingPromises = readings.map(async (reading) => {
+          const payload2 = {
+            data: {
+              attributes: {
+                patient_id: newPatient.id,
+                time_of_reading: reading.time,
+                reading_value: reading.value,
+                reading_date: reading.date,
+                notes: "",
+              },
+              type: "Reading",
+            },
+          };
+
+          const savedReading = await BloodSugarService.createReading(payload2);
+          return savedReading; // Return the saved reading
+        });
+
+        // Wait for all readings to be saved
+        const savedReadings = await Promise.all(readingPromises);
+
+        // All readings are now saved successfully
+        console.log("All readings saved:", savedReadings);
+
         toast.success("Patient created successfully! inserted", {
           icon: "✅",
           position: "top-right",
@@ -171,6 +198,10 @@ export default function PatientForm({
             borderRadius: "8px",
           },
         });
+
+        console.log(newPatient);
+        router.push(`/patients`);
+        router.refresh();
         return newPatient;
       } else {
         console.log("Updating existing patient with payload:", payload);
@@ -466,11 +497,14 @@ export default function PatientForm({
       {/* Medications Section */}
       <div
         className={`bg-white dark:bg-gray-900 p-6 rounded-xl shadow ${
-          initialData === undefined ? "hidden" : "block"
+          // initialData === undefined ? "hidden" : "block"
+          "block"
         }`}
       >
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-xl font-semibold">Medications</h2>
+          <h2 className="text-xl font-semibold">
+            Recommendations / Medications
+          </h2>
           <button
             type="button"
             onClick={addMedication}
@@ -657,7 +691,7 @@ export default function PatientForm({
       </div>
 
       {/* Recommendation Section */}
-      <div className="bg-white dark:bg-gray-900 p-6 rounded-xl shadow">
+      {/* <div className="bg-white dark:bg-gray-900 p-6 rounded-xl shadow">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-xl font-semibold">Recommendations</h2>
         </div>
@@ -698,7 +732,7 @@ export default function PatientForm({
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
       <div className="flex justify-end gap-4 mt-8">
         <button

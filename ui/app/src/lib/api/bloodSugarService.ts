@@ -45,10 +45,7 @@ export const BloodSugarService = {
     };
 
     const response = await apiClient
-      .post<ApiResponse<BloodSugarReading[]>>(
-        "/Reading/Reading"
-        , payload
-      )
+      .post<ApiResponse<BloodSugarReading[]>>("/Reading/Reading", payload)
       .catch((error) => {
         console.error("Blood Sugar Reading GET Error Details:", {
           url: error.config?.url,
@@ -60,7 +57,9 @@ export const BloodSugarService = {
       });
 
     if (response.data.code !== 0) {
-      throw new Error("POST Blood Sugar Reading API Error " + response.data.code);
+      throw new Error(
+        "POST Blood Sugar Reading API Error " + response.data.code
+      );
     }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const processedData = response.data.data.map((item: any) => ({
@@ -76,25 +75,27 @@ export const BloodSugarService = {
     return { data: processedData, total };
   },
 
-  updateReading: async (id: number, reading: Partial<BloodSugarReading>): Promise<BloodSugarReading> => {
+  updateReading: async (
+    id: number,
+    reading: Partial<BloodSugarReading>
+  ): Promise<BloodSugarReading> => {
     const payload = {
       data: {
-          patient_id: reading.patient_id,
-          time_of_reading: reading.time_of_reading,
-          reading_value: reading.reading_value,
-          reading_date: reading.reading_date,
-          notes: reading.notes ? reading.notes !== undefined : "",
-        },
-        filter: {id: id.toString()},
-        sqltypes: {
-          id: 4,
-          time_of_reading: 12, // Assuming time is in ISO format
-          reading_date: 93, // Assuming date is in ISO format
-          reading_value: 8,
-          patient_id: 4,
-          notes: 12
-        }
-
+        patient_id: reading.patient_id,
+        time_of_reading: reading.time_of_reading,
+        reading_value: reading.reading_value,
+        reading_date: reading.reading_date,
+        notes: reading.notes ? reading.notes !== undefined : "",
+      },
+      filter: { id: id.toString() },
+      sqltypes: {
+        id: 4,
+        time_of_reading: 12, // Assuming time is in ISO format
+        reading_date: 93, // Assuming date is in ISO format
+        reading_value: 8,
+        patient_id: 4,
+        notes: 12,
+      },
     };
 
     const response = await apiClient.patch<ApiResponse<BloodSugarReading>>(
@@ -106,15 +107,18 @@ export const BloodSugarService = {
     return response.data.data;
   },
 
-  createReading: async (reading: Partial<BloodSugarReading>): Promise<BloodSugarReading> => {
-    const payload = {
-      data: reading,
-      sqltypes: {id: 4,
-        time_of_reading: 12,
-        reading_date: 93, // Assuming date is in ISO format
-        reading_value: 8,
-        notes: 12 },
-    };
+  createReading: async (
+    reading: Partial<BloodSugarReading>
+  ): Promise<BloodSugarReading> => {
+    // const payload = {
+    //   data: reading,
+    //   sqltypes: {id: 4,
+    //     time_of_reading: 12,
+    //     reading_date: 93, // Assuming date is in ISO format
+    //     reading_value: 8,
+    //     notes: 12 },
+    // };
+    const payload = reading;
     console.log("Creating Blood Sugar Reading:", JSON.stringify(payload));
     const response = await apiClient.post<ApiResponse<BloodSugarReading>>(
       "/Reading/Reading",
