@@ -125,7 +125,7 @@ export const BloodSugarService = {
       payload
     );
     if (response.data.code !== 0) {
-      throw new Error("Blood Sugar Reading POST API Error");
+      // throw new Error("Blood Sugar Reading POST API Error");
     }
     return response.data.data;
   },

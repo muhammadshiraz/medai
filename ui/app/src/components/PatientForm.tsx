@@ -140,10 +140,6 @@ export default function PatientForm({
 
         // Wait for all readings to be saved
         const savedReadings = await Promise.all(readingPromises);
-
-        // All readings are now saved successfully
-        console.log("All readings saved:", savedReadings);
-
         toast.success("Patient created successfully! inserted", {
           icon: "✅",
           position: "top-right",
@@ -155,8 +151,8 @@ export default function PatientForm({
           },
         });
 
-        console.log(newPatient);
-        router.push(`/patients`);
+        // router.push(`/patients`);
+        router.push(`/patients?id=${newPatient.id}&label=${formData.name}`);
         router.refresh();
         return newPatient;
       } else {
@@ -177,7 +173,7 @@ export default function PatientForm({
         });
 
         // router.push(`/patient/${patientId}`);
-        router.push(`/patients`);
+        router.push(`/patients?id=${formData.id}&label=${formData.name}`);
         router.refresh();
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -189,7 +185,7 @@ export default function PatientForm({
         err.message ||
         "An unknown error occurred";
 
-      setError(apiError);
+      // setError(apiError);
 
       // Show toast notification
       toast.error(`Operation failed: ${apiError}`, {
@@ -487,7 +483,8 @@ export default function PatientForm({
       <div className="flex justify-end gap-4 mt-8">
         <button
           type="button"
-          onClick={() => router.back()}
+          // onClick={() => router.back()}
+          onClick={() => router.push("/patients")}
           className="px-6 py-2 border rounded-lg"
         >
           Cancel

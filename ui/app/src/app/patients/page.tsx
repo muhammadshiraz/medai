@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import ProtectedRoute from "@/components/Auth/ProtectedRoute";
 import { usePageTitle } from "@/context/PageTitleContext";
 import type { Patient } from "@/types/patient";
@@ -19,16 +20,26 @@ import { useBloodSugarReadings } from "@/hooks/useBloodSugarReadings";
 import { useRecommendations } from "@/hooks/useRecommendations";
 import Select from "react-select";
 
+type selectedPatientType = {
+  label: string;
+  value: number;
+};
+
 export default function PatientDetail() {
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id");
+  const label = searchParams.get("label");
+
   const { setTitle } = usePageTitle();
   const { patients } = usePatients();
   const { readings = [] } = useBloodSugarReadings(undefined, patients);
   const { recommendations, drugTypes } = useRecommendations();
 
   const [patient, setPatient] = useState<Patient | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
 
   // New const fields
+  const [selectedPatient, setSelectedPatient] = useState<selectedPatientType>();
   const [patientDetails, setPatientDetails] = useState<any>(undefined);
   const [latestReadings, setLatestReadings] = useState<any>(undefined);
   const [groupMedications, setGroupMedications] = useState<any>([]);
@@ -43,7 +54,16 @@ export default function PatientDetail() {
 
   useEffect(() => {
     setTitle("Patients");
-  }, []);
+    if (id && label && readings.length > 0) {
+      // Add this condition
+      onPatientSearch({
+        label: label,
+        value: parseInt(id),
+      });
+    } else if (readings.length > 0 && !id) {
+      setLoading(false);
+    }
+  }, [readings]);
 
   const getLatestReadings = (id: number) => {
     if (!readings || !id) {
@@ -123,6 +143,7 @@ export default function PatientDetail() {
   const onPatientSearch = async (value: any) => {
     try {
       console.log(value);
+      setSelectedPatient(value);
       setLoading(true);
       const dataData = await PatientService.getPatientById(value.value);
       setPatient(dataData);
@@ -229,6 +250,7 @@ export default function PatientDetail() {
               <Select
                 className="w-[250px]"
                 options={options}
+                value={selectedPatient}
                 onChange={onPatientSearch}
               />
               <Link
@@ -433,7 +455,7 @@ export default function PatientDetail() {
                     </tr>
                   </thead>
                   <tbody>
-                    {groupMedications.map((medication, index) => (
+                    {groupMedications.map((medication: any, index: any) => (
                       <tr key={index} className="border-b">
                         <td className="py-4 font-medium">{medication.drug}</td>
                         <td>{medication.breakfast}</td>
@@ -472,7 +494,7 @@ export default function PatientDetail() {
                     </tr>
                   </thead>
                   <tbody>
-                    {groupInsulinData.map((insulin, index) => (
+                    {groupInsulinData.map((insulin: any, index: any) => (
                       <tr key={index} className="border-b">
                         <td className="py-4 font-medium">{insulin.drug}</td>
                         <td>{insulin.breakfast}</td>
