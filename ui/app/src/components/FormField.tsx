@@ -11,7 +11,7 @@ interface FormFieldProps {
   step?: string;
   sub?: string;
   validate?: (value: string) => string | null;
-  disabled: boolean;
+  disabled?: boolean;
 }
 
 export default function FormField({

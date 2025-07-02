@@ -12,7 +12,7 @@ interface FormReading {
   id?: number;
   time: string;
   value: string;
-  date: string;
+  //date: string;
 }
 
 interface FormRecommendation {
@@ -48,24 +48,20 @@ export default function PatientForm({
   const router = useRouter();
   const [formData, setFormData] = useState<Partial<Patient>>(initialData || {});
   const [readings, setReadings] = useState<FormReading[]>([]);
-  const [medications, setMedications] = useState<FormMedication[]>([]);
-  const [recommendations, setRecommendations] = useState<FormRecommendation[]>(
-    []
-  );
-  const [insulinData, setInsulinData] = useState<FormInsulin[]>([]);
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
 
   // Initialize blood sugar readings
   useEffect(() => {
     if (initialData?.latestReadings) {
-      const readingsArray = initialData.latestReadings.map((reading) => ({
-        id: reading.id,
-        time: reading.time_of_reading,
-        value: reading.reading_value.toString(),
-        date: reading.reading_date,
-      }));
-      setReadings(readingsArray);
+      setReadings(
+        initialData.latestReadings.map((reading) => ({
+          id: reading.id,
+          time: reading.time_of_reading,
+          value: reading.reading_value.toString(),
+        }))
+      );
     }
   }, [initialData]);
 
@@ -84,47 +80,6 @@ export default function PatientForm({
           }))
         );
       }
-
-      // Initialize medications
-      if (initialData?.medications) {
-        setMedications(
-          initialData.medications.map((med) => ({
-            id: med.id,
-            patient_id: med.patient_id,
-            drug_id: med.drug_id,
-            dosage: med.dosage,
-            dosage_unit: med.dosage_unit,
-          }))
-        );
-      }
-
-      // Initialize recommendations
-      if (initialData?.recommendations) {
-        setRecommendations(
-          initialData.recommendations.map((med) => ({
-            id: med.id,
-            patient_id: med.patient_id,
-            drug_id: med.drug_id,
-            dosage: med.dosage,
-            dosage_unit: med.dosage_unit || "unit",
-            time_of_reading: med.time_of_reading || "",
-            recommendation_date: med.recommendation_date || "",
-          }))
-        );
-      }
-
-      // Initialize insulin data
-      if (initialData?.insulinData) {
-        setInsulinData(
-          initialData.insulinData.map((insulin) => ({
-            drug: insulin.drug || "",
-            breakfast: insulin.breakfast === "-" ? "" : insulin.breakfast,
-            lunch: insulin.lunch === "-" ? "" : insulin.lunch,
-            dinner: insulin.dinner === "-" ? "" : insulin.dinner,
-            bedtime: insulin.bedtime === "-" ? "" : insulin.bedtime,
-          }))
-        );
-      }
     }
   }, [initialData]);
 
@@ -136,7 +91,6 @@ export default function PatientForm({
     try {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { ...patientData } = formData;
-      console.log(medications, insulinData, readings);
 
       const payload = {
         ...formData,
@@ -149,8 +103,10 @@ export default function PatientForm({
         ckd: formData.ckd || 0,
         hld: formData.hld || 0,
         duration: formData.duration || 0,
-        medications: medications || [],
-        insulinData: insulinData || [],
+        readings: readings.map((r) => ({
+          time: r.time,
+          value: r.value,
+        })),
         // latestReadings: readings || [],
       };
       if (!initialData?.id) {
@@ -171,7 +127,7 @@ export default function PatientForm({
                 patient_id: newPatient.id,
                 time_of_reading: reading.time,
                 reading_value: reading.value,
-                reading_date: reading.date,
+                //reading_date: reading.date,
                 notes: "",
               },
               type: "Reading",
@@ -278,52 +234,11 @@ export default function PatientForm({
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleReadingChange = (time: string, value: string, date: string) => {
+  const handleReadingChange = (time: string, value: string) => {
     setReadings((prev) => [
       ...prev.filter((r) => r.time !== time),
-      {
-        ...(prev.find((r) => r.time === time) || { time }),
-        value,
-        date,
-      },
+      { time, value },
     ]);
-  };
-
-  const handleMedicationChange = (
-    index: number,
-    field: string,
-    value: string
-  ) => {
-    setMedications((prev) => {
-      const newMedications = [...prev];
-      newMedications[index] = { ...newMedications[index], [field]: value };
-      return newMedications;
-    });
-  };
-
-  const addMedication = () => {
-    setMedications((prev) => [
-      ...prev,
-      //{
-      //  drug: "",
-      //  time_of_reading: "",
-      //},
-    ]);
-  };
-
-  const handleRecommendationsChange = (
-    index: number,
-    field: string,
-    value: string
-  ) => {
-    setRecommendations((prev) => {
-      const newRecommendations = [...prev];
-      newRecommendations[index] = {
-        ...newRecommendations[index],
-        [field]: value,
-      };
-      return newRecommendations;
-    });
   };
 
   const bmi =
@@ -479,13 +394,7 @@ export default function PatientForm({
                   }`}
                   type="number"
                   value={reading?.value || ""}
-                  onChange={(v) =>
-                    handleReadingChange(
-                      time,
-                      v,
-                      reading?.date || new Date().toISOString().split("T")[0]
-                    )
-                  }
+                  onChange={(v) => handleReadingChange(time, v)}
                   sub="mg/dL"
                 />
               </div>
@@ -507,80 +416,12 @@ export default function PatientForm({
           </h2>
           <button
             type="button"
-            onClick={addMedication}
             className="px-4 py-2 bg-blue-500 text-white rounded-lg hidden"
           >
             Add Medication
           </button>
         </div>
-        <div className="space-y-4">
-          {medications.map((med, index) => (
-            <div
-              key={`med-${index}-${med.drug_id ?? "none"}`}
-              className="grid grid-cols-4 gap-4 items-end"
-            >
-              <FormField
-                label="Drug Name"
-                type="select"
-                options={[
-                  "Metformin",
-                  "Glimepiride",
-                  "Tradjenta",
-                  "Glargine",
-                  "Lispro",
-                  "Farxiga",
-                  "Ozempic",
-                ]}
-                value={
-                  med.drug_id
-                    ? [
-                        "Metformin",
-                        "Glimepiride",
-                        "Tradjenta",
-                        "Glargine",
-                        "Lispro",
-                        "Farxiga",
-                        "Ozempic",
-                      ][Number(med.drug_id) - 1]
-                    : ""
-                }
-                onChange={(v) =>
-                  handleMedicationChange(
-                    index,
-                    "drug_id",
-                    [
-                      "Metformin",
-                      "Glimepiride",
-                      "Tradjenta",
-                      "Glargine",
-                      "Lispro",
-                      "Farxiga",
-                      "Ozempic",
-                    ].indexOf(v) + 1
-                  )
-                }
-                disabled={initialData !== undefined}
-              />
-              <FormField
-                label="Dosage"
-                value={med.dosage || ""}
-                onChange={(v) => handleMedicationChange(index, "dosage", v)}
-                //sub="mg"
-                disabled={initialData !== undefined}
-              />
-              <FormField
-                label="Units"
-                type="select"
-                options={["mg", "mcg", "ml", "unit", "g", "kg", "l", "oz"]}
-                value={med.dosage_unit || "unit"}
-                onChange={(v) =>
-                  handleMedicationChange(index, "dosage_unit", v)
-                }
-                disabled={initialData !== undefined}
-              />
-            </div>
-          ))}
-        </div>
+        <div className="space-y-4"></div>
       </div>
 
       {/* Insulin Section */}
@@ -592,102 +433,11 @@ export default function PatientForm({
         <h2 className="text-xl font-semibold mb-6">Insulin</h2>
         <button
           type="button"
-          onClick={() =>
-            setInsulinData((prev) => [
-              ...prev,
-              {
-                drug: "Lispro",
-                breakfast: "0",
-                lunch: "0",
-                dinner: "0",
-                bedtime: "0",
-              },
-            ])
-          }
           className="px-4 py-2 bg-blue-500 text-white rounded-lg hidden"
         >
           Add Insulin
         </button>
-        <div className="space-y-4">
-          {insulinData.map((insulin, index) => (
-            <div key={index} className="grid grid-cols-5 gap-4 items-end">
-              <FormField
-                label="Insulin Type"
-                type="select"
-                options={[
-                  "Metformin",
-                  "Glimepiride",
-                  "Tradjenta",
-                  "Glargine",
-                  "Lispro",
-                  "Farxiga",
-                  "Ozempic",
-                ]}
-                value={insulin.drug || "Lispro"}
-                onChange={(v) =>
-                  setInsulinData((prev) => {
-                    const newData = [...prev];
-                    newData[index].drug = v;
-                    return newData;
-                  })
-                }
-                disabled={initialData !== undefined}
-              />
-              <FormField
-                label="Breakfast"
-                value={insulin.breakfast}
-                onChange={(v) =>
-                  setInsulinData((prev) => {
-                    const newData = [...prev];
-                    newData[index].breakfast = v;
-                    return newData;
-                  })
-                }
-                //sub="units"
-                disabled={initialData !== undefined}
-              />
-              <FormField
-                label="Lunch"
-                value={insulin.lunch}
-                onChange={(v) =>
-                  setInsulinData((prev) => {
-                    const newData = [...prev];
-                    newData[index].lunch = v;
-                    return newData;
-                  })
-                }
-                //sub="units"
-                disabled={initialData !== undefined}
-              />
-              <FormField
-                label="Dinner"
-                value={insulin.dinner}
-                onChange={(v) =>
-                  setInsulinData((prev) => {
-                    const newData = [...prev];
-                    newData[index].dinner = v;
-                    return newData;
-                  })
-                }
-                //sub="units"
-                disabled={initialData !== undefined}
-              />
-              <FormField
-                label="Bedtime"
-                value={insulin.bedtime}
-                onChange={(v) =>
-                  setInsulinData((prev) => {
-                    const newData = [...prev];
-                    newData[index].bedtime = v;
-                    return newData;
-                  })
-                }
-                //sub="units"
-                disabled={initialData !== undefined}
-              />
-            </div>
-          ))}
-        </div>
+        <div className="space-y-4"></div>
       </div>
 
       {/* Recommendation Section */}
