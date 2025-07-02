@@ -12,32 +12,6 @@ interface FormReading {
   id?: number;
   time: string;
   value: string;
-  //date: string;
-}
-
-interface FormRecommendation {
-  id?: number;
-  patient_id?: number;
-  drug_id?: number;
-  time_of_reading: string;
-  dosage?: number;
-  dosage_unit?: string;
-  recommendation_date?: string;
-}
-interface FormMedication {
-  id?: number;
-  patient_id?: number;
-  drug_id?: number;
-  dosage?: number;
-  dosage_unit?: string;
-}
-
-interface FormInsulin {
-  drug: string;
-  breakfast: string;
-  lunch: string;
-  dinner: string;
-  bedtime: string;
 }
 
 export default function PatientForm({
@@ -76,7 +50,6 @@ export default function PatientForm({
             id: reading.id,
             time: reading.time_of_reading,
             value: reading.reading_value.toString(),
-            date: reading.reading_date,
           }))
         );
       }
@@ -89,16 +62,9 @@ export default function PatientForm({
     setError("");
 
     try {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { ...patientData } = formData;
-
       const payload = {
         ...formData,
         hba1c: formData.hba1c ? Number(formData.hba1c).toFixed(2) : undefined,
-        //creatine_mg_dl: formData.creatine_mg_dl
-        // ? Number(formData.creatine_mg_dl).toFixed(4)
-        //  : undefined,
-        //age: undefined, // Age is not needed for insert
         cad: formData.cad || 0,
         ckd: formData.ckd || 0,
         hld: formData.hld || 0,
@@ -107,10 +73,8 @@ export default function PatientForm({
           time: r.time,
           value: r.value,
         })),
-        // latestReadings: readings || [],
       };
       if (!initialData?.id) {
-        //throw new Error("Patient ID missing " + JSON.stringify(initialData));
         console.log("Inserting new patient with payload:", payload);
         // Insert new patient using the payload
         const newPatient = await PatientService.insertPatient(
@@ -121,26 +85,22 @@ export default function PatientForm({
 
         // Use Promise.all to wait for all readings to be saved
         const readingPromises = readings.map(async (reading) => {
-          const payload2 = {
-            data: {
-              attributes: {
-                patient_id: newPatient.id,
-                time_of_reading: reading.time,
-                reading_value: reading.value,
-                //reading_date: reading.date,
-                notes: "",
-              },
-              type: "Reading",
-            },
+          const readingPayload = {
+            patient_id: newPatient.id,
+            time_of_reading: reading.time,
+            reading_value: Number(reading.value),
+            notes: "",
           };
 
-          const savedReading = await BloodSugarService.createReading(payload2);
+          const savedReading = await BloodSugarService.createReading(
+            readingPayload
+          );
           return savedReading; // Return the saved reading
         });
 
         // Wait for all readings to be saved
-        const savedReadings = await Promise.all(readingPromises);
-        toast.success("Patient created successfully! inserted", {
+        await Promise.all(readingPromises);
+        toast.success("Patient created successfully!", {
           icon: "✅",
           position: "top-right",
           style: {
@@ -151,7 +111,6 @@ export default function PatientForm({
           },
         });
 
-        // router.push(`/patients`);
         router.push(`/patients?id=${newPatient.id}&label=${formData.name}`);
         router.refresh();
         return newPatient;
@@ -176,16 +135,13 @@ export default function PatientForm({
         router.push(`/patients?id=${formData.id}&label=${formData.name}`);
         router.refresh();
       }
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Submission error:", err);
       // Extract error message from API response
       const apiError =
-        err.response?.data?.message ||
-        err.message ||
-        "An unknown error occurred";
+        err instanceof Error ? err.message : "An unknown error occurred";
 
-      // setError(apiError);
+      setError(apiError);
 
       // Show toast notification
       toast.error(`Operation failed: ${apiError}`, {
@@ -376,14 +332,6 @@ export default function PatientForm({
             const reading = readings.find((r) => r.time === time);
             return (
               <div key={time} className="space-y-2">
-                {/*<FormField
-                  label={`Date for ${time}`}
-                  type="date"
-                  value={reading?.date || ""}
-                  onChange={(v) =>
-                    handleReadingChange(time, reading?.value || "", v)
-                  }
-                />*/}
                 <FormField
                   label={`Before ${
                     time.charAt(0).toUpperCase() + time.slice(1)
@@ -400,12 +348,7 @@ export default function PatientForm({
       </div>
 
       {/* Medications Section */}
-      <div
-        className={`bg-white dark:bg-gray-900 p-6 rounded-xl shadow ${
-          // initialData === undefined ? "hidden" : "block"
-          "block"
-        }`}
-      >
+      <div className="bg-white dark:bg-gray-900 p-6 rounded-xl shadow block">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-xl font-semibold">
             Recommendations / Medications
@@ -436,54 +379,9 @@ export default function PatientForm({
         <div className="space-y-4"></div>
       </div>
 
-      {/* Recommendation Section */}
-      {/* <div className="bg-white dark:bg-gray-900 p-6 rounded-xl shadow">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-xl font-semibold">Recommendations</h2>
-        </div>
-        <div className="space-y-4">
-          {recommendations.map((med, index) => (
-            <div key={index} className="grid grid-cols-4 gap-4 items-end">
-              <FormField
-                label="Drug Name"
-                value={med.drug_id}
-                onChange={(v) => handleRecommendationsChange(index, "drug", v)}
-                disabled={initialData !== undefined}
-              />
-              <FormField
-                label="Breakfast"
-                value={med.time_of_reading == "breakfast" ? med.dosage : ""}
-                onChange={(v) =>
-                  handleRecommendationsChange(index, "breakfast", v)
-                }
-                //sub="mg"
-                disabled={initialData !== undefined}
-              />
-              <FormField
-                label="Lunch"
-                value={med.time_of_reading == "lunch" ? med.dosage : ""}
-                onChange={(v) => handleRecommendationsChange(index, "lunch", v)}
-                //sub="mg"
-                disabled={initialData !== undefined}
-              />
-              <FormField
-                label="Dinner"
-                value={med.time_of_reading == "dinner" ? med.dosage : ""}
-                onChange={(v) =>
-                  handleRecommendationsChange(index, "dinner", v)
-                }
-                //sub="mg"
-                disabled={initialData !== undefined}
-              />
-            </div>
-          ))}
-        </div>
-      </div> */}
-
       <div className="flex justify-end gap-4 mt-8">
         <button
           type="button"
-          // onClick={() => router.back()}
           onClick={() => router.push("/patients")}
           className="px-6 py-2 border rounded-lg"
         >

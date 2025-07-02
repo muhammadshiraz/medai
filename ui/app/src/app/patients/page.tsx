@@ -40,10 +40,34 @@ export default function PatientDetail() {
 
   // New const fields
   const [selectedPatient, setSelectedPatient] = useState<selectedPatientType>();
-  const [patientDetails, setPatientDetails] = useState<any>(undefined);
-  const [latestReadings, setLatestReadings] = useState<any>(undefined);
-  const [groupMedications, setGroupMedications] = useState<any>([]);
-  const [groupInsulinData, setGroupInsulinData] = useState<any>([]);
+  const [patientDetails, setPatientDetails] = useState<
+    | {
+        heightInMeters: number;
+        bmi: string;
+        formattedBirthDate: string;
+      }
+    | undefined
+  >(undefined);
+  const [latestReadings, setLatestReadings] = useState<
+    Record<string, string> | undefined
+  >(undefined);
+  const [groupMedications, setGroupMedications] = useState<
+    {
+      drug: string;
+      breakfast: string;
+      lunch: string;
+      dinner: string;
+    }[]
+  >([]);
+  const [groupInsulinData, setGroupInsulinData] = useState<
+    {
+      drug: string;
+      breakfast: string;
+      lunch: string;
+      dinner: string;
+      bedtime: string;
+    }[]
+  >([]);
 
   const options = patients.map((item) => {
     return {
@@ -140,7 +164,8 @@ export default function PatientDetail() {
       }));
   };
 
-  const onPatientSearch = async (value: any) => {
+  const onPatientSearch = async (value: selectedPatientType | null) => {
+    if (!value) return;
     try {
       console.log(value);
       setSelectedPatient(value);
@@ -157,7 +182,7 @@ export default function PatientDetail() {
                 : "-",
             formattedBirthDate: formatBirthDate(dataData.birth_date),
           }
-        : null;
+        : undefined;
       setPatientDetails(patientNewDetails);
 
       const latestNewReadings = getLatestReadings(value.value);
@@ -455,7 +480,7 @@ export default function PatientDetail() {
                     </tr>
                   </thead>
                   <tbody>
-                    {groupMedications.map((medication: any, index: any) => (
+                    {groupMedications.map((medication, index) => (
                       <tr key={index} className="border-b">
                         <td className="py-4 font-medium">{medication.drug}</td>
                         <td>{medication.breakfast}</td>
@@ -494,7 +519,7 @@ export default function PatientDetail() {
                     </tr>
                   </thead>
                   <tbody>
-                    {groupInsulinData.map((insulin: any, index: any) => (
+                    {groupInsulinData.map((insulin, index) => (
                       <tr key={index} className="border-b">
                         <td className="py-4 font-medium">{insulin.drug}</td>
                         <td>{insulin.breakfast}</td>
